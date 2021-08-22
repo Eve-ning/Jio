@@ -6,13 +6,13 @@ public class GameController : MonoBehaviour
 {
 
     [SerializeField] private GameObject SplashCanvas;
-
-
+    [SerializeField] private GameObject SplashCamera;
 
 	private void Awake()
 	{
         SplashCanvas.SetActive(true);
-	}
+        SplashCamera.SetActive(true);
+    }
 
 	// Start is called before the first frame update
 	void Start()
@@ -29,5 +29,6 @@ public class GameController : MonoBehaviour
     public void StartGame()
 	{
         SplashCanvas.SetActive(false);
-	}
+        SplashCamera.SetActive(false);
+    }
 }
