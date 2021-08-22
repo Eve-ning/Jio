@@ -29,6 +29,6 @@ public class GameController : MonoBehaviour
     public void StartGame()
 	{
         SplashCanvas.SetActive(false);
-        SplashCamera.SetActive(false);
+        // SplashCamera.SetActive(false);
     }
 }

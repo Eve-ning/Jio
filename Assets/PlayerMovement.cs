@@ -18,8 +18,19 @@ public class PlayerMovement : MonoBehaviour
 
 
 	private void Awake()
-	{
+    {
         playerCamera.SetActive(photonView.IsMine);
+        if (photonView.IsMine)
+        {
+            playerNameText.text = PhotonNetwork.NickName;
+            Debug.Break();
+        }
+        else
+		{
+            playerNameText.text = photonView.Owner.NickName;
+            Debug.Break();
+		}
+
 	}
 
 	// Start is called before the first frame update

@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da33bf2c8c7885e45a23194048992b3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 9116882754307984598, guid: 69e9c3035a5ac53498277e50d94b95e0, type: 3}
+  playerPrefab: {fileID: 6338171186315260497, guid: 4bc3e6210ab0d5045ba4b2e0752cf33c, type: 3}
 --- !u!4 &99935933
 Transform:
   m_ObjectHideFlags: 0
@@ -192,7 +192,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 641894277}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &641894279
 Camera:
   m_ObjectHideFlags: 0
@@ -335,7 +335,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1318918605}
   - component: {fileID: 1318918604}
-  - component: {fileID: 1318918606}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -371,19 +370,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1318918606
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1318918603}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da33bf2c8c7885e45a23194048992b3a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 9116882754307984598, guid: 69e9c3035a5ac53498277e50d94b95e0, type: 3}
 --- !u!1 &1332414043
 GameObject:
   m_ObjectHideFlags: 0
