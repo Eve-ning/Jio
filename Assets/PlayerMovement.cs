@@ -23,12 +23,10 @@ public class PlayerMovement : MonoBehaviour
         if (photonView.IsMine)
         {
             playerNameText.text = PhotonNetwork.NickName;
-            Debug.Break();
         }
         else
 		{
             playerNameText.text = photonView.Owner.NickName;
-            Debug.Break();
 		}
 
 	}
