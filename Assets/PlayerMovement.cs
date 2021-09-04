@@ -22,12 +22,12 @@ public class PlayerMovement : MonoBehaviour
         playerCamera.SetActive(photonView.IsMine);
         if (photonView.IsMine)
         {
-            playerNameText.text = PhotonNetwork.NickName;
+            playerNameText.text = PhotonNetwork.NickName != "" ? PhotonNetwork.NickName : "Unknown Name";
         }
         else
-		{
-            playerNameText.text = photonView.Owner.NickName;
-		}
+        {
+            playerNameText.text = photonView.Owner.NickName == "" ? photonView.Owner.NickName : "Unknown Name";
+        }                   
 
 	}
 
