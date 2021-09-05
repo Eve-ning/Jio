@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerMovement : MonoBehaviour
+public class Player : MonoBehaviour
 {
     public PhotonView photonView;
     public Text playerNameText;
@@ -17,22 +17,24 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 moveVelocity;
 
 
-	private void Awake()
+    private void Awake()
     {
+        PhotonNetwork.NickName = PhotonNetwork.NickName == "" ? "Unknown Name" : PhotonNetwork.NickName;
+
         playerCamera.SetActive(photonView.IsMine);
         if (photonView.IsMine)
         {
-            playerNameText.text = PhotonNetwork.NickName != "" ? PhotonNetwork.NickName : "Unknown Name";
+            playerNameText.text = PhotonNetwork.NickName;
         }
         else
         {
-            playerNameText.text = photonView.Owner.NickName == "" ? photonView.Owner.NickName : "Unknown Name";
-        }                   
+            playerNameText.text = photonView.Owner.NickName == "" ? photonView.Owner.NickName : "Unexpected Missing Name";
+        }
 
-	}
+    }
 
-	// Start is called before the first frame update
-	void Start()
+    // Start is called before the first frame update
+    void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
@@ -40,14 +42,16 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (photonView.IsMine){
+        if (photonView.IsMine)
+        {
             Vector2 moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
             moveVelocity = moveInput * speed;
         }
     }
 
-	private void FixedUpdate()
-	{
+    private void FixedUpdate()
+    {
         rb.MovePosition(rb.position + moveVelocity * Time.fixedDeltaTime);
-	}
+    }
+
 }
