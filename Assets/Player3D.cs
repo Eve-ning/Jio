@@ -8,10 +8,21 @@ using UnityEngine.UI;
 
 namespace DIPProject
 {
+    /// <summary>
+    /// This controls the Player in the 3D environments.
+    /// For example, the:
+    /// 1) Expedition
+    /// 2) Fireside Chat
+    /// </summary>
     public class Player3D : MonoBehaviourPunCallbacks
     {
         #region Variables
 
+        /// <summary>
+        /// This is the Empty parent of the player UI.
+        /// This is to facilitate what to hide if other players instantiate in.
+        /// </summary>
+        [Tooltip("UI hidable of other players.")]
         public GameObject PlayerUI;
 
         [Tooltip("This is the player instance PhotonView")]
@@ -21,7 +32,10 @@ namespace DIPProject
         [SerializeField]
         private float speed = 5;
 
+        [Tooltip("Player floating name tag. This is NOT an overlay, it's attached locally.")]
         public TextMeshPro txtNameTag;
+
+        [Tooltip("UI text, this is a global object.")]
         public Text txtRoomTag;
 
         private Rigidbody rb;
@@ -71,8 +85,10 @@ namespace DIPProject
         /// </summary>
         void Update()
         {
+            // If it's our object
             if (photonView.IsMine)
             {
+                // We do checks on these
                 MovementInputCheck();
             }
         }
@@ -99,6 +115,7 @@ namespace DIPProject
             Vector3 inputVector = new Vector3(h, 0, v);
             inputVector.Normalize();
 
+            /// The Quaternion rotation is to account for the object being isometrically rotated.
             moveVelocity = Quaternion.AngleAxis(45, Vector3.up) * inputVector * speed;
         }
 

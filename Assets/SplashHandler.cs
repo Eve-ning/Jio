@@ -7,9 +7,14 @@ using UnityEngine.UI;
 
 namespace DIPProject
 {
+    /// <summary>
+    /// Handles the splash screen interactions
+    /// </summary>
     public class SplashHandler : MonoBehaviourPunCallbacks
     {
-        [Tooltip("Username UI")]
+		#region Variables
+
+		[Tooltip("Username UI")]
         public InputField uiUsername;
 
         [Tooltip("Enter Button")]
@@ -19,10 +24,12 @@ namespace DIPProject
         [SerializeField]
         private int minimumUsernameLength = 3;
 
-        #region MonoBehaviour Callbacks
+		#endregion
 
-        // Start is called before the first frame update
-        void Start()
+		#region MonoBehaviour Callbacks
+
+		// Start is called before the first frame update
+		void Start()
         {
             uiEnterButton.SetActive(false);
             Connect();

@@ -25,6 +25,9 @@ namespace DIPProject
         #endregion
 
         #region MonoBehaviorPunCallbacks Callbacks
+        /// <summary>
+        /// Once the player joins the room, we instantiate it in the middle with some height
+        /// </summary>
         public override void OnJoinedRoom()
         {
             PhotonNetwork.Instantiate("Player", new Vector3(0, 1, 0), Quaternion.identity);
