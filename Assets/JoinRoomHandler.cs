@@ -6,62 +6,65 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class JoinRoomHandler : MonoBehaviour
+namespace DIPProject
 {
-    public GameObject uiCanvas;
-    public GameObject uiJoinButton;
-    public InputField uiRoomNameInput;
-
-
-
-    // Start is called before the first frame update
-    void Start()
+    public class JoinRoomHandler : MonoBehaviour
     {
-        
-    }
+        #region Variables
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+        public GameObject uiCanvas;
+        public GameObject uiJoinButton;
+        public InputField uiRoomNameInput;
 
+        #endregion
 
-    private bool isMineColliding(Collider2D collider)
-	{
-        return collider.gameObject.GetComponent<PhotonView>().IsMine;
-	}
+        #region Public Methods
 
-    private void OnTriggerEnter2D(Collider2D collider)
-    {
-        if (isMineColliding(collider))
+        private bool isMineColliding(Collider2D collider)
         {
-            showCanvas();
+            return collider.gameObject.GetComponent<PhotonView>().IsMine;
         }
-    }
-
-    private void OnTriggerExit2D(Collider2D collider)
-    {
-        if (isMineColliding(collider))
+        public void showCanvas()
         {
-            hideCanvas();
+            uiCanvas.SetActive(true);
         }
-    }
-    public void showCanvas()
-	{
-        uiCanvas.SetActive(true);
-	}
 
-    public void hideCanvas()
-	{
-        uiCanvas.SetActive(false);
-	}
-    
-    public void joinRoom()
-    {
-        Debug.Log(PhotonNetwork.NickName + " is Joining Room " + uiRoomNameInput.text);
-        PhotonNetwork.JoinRoom(uiRoomNameInput.text, null);
-        PhotonNetwork.LoadLevel("Expedition");
-        return;
+        public void hideCanvas()
+        {
+            uiCanvas.SetActive(false);
+        }
+
+        #endregion
+
+        #region Collider2D Callbacks 
+
+        private void OnTriggerEnter2D(Collider2D collider)
+        {
+            if (isMineColliding(collider))
+            {
+                showCanvas();
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D collider)
+        {
+            if (isMineColliding(collider))
+            {
+                hideCanvas();
+            }
+        }
+
+		#endregion
+
+		#region Join Room Method
+		public void joinRoom()
+        {
+            Debug.Log(PhotonNetwork.NickName + " is Joining Room " + uiRoomNameInput.text);
+            PhotonNetwork.JoinRoom(uiRoomNameInput.text, null);
+            PhotonNetwork.LoadLevel("Expedition");
+            return;
+        }
+
+		#endregion
 	}
 }

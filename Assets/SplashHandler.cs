@@ -5,58 +5,68 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SplashHandler : MonoBehaviourPunCallbacks
+namespace DIPProject
 {
-    public InputField uiUsername;
-    public GameObject uiEnterButton;
-    public int minimumUsernameLength = 3;
-
-    // Start is called before the first frame update
-    void Start()
+    public class SplashHandler : MonoBehaviourPunCallbacks
     {
-        uiEnterButton.SetActive(false);
-        Connect();
-    }
+        [Tooltip("Username UI")]
+        public InputField uiUsername;
 
-	private void Awake()
-	{
-        PhotonNetwork.AutomaticallySyncScene = true;
-	}
+        [Tooltip("Enter Button")]
+        public GameObject uiEnterButton;
 
-	public void Connect()
-	{
-        if (PhotonNetwork.IsConnected)
-		{
-            PhotonNetwork.JoinLobby();
-		}
-        else
-		{
-            PhotonNetwork.ConnectUsingSettings();
-            PhotonNetwork.GameVersion = "0.0";
-		}
-	}
+        [Tooltip("Minimum Length before the Enter Button appears")]
+        [SerializeField]
+        private int minimumUsernameLength = 3;
 
-    //Was able to connect to the master Server
-    public override void OnConnectedToMaster()
-    {
-        PhotonNetwork.JoinLobby(TypedLobby.Default);
-        Debug.Log("Connected to Photon Server.");
-    }
+        #region MonoBehaviour Callbacks
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+        // Start is called before the first frame update
+        void Start()
+        {
+            uiEnterButton.SetActive(false);
+            Connect();
+        }
 
-    public void validateUsername()
-	{
-        uiEnterButton.SetActive(uiUsername.text.Length >= minimumUsernameLength && PhotonNetwork.IsConnectedAndReady);
-	}
+        #endregion
 
-    public void joinLobby()
-	{
-        PhotonNetwork.NickName = uiUsername.text;
-        PhotonNetwork.LoadLevel("Landing");
+        #region Public Methods
+
+        public void Connect()
+        {
+            if (PhotonNetwork.IsConnected)
+            {
+                PhotonNetwork.JoinLobby();
+            }
+            else
+            {
+                PhotonNetwork.ConnectUsingSettings();
+                PhotonNetwork.GameVersion = "0.0";
+            }
+        }
+
+        public void validateUsername()
+        {
+            uiEnterButton.SetActive(uiUsername.text.Length >= minimumUsernameLength && PhotonNetwork.IsConnected);
+        }
+
+        public void joinLobby()
+        {
+            PhotonNetwork.NickName = uiUsername.text;
+            PhotonNetwork.LoadLevel("Landing");
+        }
+
+        #endregion
+
+        #region MonoBehaviourPunCallbacks Callbacks
+
+        //Was able to connect to the master Server
+        public override void OnConnectedToMaster()
+        {
+            PhotonNetwork.JoinLobby(TypedLobby.Default);
+            Debug.Log("Connected to Photon Server.");
+        }
+
+        #endregion
     }
 }

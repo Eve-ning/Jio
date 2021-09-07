@@ -3,23 +3,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviourPunCallbacks
+
+namespace DIPProject
 {
-    // Start is called before the first frame update
-    void Start()
+    public class GameManager : MonoBehaviourPunCallbacks
     {
-        
-    }
+        #region MonoBehavior Callbacks
+        // Start is called before the first frame update
+        void Start()
+        {
 
-	public override void OnJoinedRoom()
-	{
-        PhotonNetwork.Instantiate("Player", new Vector3(0, 1, 0), Quaternion.identity);
-        base.OnJoinedRoom();
-	}
+        }
 
-	// Update is called once per frame
-	void Update()
-    {
-        
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+
+        #endregion
+
+        #region MonoBehaviorPunCallbacks Callbacks
+        public override void OnJoinedRoom()
+        {
+            PhotonNetwork.Instantiate("Player", new Vector3(0, 1, 0), Quaternion.identity);
+            base.OnJoinedRoom();
+        }
+        #endregion
     }
 }
