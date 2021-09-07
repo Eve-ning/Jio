@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SplashHandler : MonoBehaviour
+public class SplashHandler : MonoBehaviourPunCallbacks
 {
     public InputField uiUsername;
     public GameObject uiEnterButton;
@@ -15,6 +15,32 @@ public class SplashHandler : MonoBehaviour
     void Start()
     {
         uiEnterButton.SetActive(false);
+        Connect();
+    }
+
+	private void Awake()
+	{
+        PhotonNetwork.AutomaticallySyncScene = true;
+	}
+
+	public void Connect()
+	{
+        if (PhotonNetwork.IsConnected)
+		{
+            PhotonNetwork.JoinLobby();
+		}
+        else
+		{
+            PhotonNetwork.ConnectUsingSettings();
+            PhotonNetwork.GameVersion = "0.0";
+		}
+	}
+
+    //Was able to connect to the master Server
+    public override void OnConnectedToMaster()
+    {
+        PhotonNetwork.JoinLobby(TypedLobby.Default);
+        Debug.Log("Connected to Photon Server.");
     }
 
     // Update is called once per frame
@@ -25,12 +51,11 @@ public class SplashHandler : MonoBehaviour
 
     public void validateUsername()
 	{
-        uiEnterButton.SetActive(uiUsername.text.Length >= minimumUsernameLength);
+        uiEnterButton.SetActive(uiUsername.text.Length >= minimumUsernameLength && PhotonNetwork.IsConnectedAndReady);
 	}
 
     public void joinLobby()
 	{
-        PhotonNetwork.JoinLobby(TypedLobby.Default);
         PhotonNetwork.NickName = uiUsername.text;
         PhotonNetwork.LoadLevel("Landing");
     }

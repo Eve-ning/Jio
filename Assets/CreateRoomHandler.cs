@@ -1,4 +1,5 @@
 using Photon.Pun;
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,9 @@ public class CreateRoomHandler : MonoBehaviour
     public GameObject uiCanvas;
     public GameObject uiCreateButton;
     public InputField uiRoomNameInput;
+
+    [SerializeField]
+    private byte maxPlayers = 5;
 
     // Start is called before the first frame update
     void Start()
@@ -59,6 +63,7 @@ public class CreateRoomHandler : MonoBehaviour
     public void createRoom()
 	{
         Debug.Log(PhotonNetwork.NickName + " is Creating Room " + uiRoomNameInput.text);
-        return;
+        PhotonNetwork.JoinOrCreateRoom(uiRoomNameInput.text, new RoomOptions() { MaxPlayers = maxPlayers }, null);
+        PhotonNetwork.LoadLevel("Expedition");
 	}
 }

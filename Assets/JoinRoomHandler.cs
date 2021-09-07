@@ -1,4 +1,5 @@
 using Photon.Pun;
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -59,6 +60,8 @@ public class JoinRoomHandler : MonoBehaviour
     public void joinRoom()
     {
         Debug.Log(PhotonNetwork.NickName + " is Joining Room " + uiRoomNameInput.text);
+        PhotonNetwork.JoinRoom(uiRoomNameInput.text, null);
+        PhotonNetwork.LoadLevel("Expedition");
         return;
 	}
 }
