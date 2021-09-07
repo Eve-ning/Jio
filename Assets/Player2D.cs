@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour
+public class Player2D : MonoBehaviour
 {
     public PhotonView photonView;
     public Text playerNameText;
