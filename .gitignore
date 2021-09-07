@@ -1,7 +1,7 @@
 Assets/Brackeys
 Assets/Photon
 Assets/TextMesh Pro
-Logs/*
+Logs/
 ProjectSettings/*
 UserSettings/*
 [Ll]ibrary/
@@ -41,3 +41,4 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+*.log
