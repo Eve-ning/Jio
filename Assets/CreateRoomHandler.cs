@@ -8,7 +8,10 @@ using UnityEngine.UI;
 
 namespace DIPProject
 {
-    public class CreateRoomHandler : MonoBehaviour
+    /// <summary>
+    /// Handles what happens if the player wants to create a room
+    /// </summary>
+    public class CreateRoomHandler : MonoBehaviourPunCallbacks
     {
         #region Variables
 
@@ -24,20 +27,22 @@ namespace DIPProject
 
         #region Collider2D Callbacks 
 
+        /// <summary>
+        /// Open Up canvas if we Enter
+        /// </summary>
+        /// <param name="collider"></param>
         private void OnTriggerEnter2D(Collider2D collider)
         {
-            if (isMineColliding(collider))
-            {
-                showCanvas();
-            }
+            if (isMineColliding(collider)) showCanvas();
         }
 
+        /// <summary>
+        /// Close canvas if we Exit
+        /// </summary>
+        /// <param name="collider"></param>
         private void OnTriggerExit2D(Collider2D collider)
         {
-            if (isMineColliding(collider))
-            {
-                hideCanvas();
-            }
+            if (isMineColliding(collider)) hideCanvas();
         }
 
         #endregion
@@ -81,6 +86,17 @@ namespace DIPProject
             PhotonNetwork.LoadLevel("Expedition");
         }
 
-        #endregion
-    }
+		#endregion
+
+		#region MonoBehaviourPunCallbacks Callbacks
+
+		public override void OnCreateRoomFailed(short returnCode, string message)
+		{
+            Debug.Log(PhotonNetwork.NickName + " is failed to Create Room " + uiRoomNameInput.text);
+
+			base.OnCreateRoomFailed(returnCode, message);
+		}
+
+		#endregion
+	}
 }
