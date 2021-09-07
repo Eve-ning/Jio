@@ -215,7 +215,7 @@ GameObject:
   - component: {fileID: 227183447}
   - component: {fileID: 227183446}
   m_Layer: 5
-  m_Name: Input_Username
+  m_Name: Username Input
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -853,7 +853,7 @@ GameObject:
   - component: {fileID: 1136339003}
   - component: {fileID: 1136339002}
   m_Layer: 5
-  m_Name: Img_Body
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -931,7 +931,7 @@ GameObject:
   - component: {fileID: 1341583170}
   - component: {fileID: 1341583169}
   m_Layer: 5
-  m_Name: Img_Logo
+  m_Name: Logo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1007,7 +1007,7 @@ GameObject:
   - component: {fileID: 1441335352}
   - component: {fileID: 1441335351}
   m_Layer: 5
-  m_Name: Img_Bg
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1083,7 +1083,7 @@ GameObject:
   - component: {fileID: 1929877982}
   - component: {fileID: 1929877981}
   m_Layer: 5
-  m_Name: Btn_Enter
+  m_Name: Enter Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
