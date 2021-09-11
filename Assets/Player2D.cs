@@ -1,6 +1,7 @@
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,13 +10,13 @@ namespace DIPProject
     /// <summary>
     /// This controls the player in 2D environments, specifically in the Landing.
     /// </summary>
-    public class Player2D : MonoBehaviour
-    {
+    public class Player2D : MonoBehaviourPunCallbacks
+        {
 
 		#region Variables
 
 		public PhotonView photonView;
-        public Text playerNameText;
+        public TextMeshPro playerNameText;
 
         /// <summary>
         /// Not too sure if this is needed? The 2D scene is not yet multiplayer?
@@ -70,7 +71,8 @@ namespace DIPProject
             rb.MovePosition(rb.position + moveVelocity * Time.fixedDeltaTime);
         }
 
-		#endregion
+        #endregion
+
 
 	}
 }
