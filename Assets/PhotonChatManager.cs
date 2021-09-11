@@ -9,7 +9,9 @@ using UnityEngine.UI;
 public class PhotonChatManager : MonoBehaviour, IChatClientListener
 {
     ChatClient chatClient;
+	[Tooltip("The InputField for sending a message")]
 	[SerializeField] InputField chatInput;
+	[Tooltip("The TextWindow")]
 	[SerializeField] Text chatWindow;
 	[SerializeField] Button chatBtn;
 
@@ -80,8 +82,6 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
 
 	#endregion
 
-
-
 	#region MonoBehavior Callbacks
 
 	// Start is called before the first frame update
@@ -132,6 +132,7 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
 		chatInput.enabled = status;
 		chatWindow.enabled = status;
 	}
+
 	public void AppendChat(string[] senders, object[] messages)
 	{
 		for (int i = 0; i < senders.Length; i++)
