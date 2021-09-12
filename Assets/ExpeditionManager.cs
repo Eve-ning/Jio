@@ -3,16 +3,24 @@ using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 namespace DIPProject
 {
     public class ExpeditionManager : MonoBehaviourPunCallbacks
     {
-        #region MonoBehavior Callbacks
+		#region Variables
+		[SerializeField]
+		private Text roomNameText;
 
-        // Start is called before the first frame update
-        void Start()
+		private string ROOM_NAME_PREFIX = "ROOM NAME: ";
+
+		#endregion
+
+		#region MonoBehavior Callbacks
+
+		// Start is called before the first frame update
+		void Start()
         {
 
         }
@@ -42,6 +50,7 @@ namespace DIPProject
 		public override void OnJoinedRoom()
         {
             PhotonNetwork.Instantiate("Player2D", new Vector3(0, 1, 0), Quaternion.identity);
+			roomNameText.text = ROOM_NAME_PREFIX + PhotonNetwork.CurrentRoom.Name;
             base.OnJoinedRoom();
         }
 
