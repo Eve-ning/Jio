@@ -29,8 +29,15 @@ namespace DIPProject
         public float speed = 5;
 
         private Rigidbody2D rb;
+        
         private Vector2 moveVelocity;
-
+        
+        [Tooltip("The Parent Chatbox GameObject")]
+        [SerializeField]
+        private GameObject chatBox;
+        [Tooltip("The Chatbox TMP")]
+        [SerializeField]
+        private TextMeshPro chatText;
 		#endregion
 
 		#region MonoBehavior Callbacks
@@ -46,6 +53,7 @@ namespace DIPProject
 		// Start is called before the first frame update
 		void Start()
         {
+            chatBox.SetActive(false);
             rb = GetComponent<Rigidbody2D>();
         }
 
@@ -66,6 +74,13 @@ namespace DIPProject
 
         #endregion
 
-
-	}
+        public IEnumerator ChatPopup(object msg)
+        {
+            chatBox.SetActive(true);
+            chatText.text = msg.ToString();
+            yield return new WaitForSeconds(2f);
+            chatBox.SetActive(false);
+            chatText.text = "";
+        }
+    }
 }
