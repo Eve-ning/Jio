@@ -573,6 +573,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1623146472}
+        m_TargetAssemblyTypeName: DIPProject.JoinRoomHandler, Assembly-CSharp
+        m_MethodName: EnsureAsciiInput
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
@@ -842,8 +854,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiCanvas: {fileID: 1321454603}
   uiCreateButton: {fileID: 1813065108}
-  uiRoomNameInput: {fileID: 0}
-  maxPlayers: 5
 --- !u!1 &752077203
 GameObject:
   m_ObjectHideFlags: 0
@@ -950,7 +960,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Create A Room
+  m_Text: Create Room
 --- !u!222 &766698343
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1248,7 +1258,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Join A Room
+  m_Text: Custom Room
 --- !u!222 &1266458474
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1372,8 +1382,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1623146472}
-        m_TargetAssemblyTypeName: JoinRoomHandler, Assembly-CSharp
-        m_MethodName: joinRoom
+        m_TargetAssemblyTypeName: DIPProject.CustomRoomHandler, Assembly-CSharp
+        m_MethodName: CustomRoom
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1524,7 +1534,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1544697187}
   m_Layer: 0
-  m_Name: Join Room Region
+  m_Name: Custom Room Region
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1671,7 +1681,6 @@ MonoBehaviour:
   uiCanvas: {fileID: 1038824157}
   uiJoinButton: {fileID: 1338940636}
   uiRoomNameInput: {fileID: 663375521}
-  minimumRoomNameLength: 3
 --- !u!1 &1688414936
 GameObject:
   m_ObjectHideFlags: 0
@@ -2356,7 +2365,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Join Room
+  m_text: Custom Room
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

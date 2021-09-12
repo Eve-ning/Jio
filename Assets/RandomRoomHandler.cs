@@ -9,19 +9,20 @@ using UnityEngine.UI;
 namespace DIPProject
 {
     /// <summary>
-    /// Handles what happens if the player wants to create a room
+    /// Handles what happens if the player wants to create a random room
     /// </summary>
-    public class CreateRoomHandler : MonoBehaviourPunCallbacks
+    public class RandomRoomHandler : MonoBehaviourPunCallbacks
     {
         #region Variables
 
         public GameObject uiCanvas;
         public GameObject uiCreateButton;
-        public InputField uiRoomNameInput;
+
+        [Tooltip("If the player is triggering this region.")]
+        private bool triggered = false;
 
         [Tooltip("Maximum number of players allowed in the room.")]
-        [SerializeField]
-        private byte maxPlayers = 5;
+        public const byte MAX_PLAYERS = 5;
 
         public const int ROOM_NAME_LENGTH = 5;
         private const string LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -37,6 +38,7 @@ namespace DIPProject
         private void OnTriggerEnter2D(Collider2D collider)
         {
             if (IsMineColliding(collider)) ShowCanvas();
+            triggered = true;
         }
 
         /// <summary>
@@ -46,6 +48,7 @@ namespace DIPProject
         private void OnTriggerExit2D(Collider2D collider)
         {
             if (IsMineColliding(collider)) HideCanvas();
+            triggered = false;
         }
 
         #endregion
@@ -54,7 +57,7 @@ namespace DIPProject
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Return)) CreateRoom();
+            if (Input.GetKeyDown(KeyCode.Return) && triggered) RandomRoom();
         }
         #endregion
 
@@ -88,19 +91,22 @@ namespace DIPProject
 
         #endregion
 
-        #region Create Room Method
+        #region Random Room Method
 
-        public void CreateRoom()
+        public void RandomRoom()
         {
-            string roomName = CreateRandomRoomName();
+            string roomName = RandomRoomName();
 
             Debug.Log(PhotonNetwork.NickName + " is Creating Room " + roomName);
-            PhotonNetwork.JoinOrCreateRoom(roomName, new RoomOptions() { MaxPlayers = maxPlayers }, null);
+            PhotonNetwork.JoinOrCreateRoom(roomName, new RoomOptions() { MaxPlayers = MAX_PLAYERS }, null);
             PhotonNetwork.LoadLevel("Expedition");
         }
 
-
-        private string CreateRandomRoomName()
+        /// <summary>
+        /// Creates a random room name of capital letters
+        /// </summary>
+        /// <returns></returns>
+        private string RandomRoomName()
         {
             char[] letters = new char[ROOM_NAME_LENGTH];
             for (int i = 0; i < ROOM_NAME_LENGTH; i++)
@@ -117,8 +123,8 @@ namespace DIPProject
 
 		public override void OnCreateRoomFailed(short returnCode, string message)
 		{
-            Debug.Log(PhotonNetwork.NickName + " is failed to Create Room " + uiRoomNameInput.text);
-
+            Debug.Log(PhotonNetwork.NickName + " failed to Create Random Room.");
+            PhotonNetwork.LoadLevel("Landing");
 			base.OnCreateRoomFailed(returnCode, message);
 		}
 
