@@ -32,35 +32,44 @@ namespace DIPProject
 		void Start()
         {
             uiEnterButton.SetActive(false);
-            Connect();
+            PhotonNetwork.ConnectUsingSettings();
+            PhotonNetwork.GameVersion = "0.0";
         }
 
-        #endregion
+		void Update()
+		{
+            if (Input.GetKeyDown(KeyCode.Return)) JoinLobby();
+        }
 
-        #region Public Methods
+		#endregion
 
-        public void Connect()
+		#region Public Methods
+
+		public void JoinLobby()
         {
-            if (PhotonNetwork.IsConnected)
+            if (ReadyToJoin())
             {
+                PhotonNetwork.NickName = uiUsername.text;
+                PhotonNetwork.LoadLevel("Landing");
                 PhotonNetwork.JoinLobby();
             }
-            else
-            {
-                PhotonNetwork.ConnectUsingSettings();
-                PhotonNetwork.GameVersion = "0.0";
-            }
         }
 
-        public void validateUsername()
-        {
-            uiEnterButton.SetActive(uiUsername.text.Length >= minimumUsernameLength && PhotonNetwork.IsConnected);
+        /// <summary>
+        /// Validates if the player inputs are good and if is connected
+        /// </summary>
+        /// <returns></returns>
+        public bool ReadyToJoin()
+		{
+            return uiUsername.text.Length >= minimumUsernameLength && PhotonNetwork.IsConnected;
         }
 
-        public void joinLobby()
+        /// <summary>
+        /// Checks if the username is good, if it's good, then the Join button will appear
+        /// </summary>
+        public void ButtonUpdate()
         {
-            PhotonNetwork.NickName = uiUsername.text;
-            PhotonNetwork.LoadLevel("Landing");
+            uiEnterButton.SetActive(ReadyToJoin());
         }
 
         #endregion

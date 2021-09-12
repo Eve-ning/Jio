@@ -300,8 +300,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 413276434}
-        m_TargetAssemblyTypeName: SplashHandler, Assembly-CSharp
-        m_MethodName: validateUsername
+        m_TargetAssemblyTypeName: DIPProject.SplashHandler, Assembly-CSharp
+        m_MethodName: ButtonUpdate
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1154,8 +1154,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 413276434}
-        m_TargetAssemblyTypeName: SplashHandler, Assembly-CSharp
-        m_MethodName: joinLobby
+        m_TargetAssemblyTypeName: DIPProject.SplashHandler, Assembly-CSharp
+        m_MethodName: JoinLobby
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
