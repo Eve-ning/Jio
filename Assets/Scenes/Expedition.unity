@@ -3100,7 +3100,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1094685504}
         m_TargetAssemblyTypeName: PhotonChatManager, Assembly-CSharp
-        m_MethodName: sendChatMessage
+        m_MethodName: SendChatMsg
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
