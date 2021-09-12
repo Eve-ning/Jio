@@ -17,37 +17,25 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
 
 	#region IChatClientListener Callbacks
 
-	public void DebugReturn(DebugLevel level, string message)
-	{
-		//throw new System.NotImplementedException();
-	}
+	public void DebugReturn(DebugLevel level, string message) {	}
 
-	public void OnChatStateChange(ChatState state)
-	{
-	}
+	public void OnChatStateChange(ChatState state)	{ }
 
 	public void OnConnected()
 	{
-		MsgRoom(PhotonNetwork.NickName + " has connected to the channel!");
-		chatClient.Subscribe(PhotonNetwork.CurrentRoom.Name);
+		chatClient.Subscribe(new string[] { PhotonNetwork.CurrentRoom.Name });
 		ToggleChat(true);
 	}
 
 	public void OnDisconnected()
 	{
-		MsgRoom(PhotonNetwork.NickName + " has disconnected from the channel!");
+		chatClient.Unsubscribe(new string[] { PhotonNetwork.CurrentRoom.Name });
 		ToggleChat(false);
 	}
 
 	public void OnGetMessages(string channelName, string[] senders, object[] messages)
 	{
-		string msg = "";
-		for (int i = 0; i < senders.Length; i++)
-		{
-			msg = string.Format("{0}{1}={2}, ", msg, senders[i], messages[i]);
-		}
-		Debug.LogFormat("OnGetMessages: {0} ({1}) > {2}", channelName, senders.Length, msg);
-		AppendChat(senders, messages);
+		if (channelName == PhotonNetwork.CurrentRoom.Name) AppendChat(senders, messages);
 	}
 
 	public void OnPrivateMessage(string sender, object message, string channelName)
@@ -62,12 +50,12 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
 
 	public void OnSubscribed(string[] channels, bool[] results)
 	{
-		Debug.Log(PhotonNetwork.NickName + " has subscribed to " + PhotonNetwork.CurrentRoom.Name);
+		MsgRoom(PhotonNetwork.NickName + " has connected to the channel!");
 	}
 
 	public void OnUnsubscribed(string[] channels)
 	{
-		//throw new System.NotImplementedException();
+		MsgRoom(PhotonNetwork.NickName + " has disconnected from the channel!");
 	}
 
 	public void OnUserSubscribed(string channel, string user)
@@ -109,7 +97,6 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
 		Debug.Log("Photon Chat attempting to Connect");
 		chatClient = new ChatClient(this);
 		chatClient.Connect(PhotonNetwork.PhotonServerSettings.AppSettings.AppIdChat, PhotonNetwork.AppVersion, new AuthenticationValues(PhotonNetwork.NickName));
-
 	}
 
 	void MsgRoom(string msg)
@@ -139,8 +126,6 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
 		{
 			chatWindow.text += "\n" + senders[i] + ": " + messages[i];
 		}
-
-		Debug.Log(chatWindow.text.Split('\n'));
 	}
 
 
