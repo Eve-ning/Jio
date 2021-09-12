@@ -10,12 +10,15 @@ using UnityEngine.UI;
 namespace DIPProject {
 	public class PhotonChatManager : MonoBehaviour, IChatClientListener
 	{
+		#region Variables
 		ChatClient chatClient;
 		[Tooltip("The InputField for sending a message")]
 		[SerializeField] InputField chatInput;
 		[Tooltip("The TextWindow")]
 		[SerializeField] Text chatWindow;
+		[Tooltip("The Button to send a message")]
 		[SerializeField] Button chatBtn;
+		#endregion
 
 		#region IChatClientListener Callbacks
 
@@ -83,20 +86,17 @@ namespace DIPProject {
 			ToggleChat(false);
 		}
 
-
 		// Update is called once per frame
 		void Update()
 		{
 			if (PhotonNetwork.InRoom)
 			{
 				if (chatClient == null) Connect();
-
 				if (Input.GetKeyDown(KeyCode.Return)) SendChatMsg();
 				chatClient.Service();
 			}
 
 		}
-
 
 		#endregion
 
@@ -137,7 +137,6 @@ namespace DIPProject {
 				chatWindow.text += "\n" + senders[i] + ": " + messages[i];
 			}
 		}
-
 
 		public void CreateChatPopUp(string[] senders, object[] messages)
 		{
