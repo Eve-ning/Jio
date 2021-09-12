@@ -8,47 +8,50 @@ using UnityEngine.UI;
 namespace DIPProject
 {
     /// <summary>
-    /// This controls the player in 2D environments, specifically in the Landing.
+    /// This controls the player in all 2D environments
     /// </summary>
     public class Player2D : MonoBehaviourPunCallbacks
         {
 
 		#region Variables
 
-		public PhotonView photonView;
+		new public PhotonView photonView;
         public TextMeshPro playerNameText;
-
-        /// <summary>
-        /// Not too sure if this is needed? The 2D scene is not yet multiplayer?
-        /// I'll leave this here just in case we want players too see each other in lobby?
-        /// </summary>
         public GameObject playerCamera;
 
-        [Tooltip("Controls how fast the player is moving in 2D.")]
+		#region Movement
+		[Tooltip("Controls how fast the player is moving in 2D.")]
         [SerializeField]
         public float speed = 5;
-
         private Rigidbody2D rb;
-        
         private Vector2 moveVelocity;
-        
-        [Tooltip("The Parent Chatbox GameObject")]
+		#endregion
+		#region Chat
+		[Tooltip("The Parent Chatbox GameObject")]
         [SerializeField]
         private GameObject chatBox;
         [Tooltip("The Chatbox TMP")]
         [SerializeField]
         private TextMeshPro chatText;
+        [SerializeField]
+        private float chatOpenTime = 2f;
+        #endregion
+        #region Defaults
+        private string MISSING_SELF_NAME = "Missing Self Name";
+        private string MISSING_OTHER_NAME = "Missing Other Name";
 		#endregion
+
+		#endregion
+
 
 		#region MonoBehavior Callbacks
 		private void Awake()
         {
-            PhotonNetwork.NickName = PhotonNetwork.NickName == "" ? "Unexpected Missing Self Name" : PhotonNetwork.NickName;
+            PhotonNetwork.NickName = PhotonNetwork.NickName == "" ? MISSING_SELF_NAME : PhotonNetwork.NickName;
             playerCamera.SetActive(photonView.IsMine);
             if (photonView.IsMine) playerNameText.text = PhotonNetwork.NickName;
-            else playerNameText.text = photonView.Owner.NickName == "" ? "Unexpected Missing Other Name" : photonView.Owner.NickName;
+            else playerNameText.text = photonView.Owner.NickName == "" ? MISSING_OTHER_NAME : photonView.Owner.NickName;
         }
-
 
 		// Start is called before the first frame update
 		void Start()
@@ -72,15 +75,19 @@ namespace DIPProject
             rb.MovePosition(rb.position + moveVelocity * Time.fixedDeltaTime);
         }
 
-        #endregion
+		#endregion
 
-        public IEnumerator ChatPopup(object msg)
+		#region Chat Methods
+
+		public IEnumerator ChatPopup(object msg)
         {
             chatBox.SetActive(true);
             chatText.text = msg.ToString();
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(chatOpenTime);
             chatBox.SetActive(false);
             chatText.text = "";
         }
-    }
+
+		#endregion
+	}
 }
