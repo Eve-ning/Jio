@@ -115,9 +115,9 @@ Material:
     - _OutlineWidth: 0
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
-    - _ScaleRatioA: 1
-    - _ScaleRatioB: 1
-    - _ScaleRatioC: 1
+    - _ScaleRatioA: 0.8333333
+    - _ScaleRatioB: 0.6770833
+    - _ScaleRatioC: 0.6770833
     - _ScaleX: 1
     - _ScaleY: 1
     - _ShaderFlags: 0
@@ -162,9 +162,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: Orbitron Black SDF
   m_EditorClassIdentifier: 
-  hashCode: 0
+  hashCode: -1872603321
   material: {fileID: -4062259483877724534}
-  materialHashCode: 0
+  materialHashCode: 1101845767
   m_Version: 1.1.0
   m_SourceFontFileGUID: 495c9e2a934bcc640a8d7427b13cb680
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 495c9e2a934bcc640a8d7427b13cb680, type: 3}
