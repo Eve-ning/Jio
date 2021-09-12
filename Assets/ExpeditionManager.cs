@@ -26,6 +26,7 @@ namespace DIPProject
         }
 
 
+
         // Update is called once per frame
         void Update()
         {
@@ -53,6 +54,7 @@ namespace DIPProject
 			roomNameText.text = ROOM_NAME_PREFIX + PhotonNetwork.CurrentRoom.Name;
             base.OnJoinedRoom();
         }
+
 
 		public override void OnLeftRoom()
 		{

@@ -92,6 +92,7 @@ namespace DIPProject {
 			if (PhotonNetwork.InRoom)
 			{
 				if (chatClient == null) Connect();
+
 				if (Input.GetKeyDown(KeyCode.Return)) SendChatMsg();
 				chatClient.Service();
 			}
