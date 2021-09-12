@@ -20,16 +20,15 @@ namespace DIPProject
 
         #region Public Methods
 
-        private bool isMineColliding(Collider2D collider)
+        private bool IsMineColliding(Collider2D collider)
         {
             return collider.gameObject.GetComponent<PhotonView>().IsMine;
         }
-        public void showCanvas()
+        public void ShowCanvas()
         {
             uiCanvas.SetActive(true);
         }
-
-        public void hideCanvas()
+        public void HideCanvas()
         {
             uiCanvas.SetActive(false);
         }
@@ -37,11 +36,17 @@ namespace DIPProject
         /// <summary>
         /// Attempts to Join a Room specified for the uiRoomNameInput
         /// </summary>
-        public void joinRoom()
+        public void JoinRoom()
         {
-            Debug.Log(PhotonNetwork.NickName + " is Attempting to Join Room " + uiRoomNameInput.text);
-            PhotonNetwork.JoinRoom(uiRoomNameInput.text, null);
-            return;
+            string roomName = uiRoomNameInput.text;
+            if (roomName.Length < CreateRoomHandler.ROOM_NAME_LENGTH)
+			{
+                Debug.Log("Room Name Received is too short " + roomName);
+                return;
+			}
+            Debug.Log(PhotonNetwork.NickName + " is Attempting to Join Room " + roomName);
+            PhotonNetwork.JoinRoom(roomName, null);
+            PhotonNetwork.LoadLevel("Expedition");
         }
 
         #endregion
@@ -50,29 +55,32 @@ namespace DIPProject
 
         private void OnTriggerEnter2D(Collider2D collider)
         {
-            if (isMineColliding(collider))
-            {
-                showCanvas();
-            }
+            if (IsMineColliding(collider)) ShowCanvas();
         }
 
         private void OnTriggerExit2D(Collider2D collider)
         {
-            if (isMineColliding(collider))
-            {
-                hideCanvas();
-            }
+            if (IsMineColliding(collider)) HideCanvas();
+        }
+
+		#endregion
+
+		#region MonoBehaviour Callbacks
+
+		private void Update()
+		{
+            if (Input.GetKeyDown(KeyCode.Return)) JoinRoom();
         }
 
 		#endregion
 
 		#region MonoBehaviourPunCallbacks Callbacks
 
-        /// <summary>
-        /// We load the level if we successfully joined the room.
-        /// 
-        /// We have it as separate functions to be explicit on the flow.
-        /// </summary>
+		/// <summary>
+		/// We load the level if we successfully joined the room.
+		/// 
+		/// We have it as separate functions to be explicit on the flow.
+		/// </summary>
 		public override void OnJoinedRoom()
 		{
             Debug.Log(PhotonNetwork.NickName + " Joined Room " + uiRoomNameInput.text);
@@ -89,6 +97,27 @@ namespace DIPProject
 		{
             Debug.Log(PhotonNetwork.NickName + " Failed to Join Room " + uiRoomNameInput.text);
 			base.OnJoinRoomFailed(returnCode, message);
+		}
+
+        #endregion
+
+        #region Input Validation
+
+        /// <summary>
+        /// Capitalizes the input
+        /// </summary>
+        public void CapitalizeInput()
+		{
+            uiRoomNameInput.text = uiRoomNameInput.text.ToUpper();
+        }
+
+        /// <summary>
+        /// Truncates the input if it's too long
+        /// </summary>
+        public void TruncateInput()
+		{
+            string roomName = uiRoomNameInput.text;
+            uiRoomNameInput.text = roomName.Length > 5 ? roomName.Substring(0, 5) : roomName;
 		}
 
 		#endregion

@@ -23,6 +23,9 @@ namespace DIPProject
         [SerializeField]
         private byte maxPlayers = 5;
 
+        public const int ROOM_NAME_LENGTH = 5;
+        private const string LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
         #endregion
 
         #region Collider2D Callbacks 
@@ -33,7 +36,7 @@ namespace DIPProject
         /// <param name="collider"></param>
         private void OnTriggerEnter2D(Collider2D collider)
         {
-            if (isMineColliding(collider)) showCanvas();
+            if (IsMineColliding(collider)) ShowCanvas();
         }
 
         /// <summary>
@@ -42,9 +45,17 @@ namespace DIPProject
         /// <param name="collider"></param>
         private void OnTriggerExit2D(Collider2D collider)
         {
-            if (isMineColliding(collider)) hideCanvas();
+            if (IsMineColliding(collider)) HideCanvas();
         }
 
+        #endregion
+
+        #region MonoBehaviour Callbacks
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Return)) CreateRoom();
+        }
         #endregion
 
         #region Public Methods
@@ -54,7 +65,7 @@ namespace DIPProject
         /// </summary>
         /// <param name="collider"></param>
         /// <returns></returns>
-        private bool isMineColliding(Collider2D collider)
+        private bool IsMineColliding(Collider2D collider)
         {
             return collider.gameObject.GetComponent<PhotonView>().IsMine;
         }
@@ -62,7 +73,7 @@ namespace DIPProject
         /// <summary>
         /// Shows the UI Canvas
         /// </summary>
-        public void showCanvas()
+        public void ShowCanvas()
         {
             uiCanvas.SetActive(true);
         }
@@ -70,7 +81,7 @@ namespace DIPProject
         /// <summary>
         /// Hides the UI Canvas
         /// </summary>
-        public void hideCanvas()
+        public void HideCanvas()
         {
             uiCanvas.SetActive(false);
         }
@@ -79,12 +90,26 @@ namespace DIPProject
 
         #region Create Room Method
 
-        public void createRoom()
+        public void CreateRoom()
         {
-            Debug.Log(PhotonNetwork.NickName + " is Creating Room " + uiRoomNameInput.text);
-            PhotonNetwork.JoinOrCreateRoom(uiRoomNameInput.text, new RoomOptions() { MaxPlayers = maxPlayers }, null);
+            string roomName = CreateRandomRoomName();
+
+            Debug.Log(PhotonNetwork.NickName + " is Creating Room " + roomName);
+            PhotonNetwork.JoinOrCreateRoom(roomName, new RoomOptions() { MaxPlayers = maxPlayers }, null);
             PhotonNetwork.LoadLevel("Expedition");
         }
+
+
+        private string CreateRandomRoomName()
+        {
+            char[] letters = new char[ROOM_NAME_LENGTH];
+            for (int i = 0; i < ROOM_NAME_LENGTH; i++)
+			{
+                letters[i] = LETTERS[Random.Range(0, LETTERS.Length)];
+            }
+
+            return new string(letters);
+		}
 
 		#endregion
 
