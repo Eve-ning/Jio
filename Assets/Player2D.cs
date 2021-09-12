@@ -36,22 +36,15 @@ namespace DIPProject
 		#region MonoBehavior Callbacks
 		private void Awake()
         {
-            PhotonNetwork.NickName = PhotonNetwork.NickName == "" ? "Unknown Name" : PhotonNetwork.NickName;
-
+            PhotonNetwork.NickName = PhotonNetwork.NickName == "" ? "Unexpected Missing Self Name" : PhotonNetwork.NickName;
             playerCamera.SetActive(photonView.IsMine);
-            if (photonView.IsMine)
-            {
-                playerNameText.text = PhotonNetwork.NickName;
-            }
-            else
-            {
-                playerNameText.text = photonView.Owner.NickName == "" ? photonView.Owner.NickName : "Unexpected Missing Name";
-            }
-
+            if (photonView.IsMine) playerNameText.text = PhotonNetwork.NickName;
+            else playerNameText.text = photonView.Owner.NickName == "" ? "Unexpected Missing Other Name" : photonView.Owner.NickName;
         }
 
-        // Start is called before the first frame update
-        void Start()
+
+		// Start is called before the first frame update
+		void Start()
         {
             rb = GetComponent<Rigidbody2D>();
         }
