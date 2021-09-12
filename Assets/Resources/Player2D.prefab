@@ -441,8 +441,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 6.08
-  m_fontSizeBase: 6.08
+  m_fontSize: 6
+  m_fontSizeBase: 6
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -759,6 +759,7 @@ MonoBehaviour:
   speed: 5
   chatBox: {fileID: 65320274316287493}
   chatText: {fileID: 2476205663474072140}
+  chatOpenTime: 2
 --- !u!114 &9147820164636223803
 MonoBehaviour:
   m_ObjectHideFlags: 0
