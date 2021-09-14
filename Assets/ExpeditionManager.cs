@@ -50,7 +50,7 @@ namespace DIPProject
 		/// </summary>
 		public override void OnJoinedRoom()
         {
-            PhotonNetwork.Instantiate("Player2D", new Vector3(-10, 1, 0), Quaternion.identity);
+            PhotonNetwork.Instantiate("Player2D", new Vector3(-10, 1, -3.2f), Quaternion.identity);
 			roomNameText.text = ROOM_NAME_PREFIX + PhotonNetwork.CurrentRoom.Name;
             base.OnJoinedRoom();
         }
