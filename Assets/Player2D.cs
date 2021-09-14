@@ -87,8 +87,8 @@ namespace DIPProject
             {
                 Vector2 moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
                 moveVelocity = moveInput * speed;
+                SetSpriteDirection();
             }
-            SetSpriteDirection();
         }
 
         private void FixedUpdate()
@@ -149,7 +149,7 @@ namespace DIPProject
         /// <returns></returns>
 		public IEnumerator FlipChar(bool reverse)
         {
-            for (int i = -ANIMATION_FRAMES; i < ANIMATION_FRAMES; i++)
+            for (int i = -ANIMATION_FRAMES; i <= ANIMATION_FRAMES; i++)
             {
                 spriteImage.transform.localScale = new Vector3((reverse ? -1 : 1) * (float) i / ANIMATION_FRAMES, 1, 1);
                 yield return new WaitForSeconds(ANIMATION_FRAME_DELAY);

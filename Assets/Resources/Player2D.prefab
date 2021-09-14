@@ -615,11 +615,11 @@ Canvas:
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
-  m_OverrideSorting: 0
-  m_OverridePixelPerfect: 0
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 1
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 123262365
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &3291868516327993340
@@ -644,7 +644,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &5609025860496359812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -769,7 +769,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8938161019827331024}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.7}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.94, y: 0.64, z: 1}
   m_Children: []
   m_Father: {fileID: 4630561463546410742}
@@ -817,9 +817,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 123262365
+  m_SortingLayer: 1
+  m_SortingOrder: -1
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
@@ -1026,13 +1026,13 @@ MonoBehaviour:
   photonView: {fileID: 9147820164636223803}
   playerNameText: {fileID: 1876083515578640227}
   playerCamera: {fileID: 9147820163983063848}
-  spriteImage: {fileID: 5797560904988163968}
-  frontImage: {fileID: 21300000, guid: a004fb8a5bb7d5349a21aa909d117861, type: 3}
-  backImage: {fileID: 21300000, guid: 9b9adb60b4b1ff045a14538fa36274e2, type: 3}
   speed: 5
   chatBox: {fileID: 65320274316287493}
   chatText: {fileID: 2476205663474072140}
   chatOpenTime: 2
+  spriteImage: {fileID: 5797560904988163968}
+  frontImage: {fileID: 21300000, guid: a004fb8a5bb7d5349a21aa909d117861, type: 3}
+  backImage: {fileID: 21300000, guid: 9b9adb60b4b1ff045a14538fa36274e2, type: 3}
 --- !u!114 &9147820164636223803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1107,7 +1107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
+  m_SynchronizeScale: 1
   m_UseLocal: 1
 --- !u!222 &1098082414022794236
 CanvasRenderer:
