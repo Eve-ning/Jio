@@ -328,7 +328,7 @@ GameObject:
   - component: {fileID: 5015912946959942643}
   - component: {fileID: 5666237002035881601}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -574,7 +574,7 @@ GameObject:
   - component: {fileID: 3291868516327993340}
   - component: {fileID: 5609025860496359812}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Sprite Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -644,7 +644,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &5609025860496359812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -755,7 +755,7 @@ GameObject:
   - component: {fileID: 5364332213087350792}
   - component: {fileID: 6607473714633965932}
   m_Layer: 5
-  m_Name: Circle
+  m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
