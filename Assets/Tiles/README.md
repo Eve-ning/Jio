@@ -1,1 +1,1 @@
-Tile made by @castpixel on Twitter!
+Isometric made by @castpixel on Twitter!
