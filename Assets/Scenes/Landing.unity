@@ -1884,8 +1884,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 746164039}
-        m_TargetAssemblyTypeName: DIPProject.CreateRoomHandler, Assembly-CSharp
-        m_MethodName: CreateRoom
+        m_TargetAssemblyTypeName: DIPProject.RandomRoomHandler, Assembly-CSharp
+        m_MethodName: RandomRoom
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
