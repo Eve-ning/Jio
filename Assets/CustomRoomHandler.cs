@@ -44,12 +44,16 @@ namespace DIPProject
         /// </summary>
         public void CustomRoom()
         {
-            string roomName = uiRoomNameInput.text;
+            CustomRoom(uiRoomNameInput.text);
+        }
+
+        public void CustomRoom(string roomName)
+		{
             if (roomName.Length < RandomRoomHandler.ROOM_NAME_LENGTH)
-			{
+            {
                 Debug.Log("Room Name Received is too short " + roomName);
                 return;
-			}
+            }
             Debug.Log(PhotonNetwork.NickName + " is Attempting to Join / Create Room " + roomName);
             PhotonNetwork.JoinOrCreateRoom(roomName, new RoomOptions() { MaxPlayers = RandomRoomHandler.MAX_PLAYERS }, null);
             PhotonNetwork.LoadLevel("Expedition");
