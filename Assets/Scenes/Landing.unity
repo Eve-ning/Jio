@@ -2031,7 +2031,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiCanvas: {fileID: 1321454603}
   uiCreateButton: {fileID: 1813065108}
-  uiCreateRoomScreen: {fileID: 0}
 --- !u!1 &752077203
 GameObject:
   m_ObjectHideFlags: 0
@@ -2681,12 +2680,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1038824158}
   m_Layer: 0
-  m_Name: Join Room Popout
+  m_Name: Custom Room Popout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1038824158
 Transform:
   m_ObjectHideFlags: 0
@@ -3303,7 +3302,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1321454604}
   m_Layer: 0
-  m_Name: Create Room Popout
+  m_Name: Random Room Popout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3952,9 +3951,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f388357a6fc7eb4aaff39579dc742c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiCanvas: {fileID: 0}
-  uiCreateButton: {fileID: 0}
-  uiCreateRoomScreen: {fileID: 1321454603}
+  uiCanvas: {fileID: 1321454603}
+  uiCreateButton: {fileID: 1813065108}
 --- !u!4 &1621732415
 Transform:
   m_ObjectHideFlags: 0
@@ -3963,7 +3961,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1621732413}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 29.610134, y: 6.5188227, z: -17.99227}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3994,10 +3992,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3e9b083e9c13144597dd72241b8f073, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiCanvas: {fileID: 0}
-  uiJoinButton: {fileID: 0}
-  uiJoinRoomScreen: {fileID: 1038824157}
-  uiRoomNameInput: {fileID: 0}
+  uiCanvas: {fileID: 1038824157}
+  uiJoinButton: {fileID: 1338940636}
+  uiRoomNameInput: {fileID: 663375521}
 --- !u!1 &1623146468
 GameObject:
   m_ObjectHideFlags: 0
@@ -4122,7 +4119,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiCanvas: {fileID: 1038824157}
   uiJoinButton: {fileID: 1338940636}
-  uiJoinRoomScreen: {fileID: 0}
   uiRoomNameInput: {fileID: 663375521}
 --- !u!1 &1681737579
 GameObject:

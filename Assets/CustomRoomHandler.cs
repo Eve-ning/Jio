@@ -18,7 +18,6 @@ namespace DIPProject
 
         public GameObject uiCanvas;
         public GameObject uiJoinButton;
-        public GameObject uiJoinRoomScreen;
         public InputField uiRoomNameInput;
 
         [Tooltip("If the player is triggering this region.")]
@@ -31,11 +30,11 @@ namespace DIPProject
         {
             return collider.gameObject.GetComponent<PhotonView>().IsMine;
         }
-        public void ShowCanvas()
+        public void ShowScreen()
         {
             uiCanvas.SetActive(true);
         }
-        public void HideCanvas()
+        public void HideScreen()
         {
             uiCanvas.SetActive(false);
         }
@@ -62,25 +61,25 @@ namespace DIPProject
 
         #endregion
 
-        #region Collider2D Callbacks 
+        #region Collider2D Callbacks (Deprecated)
 
-        private void OnTriggerEnter2D(Collider2D collider)
-        {
-            if (IsMineColliding(collider)) ShowCanvas();
-            triggered = true;
-        }
+        //private void OnTriggerEnter2D(Collider2D collider)
+        //{
+        //    if (IsMineColliding(collider)) ShowCanvas();
+        //    triggered = true;
+        //}
 
-        private void OnTriggerExit2D(Collider2D collider)
-        {
-            if (IsMineColliding(collider)) HideCanvas();
-            triggered = false;
-        }
+        //private void OnTriggerExit2D(Collider2D collider)
+        //{
+        //    if (IsMineColliding(collider)) HideCanvas();
+        //    triggered = false;
+        //}
 
-		#endregion
+        #endregion
 
-		#region MonoBehaviour Callbacks
+        #region MonoBehaviour Callbacks
 
-		private void Update()
+        private void Update()
 		{
             if (Input.GetKeyDown(KeyCode.Return) && triggered) CustomRoom();
         }
@@ -141,16 +140,6 @@ namespace DIPProject
             string roomName = uiRoomNameInput.text;
             Regex rgx = new Regex("[^a-zA-Z -]");
             uiRoomNameInput.text = rgx.Replace(roomName, "");
-        }
-
-        public void ShowScreen()
-        {
-            uiJoinRoomScreen.SetActive(true);
-        }
-
-        public void HideScreen()
-        {
-            uiJoinRoomScreen.SetActive(false);
         }
 
 		#endregion
