@@ -18,6 +18,7 @@ namespace DIPProject
 
         public GameObject uiCanvas;
         public GameObject uiJoinButton;
+        public GameObject uiJoinRoomScreen;
         public InputField uiRoomNameInput;
 
         [Tooltip("If the player is triggering this region.")]
@@ -140,6 +141,16 @@ namespace DIPProject
             string roomName = uiRoomNameInput.text;
             Regex rgx = new Regex("[^a-zA-Z -]");
             uiRoomNameInput.text = rgx.Replace(roomName, "");
+        }
+
+        public void ShowScreen()
+        {
+            uiJoinRoomScreen.SetActive(true);
+        }
+
+        public void HideScreen()
+        {
+            uiJoinRoomScreen.SetActive(false);
         }
 
 		#endregion

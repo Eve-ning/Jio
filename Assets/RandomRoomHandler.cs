@@ -17,6 +17,7 @@ namespace DIPProject
 
         public GameObject uiCanvas;
         public GameObject uiCreateButton;
+        public GameObject uiCreateRoomScreen;
 
         [Tooltip("If the player is triggering this region.")]
         private bool triggered = false;
@@ -127,6 +128,16 @@ namespace DIPProject
             PhotonNetwork.LoadLevel("Landing");
 			base.OnCreateRoomFailed(returnCode, message);
 		}
+
+        public void ShowScreen()
+        {
+            uiCreateRoomScreen.SetActive(true);
+        }
+
+        public void HideScreen()
+        {
+            uiCreateRoomScreen.SetActive(false);
+        }
 
 		#endregion
 	}
