@@ -29,27 +29,27 @@ namespace DIPProject
 
         #endregion
 
-        #region Collider2D Callbacks 
+        #region Collider2D Callbacks (Deprecated)
 
-        /// <summary>
-        /// Open Up canvas if we Enter
-        /// </summary>
-        /// <param name="collider"></param>
-        private void OnTriggerEnter2D(Collider2D collider)
-        {
-            if (IsMineColliding(collider)) ShowCanvas();
-            triggered = true;
-        }
+        ///// <summary>
+        ///// Open Up canvas if we Enter
+        ///// </summary>
+        ///// <param name="collider"></param>
+        //private void OnTriggerEnter2D(Collider2D collider)
+        //{
+        //    if (IsMineColliding(collider)) ShowCanvas();
+        //    triggered = true;
+        //}
 
-        /// <summary>
-        /// Close canvas if we Exit
-        /// </summary>
-        /// <param name="collider"></param>
-        private void OnTriggerExit2D(Collider2D collider)
-        {
-            if (IsMineColliding(collider)) HideCanvas();
-            triggered = false;
-        }
+        ///// <summary>
+        ///// Close canvas if we Exit
+        ///// </summary>
+        ///// <param name="collider"></param>
+        //private void OnTriggerExit2D(Collider2D collider)
+        //{
+        //    if (IsMineColliding(collider)) HideCanvas();
+        //    triggered = false;
+        //}
 
         #endregion
 
@@ -76,7 +76,7 @@ namespace DIPProject
         /// <summary>
         /// Shows the UI Canvas
         /// </summary>
-        public void ShowCanvas()
+        public void ShowScreen()
         {
             uiCanvas.SetActive(true);
         }
@@ -84,7 +84,7 @@ namespace DIPProject
         /// <summary>
         /// Hides the UI Canvas
         /// </summary>
-        public void HideCanvas()
+        public void HideScreen()
         {
             uiCanvas.SetActive(false);
         }
