@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 
@@ -17,71 +18,60 @@ namespace DIPProject
         #region Variables
 
         public GameObject uiCanvas;
-        public GameObject uiJoinButton;
+        //public GameObject uiJoinButton;
         public InputField uiRoomNameInput;
 
-        [Tooltip("If the player is triggering this region.")]
-        private bool triggered;
+        public Animator gameObjectAnimator;
+
+        [Tooltip("If the canvas is active")]
+        private bool active = false;
 
         #endregion
 
         #region Public Methods
-        private bool IsMineColliding(Collider2D collider)
-        {
-            return collider.gameObject.GetComponent<PhotonView>().IsMine;
-        }
+
         public void ShowScreen()
         {
             uiCanvas.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(uiRoomNameInput.gameObject, null);
+            active = true;
         }
         public void HideScreen()
         {
             uiCanvas.SetActive(false);
+            active = false;
         }
 
         /// <summary>
         /// Attempts to Join a Room specified for the uiRoomNameInput
+        /// This will call the trigger if the condition passes
         /// </summary>
         public void CustomRoom()
         {
-            CustomRoom(uiRoomNameInput.text);
+            if (uiRoomNameInput.text.Length != RandomRoomHandler.ROOM_NAME_LENGTH) return;
+            gameObjectAnimator.SetTrigger("Exit Custom");
         }
 
-        public void CustomRoom(string roomName)
+        /// <summary>
+        /// Assuming the condition has passed, this will move the user to the custom room
+        /// This should only be called by animation events
+        /// </summary>
+        public void TriggerToCustomRoom()
 		{
-            if (roomName.Length < RandomRoomHandler.ROOM_NAME_LENGTH)
-            {
-                Debug.Log("Room Name Received is too short " + roomName);
-                return;
-            }
-            Debug.Log(PhotonNetwork.NickName + " is Attempting to Join / Create Room " + roomName);
-            PhotonNetwork.JoinOrCreateRoom(roomName, new RoomOptions() { MaxPlayers = RandomRoomHandler.MAX_PLAYERS }, null);
+            Debug.Log(PhotonNetwork.NickName + " is Attempting to Join / Create Room " + uiRoomNameInput.text);
+            PhotonNetwork.JoinOrCreateRoom(uiRoomNameInput.text, new RoomOptions() { MaxPlayers = RandomRoomHandler.MAX_PLAYERS }, null);
             PhotonNetwork.LoadLevel("Expedition");
         }
 
         #endregion
 
-        #region Collider2D Callbacks (Deprecated)
-
-        //private void OnTriggerEnter2D(Collider2D collider)
-        //{
-        //    if (IsMineColliding(collider)) ShowCanvas();
-        //    triggered = true;
-        //}
-
-        //private void OnTriggerExit2D(Collider2D collider)
-        //{
-        //    if (IsMineColliding(collider)) HideCanvas();
-        //    triggered = false;
-        //}
-
-        #endregion
 
         #region MonoBehaviour Callbacks
 
         private void Update()
 		{
-            if (Input.GetKeyDown(KeyCode.Return) && triggered) CustomRoom();
+            if (Input.GetKeyDown(KeyCode.Return) && active) CustomRoom();
+            if (Input.GetKeyDown(KeyCode.Escape) && active) HideScreen();
         }
 
 		#endregion

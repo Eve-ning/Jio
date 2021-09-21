@@ -15,8 +15,8 @@ namespace DIPProject
     {
         #region Variables
 
-        public GameObject uiCanvas;
-        public GameObject uiCreateButton;
+        //public GameObject uiCanvas;
+        //public GameObject uiCreateButton;
 
         [Tooltip("If the player is triggering this region.")]
         private bool triggered = false;
@@ -29,30 +29,6 @@ namespace DIPProject
 
         #endregion
 
-        #region Collider2D Callbacks (Deprecated)
-
-        ///// <summary>
-        ///// Open Up canvas if we Enter
-        ///// </summary>
-        ///// <param name="collider"></param>
-        //private void OnTriggerEnter2D(Collider2D collider)
-        //{
-        //    if (IsMineColliding(collider)) ShowCanvas();
-        //    triggered = true;
-        //}
-
-        ///// <summary>
-        ///// Close canvas if we Exit
-        ///// </summary>
-        ///// <param name="collider"></param>
-        //private void OnTriggerExit2D(Collider2D collider)
-        //{
-        //    if (IsMineColliding(collider)) HideCanvas();
-        //    triggered = false;
-        //}
-
-        #endregion
-
         #region MonoBehaviour Callbacks
 
         private void Update()
@@ -61,38 +37,12 @@ namespace DIPProject
         }
         #endregion
 
-        #region Public Methods
-
-        /// <summary>
-        /// Checks if the trigger is being triggered by my own view.
-        /// </summary>
-        /// <param name="collider"></param>
-        /// <returns></returns>
-        private bool IsMineColliding(Collider2D collider)
-        {
-            return collider.gameObject.GetComponent<PhotonView>().IsMine;
-        }
-
-        /// <summary>
-        /// Shows the UI Canvas
-        /// </summary>
-        public void ShowScreen()
-        {
-            uiCanvas.SetActive(true);
-        }
-
-        /// <summary>
-        /// Hides the UI Canvas
-        /// </summary>
-        public void HideScreen()
-        {
-            uiCanvas.SetActive(false);
-        }
-
-        #endregion
-
         #region Random Room Method
 
+        /// <summary>
+        /// Creates a random room and loads it directly.
+        /// This is usually called from the animator event.
+        /// </summary>
         public void RandomRoom()
         {
             string roomName = RandomRoomName();
@@ -101,6 +51,15 @@ namespace DIPProject
             PhotonNetwork.JoinOrCreateRoom(roomName, new RoomOptions() { MaxPlayers = MAX_PLAYERS }, null);
             PhotonNetwork.LoadLevel("Expedition");
         }
+
+        /// <summary>
+        /// Alias to RandomRoom().
+        /// This should only be called by animation events
+        /// </summary>
+        public void TriggerToRandomRoom()
+		{
+            RandomRoom();
+		}
 
         /// <summary>
         /// Creates a random room name of capital letters
