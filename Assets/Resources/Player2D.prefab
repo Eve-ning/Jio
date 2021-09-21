@@ -447,7 +447,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7273157541549715725, guid: 405f84e0702305846bb6eed3be7e7557, type: 2}
+  - {fileID: 1377084458660819708, guid: 38dde030ccb83154497c26e56c800c29, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -491,8 +491,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Player Name
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 405f84e0702305846bb6eed3be7e7557, type: 2}
-  m_sharedMaterial: {fileID: 7273157541549715725, guid: 405f84e0702305846bb6eed3be7e7557, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 38dde030ccb83154497c26e56c800c29, type: 2}
+  m_sharedMaterial: {fileID: 1377084458660819708, guid: 38dde030ccb83154497c26e56c800c29, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -760,7 +760,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5364332213087350792
 RectTransform:
   m_ObjectHideFlags: 0
@@ -930,6 +930,7 @@ GameObject:
   - component: {fileID: 9147820164636223783}
   - component: {fileID: 4502497802014872581}
   - component: {fileID: 1098082414022794236}
+  - component: {fileID: 590307382}
   m_Layer: 0
   m_Name: Player2D
   m_TagString: Player
@@ -1117,3 +1118,31 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9147820164636223802}
   m_CullTransparentMesh: 1
+--- !u!114 &590307382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9147820164636223802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 1
+  m_ApplyToSortingLayers: 45bad149d3d589e1000000009dd55807
+  m_ShapePath:
+  - {x: -0.49372005, y: -0.28777838, z: 0}
+  - {x: 0.0006136894, y: -0.43377352, z: 0}
+  - {x: 0.5485704, y: -0.3331542, z: 0}
+  - {x: 0.79131365, y: -0.061254263, z: 0}
+  - {x: 0.24005389, y: 0.18595457, z: 0}
+  - {x: -0.24331677, y: 0.04670453, z: 0}
+  m_ShapePathHash: 764055545
+  m_Mesh: {fileID: 0}
+  m_InstanceId: 166870
