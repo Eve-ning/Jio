@@ -18,8 +18,10 @@ namespace DIPProject
         #region Variables
 
         public GameObject uiCanvas;
-        public GameObject uiJoinButton;
+        //public GameObject uiJoinButton;
         public InputField uiRoomNameInput;
+
+        public Animator gameObjectAnimator;
 
         [Tooltip("If the canvas is active")]
         private bool active = false;
@@ -42,29 +44,27 @@ namespace DIPProject
 
         /// <summary>
         /// Attempts to Join a Room specified for the uiRoomNameInput
+        /// This will call the trigger if the condition passes
         /// </summary>
         public void CustomRoom()
         {
-            CustomRoom(uiRoomNameInput.text);
+            if (uiRoomNameInput.text.Length != RandomRoomHandler.ROOM_NAME_LENGTH) return;
+            gameObjectAnimator.SetTrigger("Exit Custom");
         }
 
-        public void CustomRoom(string roomName)
+        /// <summary>
+        /// This is usually called from the animation event.
+        /// Assuming the condition has passed, this will move the user to the custom room
+        /// </summary>
+        public void MoveToCustomRoom()
 		{
-            if (roomName.Length < RandomRoomHandler.ROOM_NAME_LENGTH)
-            {
-                Debug.Log("Room Name Received is too short " + roomName);
-                return;
-            }
-            Debug.Log(PhotonNetwork.NickName + " is Attempting to Join / Create Room " + roomName);
-            PhotonNetwork.JoinOrCreateRoom(roomName, new RoomOptions() { MaxPlayers = RandomRoomHandler.MAX_PLAYERS }, null);
+            Debug.Log(PhotonNetwork.NickName + " is Attempting to Join / Create Room " + uiRoomNameInput.text);
+            PhotonNetwork.JoinOrCreateRoom(uiRoomNameInput.text, new RoomOptions() { MaxPlayers = RandomRoomHandler.MAX_PLAYERS }, null);
             PhotonNetwork.LoadLevel("Expedition");
         }
 
         #endregion
 
-        #region Collider2D Callbacks (Deprecated)
-
-        #endregion
 
         #region MonoBehaviour Callbacks
 

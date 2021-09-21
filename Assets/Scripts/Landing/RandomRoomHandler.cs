@@ -39,6 +39,10 @@ namespace DIPProject
 
         #region Random Room Method
 
+        /// <summary>
+        /// Creates a random room and loads it directly.
+        /// This is usually called from the animator event.
+        /// </summary>
         public void RandomRoom()
         {
             string roomName = RandomRoomName();
@@ -47,6 +51,15 @@ namespace DIPProject
             PhotonNetwork.JoinOrCreateRoom(roomName, new RoomOptions() { MaxPlayers = MAX_PLAYERS }, null);
             PhotonNetwork.LoadLevel("Expedition");
         }
+
+        /// <summary>
+        /// Alias to RandomRoom().
+        /// This is for convention for the animation call
+        /// </summary>
+        public void MoveToRandomRoom()
+		{
+            RandomRoom();
+		}
 
         /// <summary>
         /// Creates a random room name of capital letters

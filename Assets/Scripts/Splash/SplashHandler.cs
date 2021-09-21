@@ -40,14 +40,13 @@ namespace DIPProject
         // Start is called before the first frame update
         void Start()
         {
-            uiEnterButton.SetActive(false);
             PhotonNetwork.ConnectUsingSettings();
             PhotonNetwork.GameVersion = "0.0";
         }
 
 		void Update()
 		{
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (Input.GetKeyDown(KeyCode.Return) && ReadyToJoin())
 			{
                 foregroundAnimator.SetTrigger("Join");
                 backgroundAnimator.SetTrigger("Join");
