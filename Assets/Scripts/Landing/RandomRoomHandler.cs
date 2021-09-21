@@ -54,9 +54,9 @@ namespace DIPProject
 
         /// <summary>
         /// Alias to RandomRoom().
-        /// This is for convention for the animation call
+        /// This should only be called by animation events
         /// </summary>
-        public void MoveToRandomRoom()
+        public void TriggerToRandomRoom()
 		{
             RandomRoom();
 		}

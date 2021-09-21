@@ -53,10 +53,10 @@ namespace DIPProject
         }
 
         /// <summary>
-        /// This is usually called from the animation event.
         /// Assuming the condition has passed, this will move the user to the custom room
+        /// This should only be called by animation events
         /// </summary>
-        public void MoveToCustomRoom()
+        public void TriggerToCustomRoom()
 		{
             Debug.Log(PhotonNetwork.NickName + " is Attempting to Join / Create Room " + uiRoomNameInput.text);
             PhotonNetwork.JoinOrCreateRoom(uiRoomNameInput.text, new RoomOptions() { MaxPlayers = RandomRoomHandler.MAX_PLAYERS }, null);
