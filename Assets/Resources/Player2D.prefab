@@ -68,7 +68,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 4.37, y: 2.1}
+  m_SizeDelta: {x: 3.93, y: 1.79}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &4429525541492830207
 MeshRenderer:
@@ -89,7 +89,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2217856384400890417, guid: 484fff0b97008a54588f3446832a3d63, type: 2}
+  - {fileID: 9129045844581876896, guid: 4890fdab5c305f848a1fd1b28a3e6418, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -133,8 +133,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Hello!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 484fff0b97008a54588f3446832a3d63, type: 2}
-  m_sharedMaterial: {fileID: 2217856384400890417, guid: 484fff0b97008a54588f3446832a3d63, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4890fdab5c305f848a1fd1b28a3e6418, type: 2}
+  m_sharedMaterial: {fileID: 9129045844581876896, guid: 4890fdab5c305f848a1fd1b28a3e6418, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -158,18 +158,18 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 6.24
-  m_fontSizeBase: 6.24
+  m_fontSize: 13.1
+  m_fontSizeBase: 3.12
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 3
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
-  m_characterSpacing: 4.52
-  m_wordSpacing: 0.19
+  m_characterSpacing: 0
+  m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
@@ -447,7 +447,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -4062259483877724534, guid: 2c40925361d7cf946b6d90bc927b80fc, type: 2}
+  - {fileID: 7273157541549715725, guid: 405f84e0702305846bb6eed3be7e7557, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -491,8 +491,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Player Name
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2c40925361d7cf946b6d90bc927b80fc, type: 2}
-  m_sharedMaterial: {fileID: -4062259483877724534, guid: 2c40925361d7cf946b6d90bc927b80fc, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 405f84e0702305846bb6eed3be7e7557, type: 2}
+  m_sharedMaterial: {fileID: 7273157541549715725, guid: 405f84e0702305846bb6eed3be7e7557, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -644,7 +644,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &5609025860496359812
 MonoBehaviour:
   m_ObjectHideFlags: 0
