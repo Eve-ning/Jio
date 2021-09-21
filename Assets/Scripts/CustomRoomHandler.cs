@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 
@@ -20,23 +21,23 @@ namespace DIPProject
         public GameObject uiJoinButton;
         public InputField uiRoomNameInput;
 
-        [Tooltip("If the player is triggering this region.")]
-        private bool triggered;
+        [Tooltip("If the canvas is active")]
+        private bool active = false;
 
         #endregion
 
         #region Public Methods
-        private bool IsMineColliding(Collider2D collider)
-        {
-            return collider.gameObject.GetComponent<PhotonView>().IsMine;
-        }
+
         public void ShowScreen()
         {
             uiCanvas.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(uiRoomNameInput.gameObject, null);
+            active = true;
         }
         public void HideScreen()
         {
             uiCanvas.SetActive(false);
+            active = false;
         }
 
         /// <summary>
@@ -63,25 +64,14 @@ namespace DIPProject
 
         #region Collider2D Callbacks (Deprecated)
 
-        //private void OnTriggerEnter2D(Collider2D collider)
-        //{
-        //    if (IsMineColliding(collider)) ShowCanvas();
-        //    triggered = true;
-        //}
-
-        //private void OnTriggerExit2D(Collider2D collider)
-        //{
-        //    if (IsMineColliding(collider)) HideCanvas();
-        //    triggered = false;
-        //}
-
         #endregion
 
         #region MonoBehaviour Callbacks
 
         private void Update()
 		{
-            if (Input.GetKeyDown(KeyCode.Return) && triggered) CustomRoom();
+            if (Input.GetKeyDown(KeyCode.Return) && active) CustomRoom();
+            if (Input.GetKeyDown(KeyCode.Escape) && active) HideScreen();
         }
 
 		#endregion

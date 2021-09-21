@@ -22,14 +22,23 @@ namespace DIPProject
 
         [Tooltip("Minimum Length before the Enter Button appears")]
         [SerializeField]
-        private int minimumUsernameLength = 3;
+        private int minimumUsernameLength = 1;
 
-		#endregion
+        [Tooltip("The foreground animator, the Logo, Input and Join Button")]
+        [SerializeField]
+        private Animator foregroundAnimator;
 
-		#region MonoBehaviour Callbacks
+        [Tooltip("The background animator, the clouds")]
+        [SerializeField]
+        private Animator backgroundAnimator;
 
-		// Start is called before the first frame update
-		void Start()
+
+        #endregion
+
+        #region MonoBehaviour Callbacks
+
+        // Start is called before the first frame update
+        void Start()
         {
             uiEnterButton.SetActive(false);
             PhotonNetwork.ConnectUsingSettings();
@@ -38,7 +47,11 @@ namespace DIPProject
 
 		void Update()
 		{
-            if (Input.GetKeyDown(KeyCode.Return)) JoinLobby();
+            if (Input.GetKeyDown(KeyCode.Return))
+			{
+                foregroundAnimator.SetTrigger("Join");
+                backgroundAnimator.SetTrigger("Join");
+			}
         }
 
 		#endregion

@@ -15,8 +15,8 @@ namespace DIPProject
     {
         #region Variables
 
-        public GameObject uiCanvas;
-        public GameObject uiCreateButton;
+        //public GameObject uiCanvas;
+        //public GameObject uiCreateButton;
 
         [Tooltip("If the player is triggering this region.")]
         private bool triggered = false;
@@ -29,66 +29,12 @@ namespace DIPProject
 
         #endregion
 
-        #region Collider2D Callbacks (Deprecated)
-
-        ///// <summary>
-        ///// Open Up canvas if we Enter
-        ///// </summary>
-        ///// <param name="collider"></param>
-        //private void OnTriggerEnter2D(Collider2D collider)
-        //{
-        //    if (IsMineColliding(collider)) ShowCanvas();
-        //    triggered = true;
-        //}
-
-        ///// <summary>
-        ///// Close canvas if we Exit
-        ///// </summary>
-        ///// <param name="collider"></param>
-        //private void OnTriggerExit2D(Collider2D collider)
-        //{
-        //    if (IsMineColliding(collider)) HideCanvas();
-        //    triggered = false;
-        //}
-
-        #endregion
-
         #region MonoBehaviour Callbacks
 
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Return) && triggered) RandomRoom();
         }
-        #endregion
-
-        #region Public Methods
-
-        /// <summary>
-        /// Checks if the trigger is being triggered by my own view.
-        /// </summary>
-        /// <param name="collider"></param>
-        /// <returns></returns>
-        private bool IsMineColliding(Collider2D collider)
-        {
-            return collider.gameObject.GetComponent<PhotonView>().IsMine;
-        }
-
-        /// <summary>
-        /// Shows the UI Canvas
-        /// </summary>
-        public void ShowScreen()
-        {
-            uiCanvas.SetActive(true);
-        }
-
-        /// <summary>
-        /// Hides the UI Canvas
-        /// </summary>
-        public void HideScreen()
-        {
-            uiCanvas.SetActive(false);
-        }
-
         #endregion
 
         #region Random Room Method
