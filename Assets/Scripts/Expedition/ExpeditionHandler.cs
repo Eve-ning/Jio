@@ -17,7 +17,7 @@ namespace DIPProject
 		[SerializeField]
 		private GameObject dummyCamera;
 		
-		[Tooltip("The Dummy Camera used in the scene to be disabled on Start().")]
+		[Tooltip("The UI to snap to the player camera on instantiation.")]
 		[SerializeField]
 		private Canvas roomUi;
 
