@@ -21,7 +21,7 @@ namespace DIPProject
 		[SerializeField]
 		private Canvas roomUi;
 
-		private string ROOM_NAME_PREFIX = "ROOM NAME: ";
+		private string ROOM_NAME_PREFIX = "CODE: ";
 
 		#endregion
 
@@ -51,10 +51,10 @@ namespace DIPProject
 		public override void OnJoinedRoom()
         {
             GameObject player = PhotonNetwork.Instantiate("Player2D", new Vector3(0, 1, 0), Quaternion.identity);
+			Debug.Log("Room Name " + PhotonNetwork.CurrentRoom.Name);
+			roomNameText.text = ROOM_NAME_PREFIX + PhotonNetwork.CurrentRoom.Name;
 			Camera camera = player.GetComponentInChildren<Camera>();
 			roomUi.worldCamera = camera;
-			roomNameText.text = ROOM_NAME_PREFIX + PhotonNetwork.CurrentRoom.Name;
-            base.OnJoinedRoom();
         }
 
 
