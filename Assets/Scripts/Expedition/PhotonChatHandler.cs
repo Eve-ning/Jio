@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace DIPProject {
-	public class PhotonChatManager : MonoBehaviour, IChatClientListener
+	public class PhotonChatHandler : MonoBehaviour, IChatClientListener
 	{
 		#region Variables
 		ChatClient chatClient;

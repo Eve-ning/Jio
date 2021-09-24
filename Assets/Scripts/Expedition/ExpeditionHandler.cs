@@ -7,31 +7,21 @@ using UnityEngine.UI;
 
 namespace DIPProject
 {
-    public class ExpeditionManager : MonoBehaviourPunCallbacks
+    public class ExpeditionHandler : MonoBehaviourPunCallbacks
     {
 		#region Variables
 		[SerializeField]
 		private Text roomNameText;
+		// The reason for the dummy camera is so that the game scene isn't empty
+		[Tooltip("The Dummy Camera used in the scene to be disabled on Start().")]
+		[SerializeField]
+		private GameObject dummyCamera;
+		
+		[Tooltip("The Dummy Camera used in the scene to be disabled on Start().")]
+		[SerializeField]
+		private Canvas roomUi;
 
-		private string ROOM_NAME_PREFIX = "ROOM NAME: ";
-
-		#endregion
-
-		#region MonoBehavior Callbacks
-
-		// Start is called before the first frame update
-		void Start()
-        {
-
-        }
-
-
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
+		private string ROOM_NAME_PREFIX = "CODE: ";
 
 		#endregion
 
@@ -44,15 +34,27 @@ namespace DIPProject
 
 		#endregion
 
+		#region MonoBehavior Callbacks
+
+		private void Start()
+		{
+			dummyCamera.SetActive(false);
+		}
+
+		#endregion
+
+
 		#region MonoBehaviorPunCallbacks Callbacks
 		/// <summary>
 		/// Once the player joins the room, we instantiate it in the middle with some height
 		/// </summary>
 		public override void OnJoinedRoom()
         {
-            PhotonNetwork.Instantiate("Player2D", new Vector3(0, 1, 0), Quaternion.identity);
+            GameObject player = PhotonNetwork.Instantiate("Player2D", new Vector3(0, 1, 0), Quaternion.identity);
+			Debug.Log("Room Name " + PhotonNetwork.CurrentRoom.Name);
 			roomNameText.text = ROOM_NAME_PREFIX + PhotonNetwork.CurrentRoom.Name;
-            base.OnJoinedRoom();
+			Camera camera = player.GetComponentInChildren<Camera>();
+			roomUi.worldCamera = camera;
         }
 
 

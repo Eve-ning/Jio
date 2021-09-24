@@ -18,10 +18,10 @@ namespace DIPProject
         #region Variables
 
         public GameObject uiCanvas;
-        //public GameObject uiJoinButton;
         public InputField uiRoomNameInput;
 
-        public Animator gameObjectAnimator;
+        [SerializeField]
+        private Animator landingAnimatorHandler;
 
         [Tooltip("If the canvas is active")]
         private bool active = false;
@@ -33,6 +33,7 @@ namespace DIPProject
         public void ShowScreen()
         {
             uiCanvas.SetActive(true);
+            // Force User to select input field
             EventSystem.current.SetSelectedGameObject(uiRoomNameInput.gameObject, null);
             active = true;
         }
@@ -48,23 +49,21 @@ namespace DIPProject
         /// </summary>
         public void CustomRoom()
         {
-            if (uiRoomNameInput.text.Length != RandomRoomHandler.ROOM_NAME_LENGTH) return;
-            gameObjectAnimator.SetTrigger("Exit Custom");
+            if (uiRoomNameInput.text.Length == CreateRoomHandler.ROOM_NAME_LENGTH) landingAnimatorHandler.SetTrigger("Custom");
         }
 
         /// <summary>
         /// Assuming the condition has passed, this will move the user to the custom room
         /// This should only be called by animation events
         /// </summary>
-        public void TriggerToCustomRoom()
+        public void CustomRoomAfterAnimation()
 		{
             Debug.Log(PhotonNetwork.NickName + " is Attempting to Join / Create Room " + uiRoomNameInput.text);
-            PhotonNetwork.JoinOrCreateRoom(uiRoomNameInput.text, new RoomOptions() { MaxPlayers = RandomRoomHandler.MAX_PLAYERS }, null);
+            PhotonNetwork.JoinOrCreateRoom(uiRoomNameInput.text, new RoomOptions() { MaxPlayers = CreateRoomHandler.MAX_PLAYERS }, null);
             PhotonNetwork.LoadLevel("Expedition");
         }
 
         #endregion
-
 
         #region MonoBehaviour Callbacks
 
@@ -106,28 +105,13 @@ namespace DIPProject
         #region Input Validation
 
         /// <summary>
-        /// Capitalizes the input
+        /// Capitalizes, Truncates and "Letter-only" Constraints the input
         /// </summary>
-        public void CapitalizeInput()
-		{
-            uiRoomNameInput.text = uiRoomNameInput.text.ToUpper();
-        }
-
-        /// <summary>
-        /// Truncates the input if it's too long
-        /// </summary>
-        public void TruncateInput()
+        public void ValidateInput()
 		{
             string roomName = uiRoomNameInput.text;
-            uiRoomNameInput.text = roomName.Length > 5 ? roomName.Substring(0, 5) : roomName;
-		}
-        
-        /// <summary>
-        /// Truncates the input if it's too long
-        /// </summary>
-        public void EnsureAsciiInput()
-		{
-            string roomName = uiRoomNameInput.text;
+            roomName = roomName.ToUpper();
+            roomName = roomName.Length > 5 ? roomName.Substring(0, 5) : roomName;
             Regex rgx = new Regex("[^a-zA-Z -]");
             uiRoomNameInput.text = rgx.Replace(roomName, "");
         }

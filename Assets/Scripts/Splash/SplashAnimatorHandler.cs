@@ -4,7 +4,7 @@ using UnityEngine;
 namespace DIPProject
 {
     /// <summary>
-    /// Handles the splash screen interactions
+    /// Handles the splash screen animation interactions
     /// </summary>
     public class SplashAnimatorHandler : MonoBehaviourPunCallbacks
     {
@@ -19,7 +19,7 @@ namespace DIPProject
 
 		public void JoinLobby()
         {
-            splashHandler.JoinLobby();
+            splashHandler.JoinLobbyAfterAnimation();
         }
 
 		#endregion

@@ -21,26 +21,25 @@ namespace DIPProject
         [SerializeField]
         private GameObject landingIntro;
         [SerializeField]
-        private RandomRoomHandler randomRoomHandler;
+        private CreateRoomHandler createRoomHandler;
         [SerializeField]
         private CustomRoomHandler customRoomHandler;
+
         /// <summary>
-        /// This simply just closes the intro canvas once it's done animating
+        /// This simply just closes the intro canvas once it's done animating.
+        /// Otherwise the canvas will be blocking the clickables.
         /// </summary>
         public void DeactivateIntro()
         {
             landingIntro.SetActive(false);
         }
-        /// <summary>
-        /// This will call the rando
-        /// </summary>
-        public void RandomRoom()
+        public void CreateRoom()
         {
-            randomRoomHandler.TriggerToRandomRoom();
+            createRoomHandler.CreateRoomAfterAnimation();
         }
         public void CustomRoom()
         {
-            customRoomHandler.TriggerToCustomRoom();
+            customRoomHandler.CustomRoomAfterAnimation();
         }
     }
 }
