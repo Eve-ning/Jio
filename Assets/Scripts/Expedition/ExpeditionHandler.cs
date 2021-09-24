@@ -12,6 +12,14 @@ namespace DIPProject
 		#region Variables
 		[SerializeField]
 		private Text roomNameText;
+		// The reason for the dummy camera is so that the game scene isn't empty
+		[Tooltip("The Dummy Camera used in the scene to be disabled on Start().")]
+		[SerializeField]
+		private GameObject dummyCamera;
+		
+		[Tooltip("The Dummy Camera used in the scene to be disabled on Start().")]
+		[SerializeField]
+		private Canvas roomUi;
 
 		private string ROOM_NAME_PREFIX = "ROOM NAME: ";
 
@@ -26,13 +34,25 @@ namespace DIPProject
 
 		#endregion
 
+		#region MonoBehavior Callbacks
+
+		private void Start()
+		{
+			dummyCamera.SetActive(false);
+		}
+
+		#endregion
+
+
 		#region MonoBehaviorPunCallbacks Callbacks
 		/// <summary>
 		/// Once the player joins the room, we instantiate it in the middle with some height
 		/// </summary>
 		public override void OnJoinedRoom()
         {
-            PhotonNetwork.Instantiate("Player2D", new Vector3(0, 1, 0), Quaternion.identity);
+            GameObject player = PhotonNetwork.Instantiate("Player2D", new Vector3(0, 1, 0), Quaternion.identity);
+			Camera camera = player.GetComponentInChildren<Camera>();
+			roomUi.worldCamera = camera;
 			roomNameText.text = ROOM_NAME_PREFIX + PhotonNetwork.CurrentRoom.Name;
             base.OnJoinedRoom();
         }
