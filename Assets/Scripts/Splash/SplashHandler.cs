@@ -30,8 +30,7 @@ namespace DIPProject
 
         [Tooltip("The background animator, the clouds")]
         [SerializeField]
-        private Animator backgroundAnimator;
-
+        private Animator backgroundAnimator;    
 
         #endregion
 
@@ -46,25 +45,33 @@ namespace DIPProject
 
 		void Update()
 		{
-            if (Input.GetKeyDown(KeyCode.Return) && ReadyToJoin())
-			{
-                foregroundAnimator.SetTrigger("Join");
-                backgroundAnimator.SetTrigger("Join");
-			}
+            if (Input.GetKeyDown(KeyCode.Return) && ReadyToJoin()) JoinLobby();
         }
 
 		#endregion
 
 		#region Public Methods
 
+        /// <summary>
+        /// Attempts to Join the Lobby
+        /// </summary>
 		public void JoinLobby()
         {
             if (ReadyToJoin())
             {
-                PhotonNetwork.NickName = uiUsername.text;
-                PhotonNetwork.LoadLevel("Landing");
-                PhotonNetwork.JoinLobby();
+                foregroundAnimator.SetTrigger("Join");
+                backgroundAnimator.SetTrigger("Join");
             }
+        }
+
+        /// <summary>
+        /// This should only be called by the animation event trigger.
+        /// </summary>
+        public void JoinLobbyAfterAnimation()
+		{
+            PhotonNetwork.NickName = uiUsername.text;
+            PhotonNetwork.JoinLobby();
+            PhotonNetwork.LoadLevel("Landing");
         }
 
         /// <summary>
@@ -88,10 +95,11 @@ namespace DIPProject
 
         #region MonoBehaviourPunCallbacks Callbacks
 
-        //Was able to connect to the master Server
+        /// <summary>
+        /// Was able to connect to the master Server
+        /// </summary>
         public override void OnConnectedToMaster()
         {
-            PhotonNetwork.JoinLobby(TypedLobby.Default);
             Debug.Log("Connected to Photon Server.");
         }
 

@@ -65,7 +65,6 @@ namespace DIPProject
 
         #endregion
 
-
         #region MonoBehaviour Callbacks
 
         private void Update()
