@@ -20,7 +20,8 @@ namespace DIPProject
         public GameObject uiCanvas;
         public InputField uiRoomNameInput;
 
-        public Animator landingAnimatorHandler;
+        [SerializeField]
+        private Animator landingAnimatorHandler;
 
         [Tooltip("If the canvas is active")]
         private bool active = false;

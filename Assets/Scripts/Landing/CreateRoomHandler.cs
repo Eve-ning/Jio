@@ -25,6 +25,7 @@ namespace DIPProject
         private const string LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
         [Tooltip("The Landing Animator")]
+        [SerializeField]
         private Animator landingAnimatorHandler;
 
         #endregion
