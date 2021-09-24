@@ -11,61 +11,51 @@ namespace DIPProject
     /// <summary>
     /// Handles what happens if the player wants to create a random room
     /// </summary>
-    public class RandomRoomHandler : MonoBehaviourPunCallbacks
+    public class CreateRoomHandler : MonoBehaviourPunCallbacks
     {
-        #region Variables
-
-        //public GameObject uiCanvas;
-        //public GameObject uiCreateButton;
-
-        [Tooltip("If the player is triggering this region.")]
-        private bool triggered = false;
+        #region Variables'
 
         [Tooltip("Maximum number of players allowed in the room.")]
         public const byte MAX_PLAYERS = 5;
 
+        [Tooltip("The length of the room name")]
         public const int ROOM_NAME_LENGTH = 5;
+        
+        // Room name letters will be chosen from these letters
         private const string LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
+        [Tooltip("The Landing Animator")]
+        private Animator landingAnimatorHandler;
+
         #endregion
 
-        #region MonoBehaviour Callbacks
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Return) && triggered) RandomRoom();
-        }
-        #endregion
-
-        #region Random Room Method
+        #region Create Room Method
 
         /// <summary>
-        /// Creates a random room and loads it directly.
-        /// This is usually called from the animator event.
+        /// Creates a random room and loads it.
+        /// This is called from the button click.
         /// </summary>
-        public void RandomRoom()
+        public void CreateRoom()
         {
-            string roomName = RandomRoomName();
+            landingAnimatorHandler.SetTrigger("Create");
+        }
 
+        /// <summary>
+        /// This should only be called after the animation
+        /// </summary>
+        public void CreateRoomAfterAnimation()
+        {
+            string roomName = CreateRoomName();
             Debug.Log(PhotonNetwork.NickName + " is Creating Room " + roomName);
             PhotonNetwork.JoinOrCreateRoom(roomName, new RoomOptions() { MaxPlayers = MAX_PLAYERS }, null);
             PhotonNetwork.LoadLevel("Expedition");
         }
 
         /// <summary>
-        /// Alias to RandomRoom().
-        /// This should only be called by animation events
-        /// </summary>
-        public void TriggerToRandomRoom()
-		{
-            RandomRoom();
-		}
-
-        /// <summary>
         /// Creates a random room name of capital letters
         /// </summary>
-        /// <returns></returns>
-        private string RandomRoomName()
+        /// <returns>A string of random letters selected from LETTERS.</returns>
+        private string CreateRoomName()
         {
             char[] letters = new char[ROOM_NAME_LENGTH];
             for (int i = 0; i < ROOM_NAME_LENGTH; i++)
