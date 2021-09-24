@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace DIPProject
 {
-    public class ExpeditionManager : MonoBehaviourPunCallbacks
+    public class ExpeditionHandler : MonoBehaviourPunCallbacks
     {
 		#region Variables
 		[SerializeField]
