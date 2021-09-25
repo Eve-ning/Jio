@@ -27,6 +27,9 @@ namespace DIPProject
 		[SerializeField]
 		private int roomDuration = 10;
 
+		[SerializeField]
+		private Text[] playerList;
+
 		#endregion
 
 		#region RPC Methods
@@ -70,8 +73,38 @@ namespace DIPProject
 			// Gets the camera of the new instantiated player and shifts camera to it
 			Camera camera = player.GetComponentInChildren<Camera>();
 			foreach (var ui in roomUi) ui.worldCamera = camera;
-        }
 
+			UpdatePlayerList();
+		}
+
+		public override void OnPlayerEnteredRoom(Player newPlayer)
+		{
+			UpdatePlayerList();
+			base.OnPlayerEnteredRoom(newPlayer);
+		}
+
+		public override void OnPlayerLeftRoom(Player otherPlayer)
+		{
+			Debug.Log(otherPlayer.NickName + " has left the room " + PhotonNetwork.CurrentRoom.Name);
+			UpdatePlayerList();
+			base.OnPlayerLeftRoom(otherPlayer);
+		}
+
+		public void UpdatePlayerList()
+		{
+			var position = 0;
+
+			foreach (var item in playerList) item.text = "-";
+			foreach (var player in PhotonNetwork.CurrentRoom.Players)
+			{
+				if (player.Value.IsMasterClient) { playerList[0].text = player.Value.NickName; }
+				else
+				{
+					playerList[position + 1].text = player.Value.NickName;
+					position++;
+				}
+			}
+		}
 
 		public override void OnLeftRoom()
 		{
@@ -80,11 +113,6 @@ namespace DIPProject
 			base.OnLeftRoom();
 		}
 
-		public override void OnPlayerLeftRoom(Player otherPlayer)
-		{
-            Debug.Log(otherPlayer.NickName + " has left the room " + PhotonNetwork.CurrentRoom.Name);
-			base.OnPlayerLeftRoom(otherPlayer);
-		}
 
 		#endregion
 	}
