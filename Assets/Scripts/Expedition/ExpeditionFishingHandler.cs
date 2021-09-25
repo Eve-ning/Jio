@@ -63,6 +63,13 @@ namespace DIPProject
 			base.OnJoinedRoom();
 		}
 
+		public override void OnPlayerEnteredRoom(Player newPlayer)
+		{
+            SyncFishingCurrentTimeEvent();
+            SyncFishingTotalTimeEvent();
+			base.OnPlayerEnteredRoom(newPlayer);
+		}
+
 		#endregion
 
         /// In the Expedition Timer Loop, the host is the main controller
@@ -230,7 +237,7 @@ namespace DIPProject
                     break;
 
                 case SyncFishingEndEventCode:
-                    FishingCurrentTime = TimeSpan.Zero;
+                    FishingCurrentTime = FishingTotalTime;
                     fishingTimer.text = CurrentTime();
 
                     UnfreezePlayers();
