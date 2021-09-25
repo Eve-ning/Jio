@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace DIPProject
 {
@@ -24,6 +25,8 @@ namespace DIPProject
         private CreateRoomHandler createRoomHandler;
         [SerializeField]
         private CustomRoomHandler customRoomHandler;
+        [SerializeField]
+        private InputField uiRoomFieldInput;
 
         /// <summary>
         /// This simply just closes the intro canvas once it's done animating.
@@ -33,6 +36,11 @@ namespace DIPProject
         {
             landingIntro.SetActive(false);
         }
+        public void FocusRoomFieldInput()
+		{
+            EventSystem.current.SetSelectedGameObject(uiRoomFieldInput.gameObject, null);
+        }
+
         public void CreateRoom()
         {
             createRoomHandler.CreateRoomAfterAnimation();

@@ -12,6 +12,7 @@ namespace DIPProject
         [SerializeField]
         private ExpeditionHandler expeditionHandler;
 
+
         /// <summary>
         /// This simply just closes the intro canvas once it's done animating.
         /// Otherwise the canvas will be blocking the clickables.
