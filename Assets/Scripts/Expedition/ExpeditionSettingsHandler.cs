@@ -8,27 +8,15 @@ namespace DIPProject
 {
     public class ExpeditionSettingsHandler : MonoBehaviour
     {
-
-        public float duration;
-        public Text durationText;
-        public Slider durationSlider;
-        private const string DURATION_FORMAT = @"hh\:mm\:ss";
+        [Tooltip("The slider to adjust duration of the expedition")]
+        public Slider fishingDurationSlider;
+        [Tooltip("The on-screen timer on the bottom right")]
+        public Text fishingTimer;
 
         public void UpdateDurationText()
 		{
-            durationText.text = TimeSpan.FromMinutes((int) durationSlider.value).ToString(DURATION_FORMAT);
+            fishingTimer.text = TimeSpan.FromMinutes((int) fishingDurationSlider.value).ToString(ExpeditionFishingHandler.TIMER_FORMAT);
 		}
 
-
-        // Start is called before the first frame update
-        void Start()
-        {
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
     }
 }
