@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,11 +12,11 @@ namespace DIPProject
         public float duration;
         public Text durationText;
         public Slider durationSlider;
-        private const string durationPostfix = ":00";
+        private const string DURATION_FORMAT = @"hh\:mm\:ss";
 
         public void UpdateDurationText()
 		{
-            durationText.text = ((int) durationSlider.value).ToString() + durationPostfix;
+            durationText.text = TimeSpan.FromMinutes((int) durationSlider.value).ToString(DURATION_FORMAT);
 		}
 
 
