@@ -11,7 +11,7 @@ namespace DIPProject
         public float duration;
         public Text durationText;
         public Slider durationSlider;
-        private const string durationPostfix = " Minutes";
+        private const string durationPostfix = ":00";
 
         public void UpdateDurationText()
 		{
