@@ -2,17 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExpeditionAnimationHandler : MonoBehaviour
+namespace DIPProject
 {
-    // Start is called before the first frame update
-    void Start()
+    public class ExpeditionAnimationHandler : MonoBehaviour
     {
-        
-    }
+        [SerializeField]
+        private GameObject intro;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        [SerializeField]
+        private ExpeditionHandler expeditionHandler;
+
+        /// <summary>
+        /// This simply just closes the intro canvas once it's done animating.
+        /// Otherwise the canvas will be blocking the clickables.
+        /// </summary>
+        public void DeactivateIntro()
+        {
+            intro.SetActive(false);
+        }
+
+        public void Campfire()
+        {
+            expeditionHandler.Campfire();
+        }
     }
 }

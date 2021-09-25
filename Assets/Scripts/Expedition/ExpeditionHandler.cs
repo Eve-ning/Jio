@@ -19,15 +19,28 @@ namespace DIPProject
 		
 		[Tooltip("The UI to snap to the player camera on instantiation.")]
 		[SerializeField]
-		private Canvas roomUi;
+		private Canvas[] roomUi;
 
 		private string ROOM_NAME_PREFIX = "CODE: ";
+
+		[Tooltip("The duration of the room, in seconds")]
+		[SerializeField]
+		private int roomDuration = 10;
+
+		#endregion
+
+		#region RPC Methods
+
+		public void updateRoomDuration(int roomDuration)
+		{
+			this.roomDuration = roomDuration;
+		}
 
 		#endregion
 
 		#region Public Methods
 
-        public void LeaveRoom()
+		public void Campfire()
 		{
             PhotonNetwork.LeaveRoom();
 		}
@@ -53,8 +66,10 @@ namespace DIPProject
             GameObject player = PhotonNetwork.Instantiate("Player2D", new Vector3(0, 1, 0), Quaternion.identity);
 			Debug.Log("Room Name " + PhotonNetwork.CurrentRoom.Name);
 			roomNameText.text = ROOM_NAME_PREFIX + PhotonNetwork.CurrentRoom.Name;
+
+			// Gets the camera of the new instantiated player and shifts camera to it
 			Camera camera = player.GetComponentInChildren<Camera>();
-			roomUi.worldCamera = camera;
+			foreach (var ui in roomUi) ui.worldCamera = camera;
         }
 
 

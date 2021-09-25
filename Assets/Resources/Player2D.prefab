@@ -1109,7 +1109,7 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 1
-  m_UseLocal: 1
+  m_UseLocal: 0
 --- !u!222 &1098082414022794236
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1145,4 +1145,4 @@ MonoBehaviour:
   - {x: -0.24331677, y: 0.04670453, z: 0}
   m_ShapePathHash: 764055545
   m_Mesh: {fileID: 0}
-  m_InstanceId: 166870
+  m_InstanceId: 51928
