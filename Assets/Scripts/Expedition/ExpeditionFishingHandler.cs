@@ -215,9 +215,8 @@ namespace DIPProject
 			switch (photonEvent.Code)
 			{
                 case SyncFishingCurrentTimeEventCode:
-                    
                     FishingCurrentTime = TimeSpan.FromSeconds((double) photonEvent.CustomData);
-                    
+                    fishingTimer.text = CurrentTime();
                     break;
 
                 case SyncFishingTotalTimeEventCode:
