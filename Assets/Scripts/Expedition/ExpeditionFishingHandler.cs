@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace DIPProject
 {
-    public class ExpeditionFishingHandler : MonoBehaviour, IOnEventCallback
+    public class ExpeditionFishingHandler : MonoBehaviourPunCallbacks, IOnEventCallback
     {
 		#region Variables
 		/// <summary>
@@ -17,6 +17,9 @@ namespace DIPProject
 		/// </summary>
 		private TimeSpan fishingTotalTime;
 		private TimeSpan fishingCurrentTime;
+
+        [Tooltip("These Buttons will be disabled if the person is not the host.")]
+        public Button[] nonMasterButtonDisable;
 
 		[Tooltip("The slider to adjust duration of the expedition")]
         public Slider fishingDurationSlider;
@@ -33,47 +36,83 @@ namespace DIPProject
 
 		#region Event Codes
 
-		private const byte SyncfishingCurrentTimeEventCode = 1; 
-        private const byte SyncfishingTotalTimeEventCode = 2;
+		private const byte SyncFishingCurrentTimeEventCode = 1; 
+        private const byte SyncFishingTotalTimeEventCode = 2;
         
         private const byte SyncFishingStartEventCode = 3;
         private const byte SyncFishingEndEventCode = 4;
+
+		public TimeSpan FishingTotalTime { get; set; }
+		public TimeSpan FishingCurrentTime { get; set; }
+		#endregion
+
 		#endregion
 
 
+		#region MonoBehaviorPunCallbacks Callbacks
+
+		public override void OnPlayerLeftRoom(Player otherPlayer)
+		{
+            ValidateMasterButtonsUI();
+			base.OnPlayerLeftRoom(otherPlayer);
+		}
+
+		public override void OnJoinedRoom()
+		{
+            ValidateMasterButtonsUI();
+			base.OnJoinedRoom();
+		}
+
 		#endregion
 
-
+        /// In the Expedition Timer Loop, the host is the main controller
+        /// That means, we will NOT call coroutines on participants.
+        /// This will ensure that the synchronization is only based on the host.
 		#region Expedition Timer Loop
 
+        /// <summary>
+        /// This is a host-only function.
+        /// This means that this code will not be executed on participants.
+        /// </summary>
 		public void StartExpedition()
 		{
-            fishingTotalTime = TimeSpan.FromMinutes(fishingDurationSlider.value);
-            fishingCurrentTime = fishingTotalTime;
-            Debug.Log("Expedition Timer has started at " + fishingTotalTime);
+            FishingTotalTime = TimeSpan.FromMinutes(fishingDurationSlider.value);
+            FishingCurrentTime = FishingTotalTime;
+            Debug.Log("Expedition Timer has started at " + FishingTotalTime);
             FreezePlayers();
-            if (PhotonNetwork.IsMasterClient) {
-                SyncFishingStartEvent();
-                StartCoroutine(ExpeditionTimer()); 
-            }
+            SyncFishingStartEvent();
+            StartCoroutine(ExpeditionTimer()); 
 		}
+
+        /// <summary>
+        /// This loops through the expedition timer.
+        /// The host will regularly update the participants on the current time via Syncing.
+        /// </summary>
+        /// <returns></returns>
 		public IEnumerator ExpeditionTimer()
         {
             // Waits for 1 second, if we have a DEBUG_TIME_MULTIPLIER, then it'll be faster.
             yield return new WaitForSeconds(1 / DEBUG_TIME_MULTIPLIER);
-            fishingCurrentTime -= TimeSpan.FromSeconds(1);
+            FishingCurrentTime -= TimeSpan.FromSeconds(1);
 
             // While the current time is still positive, we loop the Coroutine until it isn't.
-            if (fishingCurrentTime.TotalSeconds >= 0) {
+            if (FishingCurrentTime.TotalSeconds >= 0) {
                 Debug.Log("Expedition Timer at " + CurrentTime());
                 fishingTimer.text = CurrentTime();
-                SyncfishingCurrentTimeEvent();
+                SyncFishingCurrentTimeEvent();
+
+                // This simply calls itself if it's not done.
                 StartCoroutine(ExpeditionTimer());
             } else EndExpedition();
         }
+
+        /// <summary>
+        /// This means that the host has detected the end of the expedition.
+        /// The host will now tell all the participants.
+        /// </summary>
         void EndExpedition()
 		{
-            Debug.Log("Expedition has ended! Total Time " + fishingTotalTime);
+            Debug.Log("Expedition has ended! Total Time " + FishingTotalTime);
             SyncFishingEndEvent();
             UnfreezePlayers();
             fishingTimer.text = TotalTime();
@@ -86,21 +125,23 @@ namespace DIPProject
         /// <summary>
         /// This helps sync the total time, this happens when the host changes the total time value using settings.
         /// </summary>
-		private void SyncfishingTotalTimeEvent()
+		private void SyncFishingTotalTimeEvent()
         {
-            double time = fishingTotalTime.TotalSeconds;
+            if (!PhotonNetwork.IsMasterClient) return;
+            var sliderValue = fishingDurationSlider.value;
             RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others };
-            PhotonNetwork.RaiseEvent(SyncfishingTotalTimeEventCode, time, raiseEventOptions, SendOptions.SendReliable);
+            PhotonNetwork.RaiseEvent(SyncFishingTotalTimeEventCode, sliderValue, raiseEventOptions, SendOptions.SendReliable);
         }
 
         /// <summary>
         /// This helps sync everyone's timer.
         /// </summary>
-        private void SyncfishingCurrentTimeEvent()
+        private void SyncFishingCurrentTimeEvent()
         {
-            double time = fishingCurrentTime.TotalSeconds;
+            if (!PhotonNetwork.IsMasterClient) return;
+            double time = FishingCurrentTime.TotalSeconds;
             RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others };
-            PhotonNetwork.RaiseEvent(SyncfishingCurrentTimeEventCode, time, raiseEventOptions, SendOptions.SendReliable);
+            PhotonNetwork.RaiseEvent(SyncFishingCurrentTimeEventCode, time, raiseEventOptions, SendOptions.SendReliable);
         }
         
         /// <summary>
@@ -108,6 +149,7 @@ namespace DIPProject
         /// </summary>
         private void SyncFishingStartEvent()
         {
+            if (!PhotonNetwork.IsMasterClient) return;
             RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others };
             PhotonNetwork.RaiseEvent(SyncFishingStartEventCode, null, raiseEventOptions, SendOptions.SendReliable);
         }
@@ -117,6 +159,7 @@ namespace DIPProject
         /// </summary>
         private void SyncFishingEndEvent()
         {
+            if (!PhotonNetwork.IsMasterClient) return;
             RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others };
             PhotonNetwork.RaiseEvent(SyncFishingEndEventCode, null, raiseEventOptions, SendOptions.SendReliable);
         }
@@ -147,10 +190,22 @@ namespace DIPProject
 
 		private void Start()
         {
-            fishingTotalTime = TimeSpan.FromMinutes(fishingDurationSlider.value);
-            fishingCurrentTime = fishingTotalTime;
+            FishingTotalTime = TimeSpan.FromMinutes(fishingDurationSlider.value);
+            FishingCurrentTime = FishingTotalTime;
         }
 
+        #endregion
+
+        #region Master UI Handler
+
+        /// <summary>
+        /// Disables host settings for those who are not host.
+        /// Enables those for host.
+        /// </summary>
+        private void ValidateMasterButtonsUI()
+        {
+            foreach (var obj in nonMasterButtonDisable) obj.interactable = PhotonNetwork.IsMasterClient;
+        }
 		#endregion
 
 		#region Sync Event Callbacks
@@ -159,19 +214,29 @@ namespace DIPProject
         {
 			switch (photonEvent.Code)
 			{
-                case SyncfishingCurrentTimeEventCode:
-                    fishingCurrentTime = TimeSpan.FromSeconds((double) photonEvent.CustomData);
+                case SyncFishingCurrentTimeEventCode:
+                    
+                    FishingCurrentTime = TimeSpan.FromSeconds((double) photonEvent.CustomData);
+                    
                     break;
-                case SyncfishingTotalTimeEventCode:
-                    fishingTotalTime = TimeSpan.FromSeconds((double)photonEvent.CustomData);
+
+                case SyncFishingTotalTimeEventCode:
+                    /// This will yield the slider value made by the host.
+                    /// Which in turn will trigger appropriate updates of time
+                    fishingDurationSlider.value = (float) photonEvent.CustomData;
                     break;
+
                 case SyncFishingStartEventCode:
-                    StartExpedition();
+                    FreezePlayers();
                     break;
+
                 case SyncFishingEndEventCode:
-                    fishingCurrentTime = TimeSpan.Zero;
-                    EndExpedition();
+                    FishingCurrentTime = TimeSpan.Zero;
+                    fishingTimer.text = CurrentTime();
+
+                    UnfreezePlayers();
                     break;
+
 				default:
 					break;
 			}
@@ -186,7 +251,7 @@ namespace DIPProject
 		/// </summary>
 		string CurrentTime()
 		{
-            return fishingCurrentTime.ToString(TIMER_FORMAT);
+            return FishingCurrentTime.ToString(TIMER_FORMAT);
 		}
 
         /// <summary>
@@ -194,7 +259,7 @@ namespace DIPProject
         /// </summary>
         string TotalTime()
 		{
-            return fishingTotalTime.ToString(TIMER_FORMAT);
+            return FishingTotalTime.ToString(TIMER_FORMAT);
 		}
 
         /// <summary>
@@ -203,9 +268,10 @@ namespace DIPProject
         public void UpdateTimerText()
         {
             fishingTimer.text = TimeSpan.FromMinutes((int)fishingDurationSlider.value).ToString(TIMER_FORMAT);
-            fishingTotalTime = TimeSpan.FromMinutes(fishingDurationSlider.value);
-            fishingCurrentTime = fishingTotalTime;
-            SyncfishingTotalTimeEvent();
+            FishingTotalTime = TimeSpan.FromMinutes(fishingDurationSlider.value);
+            FishingCurrentTime = FishingTotalTime;
+            Debug.Log("updating");
+            SyncFishingTotalTimeEvent();
         }
 
         #endregion
