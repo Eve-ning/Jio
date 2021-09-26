@@ -113,7 +113,6 @@ namespace DIPProject
         /// </summary>
 		public void StartExpeditionHost()
         {
-            SetHostButtonsUIStatus(false);
             if (!isTimerRunning)
             {
                 isTimerRunning = true;
@@ -167,7 +166,6 @@ namespace DIPProject
         void EndExpeditionHost()
 		{
             // Tells participants that the event has ended, will trigger unfreeze
-            SetHostButtonsUIStatus(true);
             SyncEndEvent();
 		}
 
@@ -270,12 +268,7 @@ namespace DIPProject
         /// </summary>
         private void ValidateHostButtonsUI()
         {
-            SetHostButtonsUIStatus(PhotonNetwork.IsMasterClient);
-        }
-
-        private void SetHostButtonsUIStatus(bool status)
-		{
-            foreach (var obj in nonHostButtonDisable) obj.interactable = status;
+            foreach (var obj in nonHostButtonDisable) obj.interactable = PhotonNetwork.IsMasterClient;
         }
 		#endregion
 
