@@ -12,12 +12,23 @@ namespace DIPProject {
 	{
 		#region Variables
 		ChatClient chatClient;
+		
 		[Tooltip("The InputField for sending a message")]
-		[SerializeField] InputField chatInput;
+		[SerializeField] 
+		InputField chatInput;
+		
 		[Tooltip("The TextWindow")]
-		[SerializeField] Text chatWindow;
+		[SerializeField] 
+		Text chatWindow;
+		
 		[Tooltip("The Button to send a message")]
-		[SerializeField] Button chatBtn;
+		[SerializeField] 
+		Button chatBtn;
+
+		[Tooltip("The Fishing Handler. This is to detect if it's currently fishing. If it is, then we disable chat boxes.")]
+		[SerializeField]
+		ExpeditionFishingHandler expeditionFishingHandler;
+
 		#endregion
 
 		#region IChatClientListener Callbacks
@@ -41,8 +52,11 @@ namespace DIPProject {
 		public void OnGetMessages(string channelName, string[] senders, object[] messages)
 		{
 			if (channelName == PhotonNetwork.CurrentRoom.Name) {
+				// Pushes text into the chatbox
 				AppendChat(senders, messages);
-				CreateChatPopUp(senders, messages);
+				
+				// We only create chat popups if the timer is running.
+				if (!expeditionFishingHandler.isTimerRunning) CreateChatPopUp(senders, messages);
 			}
 		}
 
@@ -109,6 +123,10 @@ namespace DIPProject {
 			chatClient.Connect(PhotonNetwork.PhotonServerSettings.AppSettings.AppIdChat, PhotonNetwork.AppVersion, new AuthenticationValues(PhotonNetwork.NickName));
 		}
 
+		/// <summary>
+		/// Sends a message to the current room.
+		/// </summary>
+		/// <param name="msg"></param>
 		void MsgRoom(string msg)
 		{
 			bool result = chatClient.PublishMessage(PhotonNetwork.CurrentRoom.Name, msg);
@@ -131,6 +149,11 @@ namespace DIPProject {
 			chatWindow.enabled = status;
 		}
 
+		/// <summary>
+		/// Simply pushes the message onto the current chatbox.
+		/// </summary>
+		/// <param name="senders"></param>
+		/// <param name="messages"></param>
 		public void AppendChat(string[] senders, object[] messages)
 		{
 			for (int i = 0; i < senders.Length; i++)
@@ -139,6 +162,9 @@ namespace DIPProject {
 			}
 		}
 
+		/// <summary>
+		/// Creates the chat bubble of message on top of the sender.
+		/// </summary>
 		public void CreateChatPopUp(string[] senders, object[] messages)
 		{
 			GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
