@@ -55,20 +55,20 @@ namespace DIPProject
             {
                 return totalTime;
             }
-            set
+            set 
             {
                 totalTime = value;
                 totalTimeText.text = TotalTimeAsString();
                 TimerTime = totalTime;
             }
         }
-		public TimeSpan TimerTime
+		public TimeSpan TimerTime 
         {
-            get
+            get 
             {
                 return timerTime;
             }
-            set
+            set 
             {
                 timerTime = value;
                 timerTimeText.text = TimerTimeAsString();
@@ -113,10 +113,11 @@ namespace DIPProject
         /// </summary>
 		public void StartExpeditionHost()
         {
-            SyncStartEvent();
+            SetHostButtonsUIStatus(false);
             if (!isTimerRunning)
             {
                 isTimerRunning = true;
+                SyncStartEvent();
                 StartCoroutine(LoopExpeditionHost());
             }
 		}
@@ -139,6 +140,7 @@ namespace DIPProject
             // Waits for 1 second, if we have a DEBUG_TIME_MULTIPLIER, then it'll be faster.
             yield return new WaitForSeconds(1 / DEBUG_TIME_MULTIPLIER);
             timerTime -= TimeSpan.FromSeconds(1);
+
             // While the Timer time is still positive, we loop the Coroutine until it isn't.
             if (TimerTime.TotalSeconds >= 0)
             {
@@ -154,7 +156,6 @@ namespace DIPProject
         public void LoopExpeditionChild(TimeSpan timerTime)
 		{
             this.TimerTime = timerTime;
-            isTimerRunning = false;
             if (TimerTime.Seconds % 10 == 0) Debug.Log("Expedition Timer at " + TimerTimeAsString());
         }
 
@@ -166,12 +167,14 @@ namespace DIPProject
         void EndExpeditionHost()
 		{
             // Tells participants that the event has ended, will trigger unfreeze
+            SetHostButtonsUIStatus(true);
             SyncEndEvent();
 		}
 
         public void EndExpeditionChild()
 		{
             Debug.Log("Expedition has ended! Total Time " + TotalTimeAsString());
+            isTimerRunning = false;
             UnfreezePlayers();
             TimerTime = TotalTime;
             animator.SetTrigger("End Expedition");
@@ -267,7 +270,12 @@ namespace DIPProject
         /// </summary>
         private void ValidateHostButtonsUI()
         {
-            foreach (var obj in nonHostButtonDisable) obj.interactable = PhotonNetwork.IsMasterClient;
+            SetHostButtonsUIStatus(PhotonNetwork.IsMasterClient);
+        }
+
+        private void SetHostButtonsUIStatus(bool status)
+		{
+            foreach (var obj in nonHostButtonDisable) obj.interactable = status;
         }
 		#endregion
 

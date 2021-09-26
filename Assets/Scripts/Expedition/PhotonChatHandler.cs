@@ -54,7 +54,9 @@ namespace DIPProject {
 			if (channelName == PhotonNetwork.CurrentRoom.Name) {
 				// Pushes text into the chatbox
 				AppendChat(senders, messages);
-				
+
+
+				Debug.Log(expeditionFishingHandler.isTimerRunning);
 				// We only create chat popups if the timer is running.
 				if (!expeditionFishingHandler.isTimerRunning) CreateChatPopUp(senders, messages);
 			}
