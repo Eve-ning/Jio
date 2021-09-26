@@ -50317,8 +50317,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PhotonChatManager, Assembly-CSharp
+      - m_Target: {fileID: 1626869185}
+        m_TargetAssemblyTypeName: DIPProject.PhotonChatHandler, Assembly-CSharp
         m_MethodName: SendChatMsg
         m_Mode: 1
         m_Arguments:
