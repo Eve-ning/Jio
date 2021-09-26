@@ -19,6 +19,8 @@ namespace DIPProject
         public TextMeshPro playerNameText;
         public GameObject playerCamera;
 
+
+
 		#region Movement
 		[Tooltip("Controls how fast the player is moving in 2D.")]
         [SerializeField]
@@ -39,10 +41,12 @@ namespace DIPProject
         #region Defaults
         private string MISSING_SELF_NAME = "Missing Self Name";
         private string MISSING_OTHER_NAME = "Missing Other Name";
-        #endregion
+		#endregion
 
-        #region Animation Variables
-        [Tooltip("The GameObj Sprite Image used for transform scaling")]
+		#endregion
+
+		#region Animation Variables
+		[Tooltip("The GameObj Sprite Image used for transform scaling")]
         [SerializeField]
         private GameObject spriteImage;
         [Tooltip("The front side of the image")]
@@ -61,7 +65,7 @@ namespace DIPProject
         private bool facingLeft = false;
 		#endregion
 
-		#endregion
+		
 
 
 		#region MonoBehavior Callbacks

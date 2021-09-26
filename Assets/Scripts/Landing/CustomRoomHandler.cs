@@ -23,25 +23,9 @@ namespace DIPProject
         [SerializeField]
         private Animator landingAnimatorHandler;
 
-        [Tooltip("If the canvas is active")]
-        private bool active = false;
-
         #endregion
 
         #region Public Methods
-
-        public void ShowScreen()
-        {
-            uiCanvas.SetActive(true);
-            // Force User to select input field
-            EventSystem.current.SetSelectedGameObject(uiRoomNameInput.gameObject, null);
-            active = true;
-        }
-        public void HideScreen()
-        {
-            uiCanvas.SetActive(false);
-            active = false;
-        }
 
         /// <summary>
         /// Attempts to Join a Room specified for the uiRoomNameInput
@@ -49,7 +33,16 @@ namespace DIPProject
         /// </summary>
         public void CustomRoom()
         {
-            if (uiRoomNameInput.text.Length == CreateRoomHandler.ROOM_NAME_LENGTH) landingAnimatorHandler.SetTrigger("Custom");
+            CustomRoom(uiRoomNameInput.text);
+        }
+
+        /// <summary>
+        /// Attempts to Join a Room specified for the uiRoomNameInput
+        /// This will call the trigger if the condition passes
+        /// </summary>
+        public void CustomRoom(string roomName)
+        {
+            if (roomName.Length == CreateRoomHandler.ROOM_NAME_LENGTH) landingAnimatorHandler.SetTrigger("Custom");
         }
 
         /// <summary>
@@ -69,8 +62,8 @@ namespace DIPProject
 
         private void Update()
 		{
-            if (Input.GetKeyDown(KeyCode.Return) && active) CustomRoom();
-            if (Input.GetKeyDown(KeyCode.Escape) && active) HideScreen();
+            if (Input.GetKeyDown(KeyCode.Return) && uiCanvas.activeSelf) CustomRoom();
+            if (Input.GetKeyDown(KeyCode.Escape) && uiCanvas.activeSelf) landingAnimatorHandler.SetTrigger("Close Custom");
         }
 
 		#endregion
