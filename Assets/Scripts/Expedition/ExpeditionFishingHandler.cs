@@ -18,7 +18,7 @@ namespace DIPProject
 		private TimeSpan totalTime;
 		private TimeSpan timerTime;
 
-        private bool isTimerRunning = false;
+        public bool isTimerRunning = false;
 
         [Tooltip("These Buttons will be disabled if the person is not the host.")]
         public Button[] nonHostButtonDisable;
@@ -41,8 +41,6 @@ namespace DIPProject
         [Tooltip("This is used to trigger the start/end expedition.")]
         public Animator animator;
 
-
-
 		#region Event Codes
 
 		private const byte SyncTimerTimeEventCode = 1; 
@@ -61,6 +59,7 @@ namespace DIPProject
             {
                 totalTime = value;
                 totalTimeText.text = TotalTimeAsString();
+                TimerTime = totalTime;
             }
         }
 		public TimeSpan TimerTime
@@ -103,11 +102,11 @@ namespace DIPProject
 
 		#endregion
 
+		#region Expedition Timer Loop
         /// In the Expedition Timer Loop, the host is the main controller
         /// That means, we will NOT call coroutines on participants.
         /// This will ensure that the synchronization is only based on the host.
-		#region Expedition Timer Loop
-
+        
         /// <summary>
         /// This is a host-only function.
         /// This means that this code will not be executed on participants.
@@ -126,7 +125,6 @@ namespace DIPProject
         {
             Debug.Log("Expedition Timer has started at " + TotalTime);
             // Just in case it's not synced.
-            TotalTime = TimeSpan.FromMinutes(totalTimeSlider.value);
             FreezePlayers();
             animator.SetTrigger("Start Expedition");
         }
@@ -140,7 +138,7 @@ namespace DIPProject
         {
             // Waits for 1 second, if we have a DEBUG_TIME_MULTIPLIER, then it'll be faster.
             yield return new WaitForSeconds(1 / DEBUG_TIME_MULTIPLIER);
-            TimerTime -= TimeSpan.FromSeconds(1);
+            timerTime -= TimeSpan.FromSeconds(1);
             // While the Timer time is still positive, we loop the Coroutine until it isn't.
             if (TimerTime.TotalSeconds >= 0)
             {
