@@ -10,14 +10,8 @@ EditorBuildSettings:
     guid: ddf3478d4f89289428c38a36b9a752fd
   - enabled: 1
     path: Assets/Scenes/Landing.unity
-    guid: 12dd1a983df8fe142b43be6291309a39
+    guid: 094659b522783bb479c9ccd210a05765
   - enabled: 1
     path: Assets/Scenes/Expedition.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
-    path: Assets/Scenes/ExpeditionOld1.unity
-    guid: 2880c1dd1d52da0428b8d3f60b473349
-  - enabled: 1
-    path: Assets/Scenes/ExpeditionOld2.unity
-    guid: e5ec10c9b6f69fe4f99109aaa4873df5
   m_configObjects: {}
