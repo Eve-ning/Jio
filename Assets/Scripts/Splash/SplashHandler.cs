@@ -2,6 +2,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,14 +16,14 @@ namespace DIPProject
 		#region Variables
 
 		[Tooltip("Username UI")]
-        public InputField uiUsername;
+        public TMP_InputField uiUsername;
 
         [Tooltip("Enter Button")]
         public GameObject uiEnterButton;
 
         [Tooltip("Minimum Length before the Enter Button appears")]
         [SerializeField]
-        private int minimumUsernameLength = 1;
+        private int minimumUsernameLength = 3;
 
         [Tooltip("The foreground animator, the Logo, Input and Join Button")]
         [SerializeField]
@@ -39,6 +40,7 @@ namespace DIPProject
         // Start is called before the first frame update
         void Start()
         {
+            uiEnterButton.SetActive(false);
             PhotonNetwork.ConnectUsingSettings();
             PhotonNetwork.GameVersion = "0.0";
         }
