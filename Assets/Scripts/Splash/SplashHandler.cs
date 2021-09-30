@@ -2,6 +2,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,7 +16,7 @@ namespace DIPProject
 		#region Variables
 
 		[Tooltip("Username UI")]
-        public InputField uiUsername;
+        public TMP_InputField uiUsername;
 
         [Tooltip("Enter Button")]
         public GameObject uiEnterButton;
