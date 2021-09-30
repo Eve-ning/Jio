@@ -59,6 +59,9 @@ TextureImporter:
   - first:
       213: -2123994196209023183
     second: NEWTILES_18
+  - first:
+      213: -4200770866634009782
+    second: NEWTILES_19
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -545,6 +548,48 @@ TextureImporter:
       bones: []
       spriteID: efe5435a9c8b2a320800000000000000
       internalID: 2567817913754214142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NEWTILES_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 600
+        width: 100
+        height: 100
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13748fd288e0682e0800000000000000
+      internalID: -2123994196209023183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NEWTILES_19
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 500
+        width: 100
+        height: 100
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a435877472dd3b5c0800000000000000
+      internalID: -4200770866634009782
       vertices: []
       indices: 
       edges: []
