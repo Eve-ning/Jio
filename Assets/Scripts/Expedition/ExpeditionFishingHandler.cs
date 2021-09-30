@@ -125,6 +125,9 @@ namespace DIPProject
         public void StartExpeditionChild()
         {
             Debug.Log("Expedition Timer has started at " + TotalTime);
+            // Though called at Host, the child will need to affirm this running variable too
+            isTimerRunning = true;
+
             // Just in case it's not synced.
             FreezePlayers();
             animator.SetTrigger("Start Expedition");
