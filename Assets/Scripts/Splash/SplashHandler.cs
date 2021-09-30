@@ -23,7 +23,7 @@ namespace DIPProject
 
         [Tooltip("Minimum Length before the Enter Button appears")]
         [SerializeField]
-        private int minimumUsernameLength = 1;
+        private int minimumUsernameLength = 3;
 
         [Tooltip("The foreground animator, the Logo, Input and Join Button")]
         [SerializeField]
@@ -40,6 +40,7 @@ namespace DIPProject
         // Start is called before the first frame update
         void Start()
         {
+            uiEnterButton.SetActive(false);
             PhotonNetwork.ConnectUsingSettings();
             PhotonNetwork.GameVersion = "0.0";
         }

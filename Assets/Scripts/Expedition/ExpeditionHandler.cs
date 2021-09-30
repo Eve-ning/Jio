@@ -2,6 +2,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,7 @@ namespace DIPProject
     {
 		#region Variables
 		[SerializeField]
-		private Text roomNameText;
+		private TMP_Text roomNameText;
 		// The reason for the dummy camera is so that the game scene isn't empty
 		[Tooltip("The Dummy Camera used in the scene to be disabled on Start().")]
 		[SerializeField]
@@ -28,7 +29,7 @@ namespace DIPProject
 		private int roomDuration = 10;
 
 		[SerializeField]
-		private Text[] playerList;
+		private TMP_Text[] playerList;
 
 		#endregion
 

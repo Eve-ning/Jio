@@ -4,6 +4,7 @@ using Photon.Realtime;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,9 +27,9 @@ namespace DIPProject
 		[Tooltip("The slider to adjust duration of the expedition")]
         public Slider totalTimeSlider;
         [Tooltip("The total timer on the bottom-right")]
-        public Text totalTimeText;
+        public TMP_Text totalTimeText;
         [Tooltip("The on-screen timer that pops up on start fishing")]
-        public Text timerTimeText;
+        public TMP_Text timerTimeText;
 
         [Tooltip("This is the formatting for the timer.")]
         [SerializeField]
