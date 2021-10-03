@@ -138,11 +138,11 @@ namespace DIPProject
             }
             if (Input.GetAxis("Vertical") < 0)
             {
-                spriteImage.GetComponent<Image>().sprite = frontImage;
+                spriteImage.GetComponent<SpriteRenderer>().sprite = frontImage;
             }
             else if (Input.GetAxis("Vertical") > 0)
             {
-                spriteImage.GetComponent<Image>().sprite = backImage;
+                spriteImage.GetComponent<SpriteRenderer>().sprite = backImage;
             }
         }
 
