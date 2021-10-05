@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Greycat_fishing_back
+  m_Name: Front Walk Right
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,11 +20,11 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: a997ea2a26b6eac44a533f277a0f4a79, type: 3}
+      value: {fileID: 21300000, guid: b5f203d4e6c25624cab82dc9f5caf1d8, type: 3}
+    - time: 0.25
+      value: {fileID: 21300000, guid: 12564ca474d770a4eac159d5c587a237, type: 3}
     - time: 0.5
-      value: {fileID: 21300000, guid: 239e1e282633aeb41894803f45a6896e, type: 3}
-    - time: 1
-      value: {fileID: 21300000, guid: a997ea2a26b6eac44a533f277a0f4a79, type: 3}
+      value: {fileID: 21300000, guid: b8bfbf088eb938e48a596fc970d4224c, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -44,15 +44,15 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: a997ea2a26b6eac44a533f277a0f4a79, type: 3}
-    - {fileID: 21300000, guid: 239e1e282633aeb41894803f45a6896e, type: 3}
-    - {fileID: 21300000, guid: a997ea2a26b6eac44a533f277a0f4a79, type: 3}
+    - {fileID: 21300000, guid: b5f203d4e6c25624cab82dc9f5caf1d8, type: 3}
+    - {fileID: 21300000, guid: 12564ca474d770a4eac159d5c587a237, type: 3}
+    - {fileID: 21300000, guid: b8bfbf088eb938e48a596fc970d4224c, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.0166667
+    m_StopTime: 0.51666665
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
