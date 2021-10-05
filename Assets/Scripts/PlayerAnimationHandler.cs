@@ -87,7 +87,11 @@ namespace DIPProject
             // In addition to setting the animator triggers
             // We also send the RPC if we are in a room
             // Note that we shouldn't send RPCs in the lobby / camp
-            if (PhotonNetwork.InRoom) photonView.RPC("RPCTrigger", RpcTarget.Others, (int) movement);
+            //
+            // Note that we need the isMine check again because RPCs can call this, 
+            // We don't want to send another RPC, it'll cause an infinite loop.
+            if (PhotonNetwork.InRoom && photonView.IsMine) 
+                photonView.RPC("RPCTrigger", RpcTarget.Others, (int) movement);
             
             // A Switch statement for the movement
             // Note that we explicitly reset some triggers just in case they get stuck
