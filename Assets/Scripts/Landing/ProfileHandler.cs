@@ -1,6 +1,5 @@
+using System;
 using Photon.Pun;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -11,19 +10,19 @@ namespace DIPProject
         [Tooltip("The Profile Page Name TMP Text")]
         public TMP_Text profileName;
 
-		public override void OnJoinedLobby()
-		{
-            UpdateName();
-            base.OnJoinedLobby();
-        }
-		public override void OnLeftRoom()
-		{
+        public override void OnJoinedLobby()
+        {
             UpdateName();
             base.OnJoinedLobby();
         }
 
+        private void Start()
+        {
+            UpdateName();
+        }
+
         public void UpdateName()
-		{
+        {
             profileName.text = PhotonNetwork.NickName;
         }
     }
