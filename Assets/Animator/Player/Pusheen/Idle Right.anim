@@ -26,7 +26,7 @@ AnimationClip:
     - time: 1
       value: {fileID: 21300000, guid: b67622584464f684d8b1d6aec7238836, type: 3}
     attribute: m_Sprite
-    path: 
+    path: Scaler/Sprite
     classID: 212
     script: {fileID: 0}
   m_SampleRate: 60
