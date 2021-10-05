@@ -62,23 +62,11 @@ namespace DIPProject
 
         #region Animation Variables
 
-        [Tooltip("The GameObj Sprite Image used for transform scaling")] [SerializeField]
-        private GameObject spriteImage;
-
-        [Tooltip("The front side of the image")] [SerializeField]
-        private Sprite frontImage;
-
-        [Tooltip("The back side of the image")] [SerializeField]
-        private Sprite backImage;
-
         [Tooltip("0.01f Frames of the flipping animation")]
         private const int AnimationFrames = 10;
 
         [Tooltip("0.01f Frames of the flipping animation")]
         private const float AnimationFrameDelay = 0.01f;
-
-        [Tooltip("A flag on if the sprite is now facing left. This is used to avoid repeated calls on held keys.")]
-        private bool _facingLeft;
 
         #endregion
 
@@ -107,7 +95,6 @@ namespace DIPProject
             {
                 var moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
                 _moveVelocity = moveInput * speed;
-                SetSpriteDirection();
             }
         }
 
@@ -120,30 +107,6 @@ namespace DIPProject
 
         #region Scripted Animations
 
-        /// <summary>
-        ///     This simply finds the input and sets the direction of the sprite.
-        /// </summary>
-        private void SetSpriteDirection()
-        {
-            // if (Input.GetAxis("Horizontal") < 0 && !_facingLeft)
-            // {
-            //     // We force the animation to the end before calling another coroutine
-            //     spriteImage.transform.localScale = new Vector3(1, 1, 1);
-            //     StartCoroutine(FlipChar(true));
-            //     _facingLeft = true;
-            // }
-            // else if (Input.GetAxis("Horizontal") > 0 && _facingLeft)
-            // {
-            //     // We force the animation to the end before calling another coroutine
-            //     spriteImage.transform.localScale = new Vector3(-1, 1, 1);
-            //     StartCoroutine(FlipChar(false));
-            //     _facingLeft = false;
-            // }
-            //
-            // if (Input.GetAxis("Vertical") < 0)
-            //     spriteImage.GetComponent<SpriteRenderer>().sprite = frontImage;
-            // else if (Input.GetAxis("Vertical") > 0) spriteImage.GetComponent<SpriteRenderer>().sprite = backImage;
-        }
 
         /// <summary>
         ///     The asynchronous coroutine called when flipping
@@ -154,7 +117,7 @@ namespace DIPProject
         {
             for (var i = -AnimationFrames; i <= AnimationFrames; i++)
             {
-                spriteImage.transform.localScale = new Vector3((reverse ? -1 : 1) * (float) i / AnimationFrames, 1, 1);
+                // spriteImage.transform.localScale = new Vector3((reverse ? -1 : 1) * (float) i / AnimationFrames, 1, 1);
                 yield return new WaitForSeconds(AnimationFrameDelay);
             }
         }
