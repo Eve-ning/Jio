@@ -38,10 +38,6 @@ namespace DIPProject
                 if (Input.GetAxis("Vertical") < 0) animator.SetTrigger("Down");
                 else if (Input.GetAxis("Vertical") > 0) animator.SetTrigger("Up");
             }
-
-
-
-            
         }
     }
 }

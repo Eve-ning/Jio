@@ -1,3 +1,4 @@
+using System;
 using Photon.Pun;
 using TMPro;
 using UnityEngine;
@@ -15,10 +16,9 @@ namespace DIPProject
             base.OnJoinedLobby();
         }
 
-        public override void OnLeftRoom()
+        private void Start()
         {
             UpdateName();
-            base.OnJoinedLobby();
         }
 
         public void UpdateName()
