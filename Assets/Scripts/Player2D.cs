@@ -53,8 +53,8 @@ namespace DIPProject
 
         #region Defaults
 
-        private readonly string _missingSelfName = "Missing Self Name";
-        private readonly string _missingOtherName = "Missing Other Name";
+        private const string MissingSelfName = "Missing Self Name";
+        private const string MissingOtherName = "Missing Other Name";
 
         #endregion
 
@@ -87,10 +87,10 @@ namespace DIPProject
 
         private void Awake()
         {
-            PhotonNetwork.NickName = PhotonNetwork.NickName == "" ? _missingSelfName : PhotonNetwork.NickName;
+            PhotonNetwork.NickName = PhotonNetwork.NickName == "" ? MissingSelfName : PhotonNetwork.NickName;
             playerCamera.SetActive(photonView.IsMine);
             if (photonView.IsMine) playerNameText.text = PhotonNetwork.NickName;
-            else playerNameText.text = photonView.Owner.NickName == "" ? _missingOtherName : photonView.Owner.NickName;
+            else playerNameText.text = photonView.Owner.NickName == "" ? MissingOtherName : photonView.Owner.NickName;
         }
 
         // Start is called before the first frame update
@@ -123,26 +123,26 @@ namespace DIPProject
         /// <summary>
         ///     This simply finds the input and sets the direction of the sprite.
         /// </summary>
-        public void SetSpriteDirection()
+        private void SetSpriteDirection()
         {
-            if (Input.GetAxis("Horizontal") < 0 && !_facingLeft)
-            {
-                // We force the animation to the end before calling another coroutine
-                spriteImage.transform.localScale = new Vector3(1, 1, 1);
-                StartCoroutine(FlipChar(true));
-                _facingLeft = true;
-            }
-            else if (Input.GetAxis("Horizontal") > 0 && _facingLeft)
-            {
-                // We force the animation to the end before calling another coroutine
-                spriteImage.transform.localScale = new Vector3(-1, 1, 1);
-                StartCoroutine(FlipChar(false));
-                _facingLeft = false;
-            }
-
-            if (Input.GetAxis("Vertical") < 0)
-                spriteImage.GetComponent<SpriteRenderer>().sprite = frontImage;
-            else if (Input.GetAxis("Vertical") > 0) spriteImage.GetComponent<SpriteRenderer>().sprite = backImage;
+            // if (Input.GetAxis("Horizontal") < 0 && !_facingLeft)
+            // {
+            //     // We force the animation to the end before calling another coroutine
+            //     spriteImage.transform.localScale = new Vector3(1, 1, 1);
+            //     StartCoroutine(FlipChar(true));
+            //     _facingLeft = true;
+            // }
+            // else if (Input.GetAxis("Horizontal") > 0 && _facingLeft)
+            // {
+            //     // We force the animation to the end before calling another coroutine
+            //     spriteImage.transform.localScale = new Vector3(-1, 1, 1);
+            //     StartCoroutine(FlipChar(false));
+            //     _facingLeft = false;
+            // }
+            //
+            // if (Input.GetAxis("Vertical") < 0)
+            //     spriteImage.GetComponent<SpriteRenderer>().sprite = frontImage;
+            // else if (Input.GetAxis("Vertical") > 0) spriteImage.GetComponent<SpriteRenderer>().sprite = backImage;
         }
 
         /// <summary>

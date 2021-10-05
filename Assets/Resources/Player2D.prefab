@@ -331,6 +331,7 @@ GameObject:
   - component: {fileID: 4766602672286081563}
   - component: {fileID: 8580450556019708032}
   - component: {fileID: 1148265145879188986}
+  - component: {fileID: 61207829457401290}
   m_Layer: 0
   m_Name: Garfield Front
   m_TagString: Untagged
@@ -428,7 +429,26 @@ MonoBehaviour:
   - {x: 0.52880704, y: -0.3342057, z: 0}
   m_ShapePathHash: -14164696
   m_Mesh: {fileID: 0}
-  m_InstanceId: 47104
+  m_InstanceId: 73572
+--- !u!95 &61207829457401290
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5656620885957570492}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4feae2a2594fc764d82791111da1a50c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5748995862670152976
 GameObject:
   m_ObjectHideFlags: 0
@@ -729,6 +749,7 @@ GameObject:
   - component: {fileID: 9147820164636223783}
   - component: {fileID: 4502497802014872581}
   - component: {fileID: 1098082414022794236}
+  - component: {fileID: 5549565987671401517}
   m_Layer: 0
   m_Name: Player2D
   m_TagString: Player
@@ -916,3 +937,16 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9147820164636223802}
   m_CullTransparentMesh: 1
+--- !u!114 &5549565987671401517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9147820164636223802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1103dc80df0d0cb4b80177c3f675555d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 61207829457401290}
