@@ -11,47 +11,6 @@ namespace DIPProject
 {
     public class ExpeditionFishingHandler : MonoBehaviourPunCallbacks, IOnEventCallback
     {
-        #region Sync Event Callbacks
-
-        public void OnEvent(EventData photonEvent)
-        {
-            switch (photonEvent.Code)
-            {
-                case SyncStartEventCode:
-                    StartExpeditionChild();
-                    break;
-
-                case SyncEndEventCode:
-                    EndExpeditionChild();
-                    break;
-
-                case SyncTimerTimeEventCode:
-                    LoopExpeditionChild(TimeSpan.FromSeconds((double) photonEvent.CustomData));
-                    break;
-
-                case SyncTotalTimeEventCode:
-                    /// This will yield the slider value made by the host.
-                    /// Which in turn will trigger appropriate updates of time
-                    totalTimeSlider.value = (float) photonEvent.CustomData;
-                    break;
-            }
-        }
-
-        #endregion
-
-        #region Host UI Handler
-
-        /// <summary>
-        ///     Disables host settings for those who are not host.
-        ///     Enables those for host.
-        /// </summary>
-        private void ValidateHostButtonsUI()
-        {
-            foreach (var obj in nonHostButtonDisable) obj.interactable = PhotonNetwork.IsMasterClient;
-        }
-
-        #endregion
-
         #region Variables
 
         /// <summary>
@@ -64,7 +23,7 @@ namespace DIPProject
         public bool isTimerRunning;
 
         [Tooltip("These Buttons will be disabled if the person is not the host.")]
-        public Button[] nonHostButtonDisable;
+        public Selectable[] nonHostSelectableDisable;
 
         [Tooltip("The slider to adjust duration of the expedition")]
         public Slider totalTimeSlider;
@@ -114,6 +73,47 @@ namespace DIPProject
         }
 
         #endregion
+
+        #endregion
+
+        #region Sync Event Callbacks
+
+        public void OnEvent(EventData photonEvent)
+        {
+            switch (photonEvent.Code)
+            {
+                case SyncStartEventCode:
+                    StartExpeditionChild();
+                    break;
+
+                case SyncEndEventCode:
+                    EndExpeditionChild();
+                    break;
+
+                case SyncTimerTimeEventCode:
+                    LoopExpeditionChild(TimeSpan.FromSeconds((double) photonEvent.CustomData));
+                    break;
+
+                case SyncTotalTimeEventCode:
+                    /// This will yield the slider value made by the host.
+                    /// Which in turn will trigger appropriate updates of time
+                    totalTimeSlider.value = (float) photonEvent.CustomData;
+                    break;
+            }
+        }
+
+        #endregion
+
+        #region Host UI Handler
+
+        /// <summary>
+        ///     Disables host settings for those who are not host.
+        ///     Enables those for host.
+        /// </summary>
+        private void ValidateHostButtonsUI()
+        {
+            foreach (var obj in nonHostSelectableDisable) obj.interactable = PhotonNetwork.IsMasterClient;
+        }
 
         #endregion
 
