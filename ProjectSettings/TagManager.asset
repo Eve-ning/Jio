@@ -48,8 +48,20 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Player
-    uniqueID: 3270184215
+  - name: Collider (-2)
+    uniqueID: 3117124167
+    locked: 0
+  - name: Sea Level (-1)
+    uniqueID: 655618773
+    locked: 0
+  - name: Ground (0)
+    uniqueID: 2125960549
+    locked: 0
+  - name: Level 1
+    uniqueID: 278325297
+    locked: 0
+  - name: Level 2
+    uniqueID: 690265765
     locked: 0
   - name: UI
     uniqueID: 123262365
