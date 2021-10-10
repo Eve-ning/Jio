@@ -1,0 +1,23 @@
+orange cat:
+
+1. sitting
+2. tail moved
+3. tail moved + ear moved
+4. tail moved + eye closed
+5. exclamation mark with water1
+6. exclamation mark with water2
+7. get fish with water 1
+8. get fish with water 2
+
+grey cat:
+
+A. sitting
+B. tail moved 
+C. exclamation mark with water1
+D. exclamation mark with water2
+E. get fish with water 1
+F. get fish with water 2
+
+NOTE* 
+the order of the movement and timing all those are flexible one
+if needed can refer to the gif 
