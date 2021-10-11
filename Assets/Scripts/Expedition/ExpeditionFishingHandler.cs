@@ -1,11 +1,16 @@
 using System;
 using System.Collections;
+using System.Linq;
+using System.Numerics;
 using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Quaternion = UnityEngine.Quaternion;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 namespace DIPProject
 {
@@ -13,15 +18,43 @@ namespace DIPProject
     {
         #region Variables
 
+        #region Time
         /// <summary>
         ///     Time are always in seconds.
         /// </summary>
-        private TimeSpan totalTime;
+        private TimeSpan _totalTime;
+        private TimeSpan _timerTime;
 
-        private TimeSpan timerTime;
+        private TimeSpan TotalTime
+        {
+            get => _totalTime;
+            set
+            {
+                _totalTime = value;
+                totalTimeText.text = TotalTimeAsString();
+                TimerTime = _totalTime;
+            }
+        }
 
+        private TimeSpan TimerTime
+        {
+            get => _timerTime;
+            set
+            {
+                _timerTime = value;
+                timerTimeText.text = TimerTimeAsString();
+            }
+        }
+        
         public bool isTimerRunning;
 
+        #endregion
+
+        [Tooltip("These are the locations that the players will be teleported to, x, y")] 
+        public Vector2[] fishingTeleportLocations;
+        // These are the locations that the players were before teleporting. 
+        private Vector2[] fishingTeleportLocationsBefore = new Vector2[CreateRoomHandler.MAX_PLAYERS];
+        
         [Tooltip("These Buttons will be disabled if the person is not the host.")]
         public Selectable[] nonHostSelectableDisable;
 
@@ -51,27 +84,6 @@ namespace DIPProject
         private const byte SyncStartEventCode = 3;
         private const byte SyncEndEventCode = 4;
 
-        public TimeSpan TotalTime
-        {
-            get => totalTime;
-            set
-            {
-                totalTime = value;
-                totalTimeText.text = TotalTimeAsString();
-                TimerTime = totalTime;
-            }
-        }
-
-        public TimeSpan TimerTime
-        {
-            get => timerTime;
-            set
-            {
-                timerTime = value;
-                timerTimeText.text = TimerTimeAsString();
-            }
-        }
-
         #endregion
 
         #endregion
@@ -95,8 +107,8 @@ namespace DIPProject
                     break;
 
                 case SyncTotalTimeEventCode:
-                    /// This will yield the slider value made by the host.
-                    /// Which in turn will trigger appropriate updates of time
+                    // This will yield the slider value made by the host.
+                    // Which in turn will trigger appropriate updates of time
                     totalTimeSlider.value = (float) photonEvent.CustomData;
                     break;
             }
@@ -159,7 +171,7 @@ namespace DIPProject
             }
         }
 
-        public void StartExpeditionChild()
+        private void StartExpeditionChild()
         {
             Debug.Log("Expedition Timer has started at " + TotalTime);
             // Though called at Host, the child will need to affirm this running variable too
@@ -175,11 +187,11 @@ namespace DIPProject
         ///     The host will regularly update the participants on the Timer time via Syncing.
         /// </summary>
         /// <returns></returns>
-        public IEnumerator LoopExpeditionHost()
+        private IEnumerator LoopExpeditionHost()
         {
             // Waits for 1 second, if we have a DEBUG_TIME_MULTIPLIER, then it'll be faster.
             yield return new WaitForSeconds(1 / DEBUG_TIME_MULTIPLIER);
-            timerTime -= TimeSpan.FromSeconds(1);
+            _timerTime -= TimeSpan.FromSeconds(1);
 
             // While the Timer time is still positive, we loop the Coroutine until it isn't.
             if (TimerTime.TotalSeconds >= 0)
@@ -196,7 +208,7 @@ namespace DIPProject
             }
         }
 
-        public void LoopExpeditionChild(TimeSpan timerTime)
+        private void LoopExpeditionChild(TimeSpan timerTime)
         {
             TimerTime = timerTime;
             if (TimerTime.Seconds % 10 == 0) Debug.Log("Expedition Timer at " + TimerTimeAsString());
@@ -213,7 +225,7 @@ namespace DIPProject
             SyncEndEvent();
         }
 
-        public void EndExpeditionChild()
+        private void EndExpeditionChild()
         {
             Debug.Log("Expedition has ended! Total Time " + TotalTimeAsString());
             isTimerRunning = false;
@@ -333,22 +345,55 @@ namespace DIPProject
 
         #endregion
 
-        #region Player Freezing Methods
+        #region Player Movement Methods
 
-        public void FreezePlayers()
+        private void TeleportPlayersTo()
         {
-            var players = GameObject.FindGameObjectsWithTag("Player");
+            var players = GetPlayers();
+            for (int i = 0; i < players.Length; i++)
+            {
+                players[i].transform.SetPositionAndRotation(
+                    new Vector3(fishingTeleportLocations[i].x, fishingTeleportLocations[i].y, this.transform.position.z),
+                    Quaternion.identity
+                    );
+                fishingTeleportLocationsBefore.Append(
+                    new Vector2(players[i].transform.position.x, players[i].transform.position.y)
+                    );
+            }
+        }
+        private void TeleportPlayersBack()
+        {
+            var players = GetPlayers();
+            for (int i = 0; i < players.Length; i++)
+            {
+                players[i].transform.SetPositionAndRotation(
+                    new Vector3(fishingTeleportLocations[i].x, fishingTeleportLocations[i].y,0),
+                    Quaternion.identity
+                    );
+                fishingTeleportLocationsBefore[i].x = players[i].transform.position.x;
+                fishingTeleportLocationsBefore[i].y = players[i].transform.position.y;
+            }
+        }
+        
+        private void FreezePlayers()
+        {
+            var players = GetPlayers();
             players[0].GetComponent<Rigidbody2D>().constraints |=
                 RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
         }
 
         public void UnfreezePlayers()
         {
-            var players = GameObject.FindGameObjectsWithTag("Player");
+            var players = GetPlayers();
             players[0].GetComponent<Rigidbody2D>().constraints ^=
                 RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
         }
 
+        private GameObject[] GetPlayers()
+        {
+            return GameObject.FindGameObjectsWithTag("Player");
+        }
+        
         #endregion
     }
 }
