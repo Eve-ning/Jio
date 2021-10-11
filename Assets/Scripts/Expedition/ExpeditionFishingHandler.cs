@@ -359,7 +359,12 @@ namespace DIPProject
         {
             var players = PhotonNetwork.CurrentRoom.Players;
             int myActorKey = players.First(o => o.Value.NickName == PhotonNetwork.NickName).Key;
-            int myIx = players.Keys.ToList().IndexOf(myActorKey);
+            int myIx = players.Keys.OrderBy(o => o).ToList().IndexOf(myActorKey);
+            
+            Debug.Log(myIx);
+            Debug.Log(myActorKey);
+            Debug.Log(players.Keys.ToList());
+            Debug.Log(players.Values.ToList());
                 
             return fishingTeleportLocations[myIx];
         }
