@@ -3861,6 +3861,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isTimerRunning: 0
+  fishingTeleportLocations:
+  - {x: 10, y: 10}
   nonHostSelectableDisable:
   - {fileID: 1117760052}
   - {fileID: 242508172}
@@ -5844,7 +5846,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 4999.9834}
+  m_AnchoredPosition: {x: 0, y: 4999.983}
   m_SizeDelta: {x: -10, y: 10000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1175173691

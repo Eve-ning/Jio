@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
 using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
@@ -53,7 +53,7 @@ namespace DIPProject
         [Tooltip("These are the locations that the players will be teleported to, x, y")] 
         public Vector2[] fishingTeleportLocations;
         // These are the locations that the players were before teleporting. 
-        private Vector2[] fishingTeleportLocationsBefore = new Vector2[CreateRoomHandler.MAX_PLAYERS];
+        private Vector2 fishingPreviousLocation = Vector2.zero;
         
         [Tooltip("These Buttons will be disabled if the person is not the host.")]
         public Selectable[] nonHostSelectableDisable;
@@ -179,6 +179,7 @@ namespace DIPProject
 
             // Just in case it's not synced.
             FreezePlayers();
+            TeleportMyPlayerTo();
             animator.SetTrigger("Start Expedition");
         }
 
@@ -190,7 +191,7 @@ namespace DIPProject
         private IEnumerator LoopExpeditionHost()
         {
             // Waits for 1 second, if we have a DEBUG_TIME_MULTIPLIER, then it'll be faster.
-            yield return new WaitForSeconds(1 / DEBUG_TIME_MULTIPLIER);
+            yield return new WaitForSeconds(1f / DEBUG_TIME_MULTIPLIER);
             _timerTime -= TimeSpan.FromSeconds(1);
 
             // While the Timer time is still positive, we loop the Coroutine until it isn't.
@@ -211,9 +212,7 @@ namespace DIPProject
         private void LoopExpeditionChild(TimeSpan timerTime)
         {
             TimerTime = timerTime;
-            if (TimerTime.Seconds % 10 == 0) Debug.Log("Expedition Timer at " + TimerTimeAsString());
         }
-
 
         /// <summary>
         ///     This means that the host has detected the end of the expedition.
@@ -230,6 +229,7 @@ namespace DIPProject
             Debug.Log("Expedition has ended! Total Time " + TotalTimeAsString());
             isTimerRunning = false;
             UnfreezePlayers();
+            TeleportMyPlayerBack();
             TimerTime = TotalTime;
             animator.SetTrigger("End Expedition");
         }
@@ -275,7 +275,11 @@ namespace DIPProject
         {
             if (!PhotonNetwork.IsMasterClient) return;
             var raiseEventOptions = new RaiseEventOptions {Receivers = ReceiverGroup.All};
-            PhotonNetwork.RaiseEvent(SyncStartEventCode, null, raiseEventOptions, SendOptions.SendReliable);
+            PhotonNetwork.RaiseEvent(
+                SyncStartEventCode, 
+                null, 
+                raiseEventOptions,
+                SendOptions.SendReliable);
         }
 
         /// <summary>
@@ -295,7 +299,7 @@ namespace DIPProject
         /// <summary>
         ///     This simply adds this instance as a Event Callback participant, so OnEvent will be triggered.
         /// </summary>
-        private void OnEnable()
+        public override void OnEnable()
         {
             PhotonNetwork.AddCallbackTarget(this);
         }
@@ -303,7 +307,7 @@ namespace DIPProject
         /// <summary>
         ///     This removes the OnEvent Callback
         /// </summary>
-        private void OnDisable()
+        public override void OnDisable()
         {
             PhotonNetwork.RemoveCallbackTarget(this);
         }
@@ -347,53 +351,91 @@ namespace DIPProject
 
         #region Player Movement Methods
 
-        private void TeleportPlayersTo()
+        /// <summary>
+        /// Gets the player specific teleport location based on the player list
+        /// </summary>
+        /// <returns></returns>
+        private Vector2 GetMyTeleportLocation()
         {
-            var players = GetPlayers();
-            for (int i = 0; i < players.Length; i++)
-            {
-                players[i].transform.SetPositionAndRotation(
-                    new Vector3(fishingTeleportLocations[i].x, fishingTeleportLocations[i].y, this.transform.position.z),
-                    Quaternion.identity
-                    );
-                fishingTeleportLocationsBefore.Append(
-                    new Vector2(players[i].transform.position.x, players[i].transform.position.y)
-                    );
-            }
-        }
-        private void TeleportPlayersBack()
-        {
-            var players = GetPlayers();
-            for (int i = 0; i < players.Length; i++)
-            {
-                players[i].transform.SetPositionAndRotation(
-                    new Vector3(fishingTeleportLocations[i].x, fishingTeleportLocations[i].y,0),
-                    Quaternion.identity
-                    );
-                fishingTeleportLocationsBefore[i].x = players[i].transform.position.x;
-                fishingTeleportLocationsBefore[i].y = players[i].transform.position.y;
-            }
+            var players = PhotonNetwork.CurrentRoom.Players;
+            int myActorKey = players.First(o => o.Value.NickName == PhotonNetwork.NickName).Key;
+            int myIx = players.Keys.ToList().IndexOf(myActorKey);
+                
+            return fishingTeleportLocations[myIx];
         }
         
+        /// <summary>
+        /// Teleports the player to the fishing locations.
+        /// This will call GetTeleportLocation to get the player's destination.
+        /// </summary>
+        private void TeleportMyPlayerTo()
+        {
+            var player = GetMyPlayer();
+            
+            // Remember where I was            
+            var position = player.transform.position;
+            fishingPreviousLocation = new Vector2(position.x, position.y);
+            
+            // Get my teleport location
+            var myTeleportLocation = GetMyTeleportLocation();
+            Debug.Log("Teleporting myself to: " + myTeleportLocation);
+            player.transform.SetPositionAndRotation(
+                new Vector3(myTeleportLocation.x, myTeleportLocation.y, transform.position.z),
+                Quaternion.identity
+            );
+            
+        }
+
+        /// <summary>
+        /// Teleports the player back to where they were
+        /// </summary>
+        private void TeleportMyPlayerBack()
+        {
+            var player = GetMyPlayer();
+            Debug.Log("Teleporting myself back: " + fishingPreviousLocation);
+            player.transform.SetPositionAndRotation(fishingPreviousLocation, Quaternion.identity);
+            fishingPreviousLocation = Vector2.zero;
+        }
+        
+        /// <summary>
+        /// Uses a OR to freeze constraints without loss of info
+        /// </summary>
         private void FreezePlayers()
         {
-            var players = GetPlayers();
-            players[0].GetComponent<Rigidbody2D>().constraints |=
+            GetMyPlayer().GetComponent<Rigidbody2D>().constraints |=
                 RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
         }
 
+        /// <summary>
+        /// Uses an XOR to unfreeze constraints without loss of info
+        /// </summary>
         public void UnfreezePlayers()
         {
-            var players = GetPlayers();
-            players[0].GetComponent<Rigidbody2D>().constraints ^=
+            GetMyPlayer().GetComponent<Rigidbody2D>().constraints ^=
                 RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
         }
 
+        #endregion
+        
+        #region Photon Helper Methods
+        
+        /// <summary>
+        /// Gets all the players
+        /// </summary>
+        /// <returns></returns>
         private GameObject[] GetPlayers()
         {
             return GameObject.FindGameObjectsWithTag("Player");
         }
-        
+        /// <summary>
+        /// Gets my player based on the photonView.
+        /// </summary>
+        /// <returns></returns>
+        private GameObject GetMyPlayer()
+        {
+            return GetPlayers().First(o => o.GetComponent<PhotonView>().IsMine);
+        }
+
         #endregion
     }
 }
