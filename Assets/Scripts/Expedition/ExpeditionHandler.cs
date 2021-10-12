@@ -7,33 +7,6 @@ namespace DIPProject
 {
     public class ExpeditionHandler : MonoBehaviourPunCallbacks
     {
-        #region MonoBehavior Callbacks
-
-        private void Start()
-        {
-            dummyCamera.SetActive(false);
-        }
-
-        #endregion
-
-        #region RPC Methods
-
-        public void updateRoomDuration(int roomDuration)
-        {
-            this.roomDuration = roomDuration;
-        }
-
-        #endregion
-
-        #region Public Methods
-
-        public void Campfire()
-        {
-            PhotonNetwork.LeaveRoom();
-        }
-
-        #endregion
-
         #region Variables
 
         [SerializeField] private TMP_Text roomNameText;
@@ -53,7 +26,25 @@ namespace DIPProject
         [SerializeField] private TMP_Text[] playerList;
 
         #endregion
+        
+        #region MonoBehavior Callbacks
 
+        private void Start()
+        {
+            dummyCamera.SetActive(false);
+        }
+
+        #endregion
+        
+
+        #region Public Methods
+
+        public void Campfire()
+        {
+            PhotonNetwork.LeaveRoom();
+        }
+
+        #endregion
 
         #region MonoBehaviorPunCallbacks Callbacks
 
@@ -62,13 +53,14 @@ namespace DIPProject
         /// </summary>
         public override void OnJoinedRoom()
         {
-            var player = PhotonNetwork.Instantiate("Player2D", new Vector3(0, 1, 0), Quaternion.identity);
+            var player = 
+                PhotonNetwork.Instantiate("Player2D", new Vector3(0, 1, 0), Quaternion.identity);
             Debug.Log("Room Name " + PhotonNetwork.CurrentRoom.Name);
             roomNameText.text = ROOM_NAME_PREFIX + PhotonNetwork.CurrentRoom.Name;
 
             // Gets the camera of the new instantiated player and shifts camera to it
-            var camera = player.GetComponentInChildren<Camera>();
-            foreach (var ui in roomUi) ui.worldCamera = camera;
+            var playerCamera = player.GetComponentInChildren<Camera>();
+            foreach (var ui in roomUi) ui.worldCamera = playerCamera;
 
             UpdatePlayerList();
         }
@@ -92,6 +84,7 @@ namespace DIPProject
 
             foreach (var item in playerList) item.text = "-";
             foreach (var player in PhotonNetwork.CurrentRoom.Players)
+            {
                 if (player.Value.IsMasterClient)
                 {
                     playerList[0].text = player.Value.NickName;
@@ -101,6 +94,7 @@ namespace DIPProject
                     playerList[position + 1].text = player.Value.NickName;
                     position++;
                 }
+            }
         }
 
         public override void OnLeftRoom()
