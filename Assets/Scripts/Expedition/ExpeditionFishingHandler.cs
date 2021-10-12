@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Linq;
 using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
@@ -9,62 +10,44 @@ using UnityEngine.UI;
 
 namespace DIPProject
 {
-    public class ExpeditionFishingHandler : MonoBehaviourPunCallbacks, IOnEventCallback
+    public partial class ExpeditionFishingHandler : MonoBehaviourPunCallbacks, IOnEventCallback
     {
-        #region Sync Event Callbacks
-
-        public void OnEvent(EventData photonEvent)
-        {
-            switch (photonEvent.Code)
-            {
-                case SyncStartEventCode:
-                    StartExpeditionChild();
-                    break;
-
-                case SyncEndEventCode:
-                    EndExpeditionChild();
-                    break;
-
-                case SyncTimerTimeEventCode:
-                    LoopExpeditionChild(TimeSpan.FromSeconds((double) photonEvent.CustomData));
-                    break;
-
-                case SyncTotalTimeEventCode:
-                    /// This will yield the slider value made by the host.
-                    /// Which in turn will trigger appropriate updates of time
-                    totalTimeSlider.value = (float) photonEvent.CustomData;
-                    break;
-            }
-        }
-
-        #endregion
-
-        #region Host UI Handler
-
-        /// <summary>
-        ///     Disables host settings for those who are not host.
-        ///     Enables those for host.
-        /// </summary>
-        private void ValidateHostButtonsUI()
-        {
-            foreach (var obj in nonHostButtonDisable) obj.interactable = PhotonNetwork.IsMasterClient;
-        }
-
-        #endregion
-
         #region Variables
 
+        #region Time
         /// <summary>
         ///     Time are always in seconds.
         /// </summary>
-        private TimeSpan totalTime;
+        private TimeSpan _totalTime;
+        private TimeSpan _timerTime;
 
-        private TimeSpan timerTime;
+        private TimeSpan TotalTime
+        {
+            get => _totalTime;
+            set
+            {
+                _totalTime = value;
+                totalTimeText.text = TotalTimeAsString();
+                TimerTime = _totalTime;
+            }
+        }
 
+        private TimeSpan TimerTime
+        {
+            get => _timerTime;
+            set
+            {
+                _timerTime = value;
+                timerTimeText.text = TimerTimeAsString();
+            }
+        }
+        
         public bool isTimerRunning;
 
+        #endregion
+        
         [Tooltip("These Buttons will be disabled if the person is not the host.")]
-        public Button[] nonHostButtonDisable;
+        public Selectable[] nonHostSelectableDisable;
 
         [Tooltip("The slider to adjust duration of the expedition")]
         public Slider totalTimeSlider;
@@ -92,28 +75,48 @@ namespace DIPProject
         private const byte SyncStartEventCode = 3;
         private const byte SyncEndEventCode = 4;
 
-        public TimeSpan TotalTime
-        {
-            get => totalTime;
-            set
-            {
-                totalTime = value;
-                totalTimeText.text = TotalTimeAsString();
-                TimerTime = totalTime;
-            }
-        }
+        #endregion
 
-        public TimeSpan TimerTime
+        #endregion
+
+        #region Sync Event Callbacks
+
+        public void OnEvent(EventData photonEvent)
         {
-            get => timerTime;
-            set
+            switch (photonEvent.Code)
             {
-                timerTime = value;
-                timerTimeText.text = TimerTimeAsString();
+                case SyncStartEventCode:
+                    StartExpeditionChild();
+                    break;
+
+                case SyncEndEventCode:
+                    EndExpeditionChild();
+                    break;
+
+                case SyncTimerTimeEventCode:
+                    LoopExpeditionChild(TimeSpan.FromSeconds((double) photonEvent.CustomData));
+                    break;
+
+                case SyncTotalTimeEventCode:
+                    // This will yield the slider value made by the host.
+                    // Which in turn will trigger appropriate updates of time
+                    totalTimeSlider.value = (float) photonEvent.CustomData;
+                    break;
             }
         }
 
         #endregion
+
+        #region Host UI Handler
+
+        /// <summary>
+        ///     Disables host settings for those who are not host.
+        ///     Enables those for host.
+        /// </summary>
+        private void ValidateHostButtonsUI()
+        {
+            foreach (var obj in nonHostSelectableDisable) obj.interactable = PhotonNetwork.IsMasterClient;
+        }
 
         #endregion
 
@@ -159,7 +162,7 @@ namespace DIPProject
             }
         }
 
-        public void StartExpeditionChild()
+        private void StartExpeditionChild()
         {
             Debug.Log("Expedition Timer has started at " + TotalTime);
             // Though called at Host, the child will need to affirm this running variable too
@@ -167,6 +170,7 @@ namespace DIPProject
 
             // Just in case it's not synced.
             FreezePlayers();
+            TeleportMyPlayerTo();
             animator.SetTrigger("Start Expedition");
         }
 
@@ -175,11 +179,11 @@ namespace DIPProject
         ///     The host will regularly update the participants on the Timer time via Syncing.
         /// </summary>
         /// <returns></returns>
-        public IEnumerator LoopExpeditionHost()
+        private IEnumerator LoopExpeditionHost()
         {
             // Waits for 1 second, if we have a DEBUG_TIME_MULTIPLIER, then it'll be faster.
-            yield return new WaitForSeconds(1 / DEBUG_TIME_MULTIPLIER);
-            timerTime -= TimeSpan.FromSeconds(1);
+            yield return new WaitForSeconds(1f / DEBUG_TIME_MULTIPLIER);
+            _timerTime -= TimeSpan.FromSeconds(1);
 
             // While the Timer time is still positive, we loop the Coroutine until it isn't.
             if (TimerTime.TotalSeconds >= 0)
@@ -196,12 +200,10 @@ namespace DIPProject
             }
         }
 
-        public void LoopExpeditionChild(TimeSpan timerTime)
+        private void LoopExpeditionChild(TimeSpan timerTime)
         {
             TimerTime = timerTime;
-            if (TimerTime.Seconds % 10 == 0) Debug.Log("Expedition Timer at " + TimerTimeAsString());
         }
-
 
         /// <summary>
         ///     This means that the host has detected the end of the expedition.
@@ -213,11 +215,12 @@ namespace DIPProject
             SyncEndEvent();
         }
 
-        public void EndExpeditionChild()
+        private void EndExpeditionChild()
         {
             Debug.Log("Expedition has ended! Total Time " + TotalTimeAsString());
             isTimerRunning = false;
             UnfreezePlayers();
+            TeleportMyPlayerBack();
             TimerTime = TotalTime;
             animator.SetTrigger("End Expedition");
         }
@@ -263,7 +266,11 @@ namespace DIPProject
         {
             if (!PhotonNetwork.IsMasterClient) return;
             var raiseEventOptions = new RaiseEventOptions {Receivers = ReceiverGroup.All};
-            PhotonNetwork.RaiseEvent(SyncStartEventCode, null, raiseEventOptions, SendOptions.SendReliable);
+            PhotonNetwork.RaiseEvent(
+                SyncStartEventCode, 
+                null, 
+                raiseEventOptions,
+                SendOptions.SendReliable);
         }
 
         /// <summary>
@@ -283,7 +290,7 @@ namespace DIPProject
         /// <summary>
         ///     This simply adds this instance as a Event Callback participant, so OnEvent will be triggered.
         /// </summary>
-        private void OnEnable()
+        public override void OnEnable()
         {
             PhotonNetwork.AddCallbackTarget(this);
         }
@@ -291,7 +298,7 @@ namespace DIPProject
         /// <summary>
         ///     This removes the OnEvent Callback
         /// </summary>
-        private void OnDisable()
+        public override void OnDisable()
         {
             PhotonNetwork.RemoveCallbackTarget(this);
         }
@@ -333,20 +340,23 @@ namespace DIPProject
 
         #endregion
 
-        #region Player Freezing Methods
-
-        public void FreezePlayers()
+        #region Photon Helper Methods
+        
+        /// <summary>
+        /// Gets all the players
+        /// </summary>
+        /// <returns></returns>
+        private GameObject[] GetPlayers()
         {
-            var players = GameObject.FindGameObjectsWithTag("Player");
-            players[0].GetComponent<Rigidbody2D>().constraints |=
-                RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
+            return GameObject.FindGameObjectsWithTag("Player");
         }
-
-        public void UnfreezePlayers()
+        /// <summary>
+        /// Gets my player based on the photonView.
+        /// </summary>
+        /// <returns></returns>
+        private GameObject GetMyPlayer()
         {
-            var players = GameObject.FindGameObjectsWithTag("Player");
-            players[0].GetComponent<Rigidbody2D>().constraints ^=
-                RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
+            return GetPlayers().First(o => o.GetComponent<PhotonView>().IsMine);
         }
 
         #endregion
