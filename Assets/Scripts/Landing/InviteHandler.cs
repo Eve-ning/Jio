@@ -16,21 +16,26 @@ namespace DIPProject
         [SerializeField] [Tooltip("Room name for Boya's Invite")]
         private const string BOYA_ROOMNAME = "BOYAR";
 
+        [SerializeField] [Tooltip("Room name for June's Invite")]
+        private const string JUNE_ROOMNAME = "JUNER";
+
+        [SerializeField] [Tooltip("Room name for Fu Hao's Invite")]
+        private const string FUHAO_ROOMNAME = "FUHAO";
+
         #endregion
 
         #region Public Methods
 
-        public void JoinJohn()
+        private void JoinRoom(string name)
         {
             customRoomHandler.CustomRoom(JOHN_ROOMNAME);
             uiRoomNameInput.text = JOHN_ROOMNAME;
         }
-
-        public void JoinBoya()
-        {
-            customRoomHandler.CustomRoom(BOYA_ROOMNAME);
-            uiRoomNameInput.text = BOYA_ROOMNAME;
-        }
+        
+        public void JoinJohn() { JoinRoom(JOHN_ROOMNAME); }
+        public void JoinBoya() { JoinRoom(BOYA_ROOMNAME); }
+        public void JoinJune() { JoinRoom(JUNE_ROOMNAME); }
+        public void JoinFuhao() { JoinRoom(FUHAO_ROOMNAME); }
 
         #endregion
     }
