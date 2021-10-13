@@ -428,7 +428,7 @@ MonoBehaviour:
   - {x: 0.46231422, y: -0.7993677, z: 0}
   m_ShapePathHash: 172546135
   m_Mesh: {fileID: 0}
-  m_InstanceId: 56302
+  m_InstanceId: 32268
 --- !u!1 &5748995862670152976
 GameObject:
   m_ObjectHideFlags: 0
@@ -974,7 +974,7 @@ Animator:
   m_GameObject: {fileID: 9147820164636223802}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4feae2a2594fc764d82791111da1a50c, type: 2}
+  m_Controller: {fileID: 22100000, guid: 4ab72b00757008046b6719600780fa2d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1025,6 +1025,9 @@ MonoBehaviour:
   - Type: 9
     SynchronizeType: 0
     Name: End Fishing
+  - Type: 3
+    SynchronizeType: 0
+    Name: Fishing
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
