@@ -19,16 +19,16 @@ namespace DIPProject
         // are not redundant.
         private static Movement currentMovement = Movement.Stop;
         
-        [SerializeField] private Animator animator;
+        [SerializeField] public Animator animator;
         [SerializeField] private PhotonView photonView;
 
-        private enum Movement
+        public enum Movement
         {
             Stop = 0,
             Left = 1,
             Right = 2,
             Up = 3,
-            Down = 4
+            Down = 4,
         }
 
         #endregion
@@ -57,9 +57,9 @@ namespace DIPProject
                 AnimationTrigger(Movement.Stop);
             else
             {
-                if (Input.GetAxis("Horizontal") < 0)      AnimationTrigger(Movement.Left);
+                if      (Input.GetAxis("Horizontal") < 0) AnimationTrigger(Movement.Left);
                 else if (Input.GetAxis("Horizontal") > 0) AnimationTrigger(Movement.Right);
-                if (Input.GetAxis("Vertical") < 0)        AnimationTrigger(Movement.Down);
+                if      (Input.GetAxis("Vertical") < 0)   AnimationTrigger(Movement.Down);
                 else if (Input.GetAxis("Vertical") > 0)   AnimationTrigger(Movement.Up);
             }
         }

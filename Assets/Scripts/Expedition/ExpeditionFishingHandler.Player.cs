@@ -11,11 +11,23 @@ namespace DIPProject
     {
         #region Variables
 
+        public enum FishingPosition
+        {
+            Reset = 0,
+            FrontLeft = 1,
+            FrontRight = 2,
+            BackLeft = 3,
+            BackRight = 4,
+        }
+        
         [Tooltip("These are the locations that the players will be teleported to, x, y")] 
         public Vector2[] fishingTeleportLocations;
+        
+        [Tooltip("These are the fishing positions corresponding to the locations fished.")] 
+        public FishingPosition[] fishingPositions;
+        
         // These are the locations that the players were before teleporting. 
-        private Vector2 fishingPreviousLocation = Vector2.zero;
-
+        private Vector2 _fishingPreviousLocation = Vector2.zero;
         #endregion
 
     
@@ -25,46 +37,36 @@ namespace DIPProject
         /// Gets the player specific teleport location based on the player list
         /// </summary>
         /// <returns></returns>
-        private Vector2 GetMyTeleportLocation()
+        private (FishingPosition, Vector2) GetMyTeleportLocation()
         {
             var players = PhotonNetwork.CurrentRoom.Players;
             int myActorKey = players.First(o => o.Value.NickName == PhotonNetwork.NickName).Key;
             int myIx = players.Keys.OrderBy(o => o).ToList().IndexOf(myActorKey);
             
-            return fishingTeleportLocations[myIx];
+            return (fishingPositions[myIx], fishingTeleportLocations[myIx]);
         }
         
         /// <summary>
         /// Teleports the player to the fishing locations.
         /// This will call GetTeleportLocation to get the player's destination.
         /// </summary>
-        private void TeleportMyPlayerTo()
+        private void TeleportMyPlayer()
         {
             var player = GetMyPlayer();
             
             // Remember where I was            
             var position = player.transform.position;
-            fishingPreviousLocation = new Vector2(position.x, position.y);
+            _fishingPreviousLocation = new Vector2(position.x, position.y);
             
             // Get my teleport location
-            var myTeleportLocation = GetMyTeleportLocation();
+            (var myFishingPosition, var myTeleportLocation) = GetMyTeleportLocation();
             Debug.Log("Teleporting myself to: " + myTeleportLocation);
             player.transform.SetPositionAndRotation(
                 new Vector3(myTeleportLocation.x, myTeleportLocation.y, transform.position.z),
                 Quaternion.identity
             );
+            player.GetComponent<Animator>().SetInteger("Fishing", (int) myFishingPosition);
             
-        }
-
-        /// <summary>
-        /// Teleports the player back to where they were
-        /// </summary>
-        private void TeleportMyPlayerBack()
-        {
-            var player = GetMyPlayer();
-            Debug.Log("Teleporting myself back: " + fishingPreviousLocation);
-            player.transform.SetPositionAndRotation(fishingPreviousLocation, Quaternion.identity);
-            fishingPreviousLocation = Vector2.zero;
         }
         
         /// <summary>
