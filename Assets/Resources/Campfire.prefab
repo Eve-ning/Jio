@@ -59,7 +59,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0.29996848
-  m_PointLightOuterRadius: 5.93
+  m_PointLightOuterRadius: 3
   m_PointLightDistance: 5
   m_PointLightQuality: 1
   m_ShapeLightParametricSides: 5
@@ -100,7 +100,7 @@ Transform:
   m_GameObject: {fileID: 7371409071452019769}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.009889, y: 6.129019, z: -495.8358}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
+  m_LocalScale: {x: 0.35, y: 0.35, z: 1}
   m_Children:
   - {fileID: 7371409071313111738}
   m_Father: {fileID: 0}
