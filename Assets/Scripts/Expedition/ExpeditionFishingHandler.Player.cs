@@ -26,8 +26,6 @@ namespace DIPProject
         [Tooltip("These are the fishing positions corresponding to the locations fished.")] 
         public FishingPosition[] fishingPositions;
         
-        // These are the locations that the players were before teleporting. 
-        private Vector2 _fishingPreviousLocation = Vector2.zero;
         #endregion
 
     
