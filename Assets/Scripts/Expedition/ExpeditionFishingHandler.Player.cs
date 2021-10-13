@@ -28,7 +28,6 @@ namespace DIPProject
         
         #endregion
 
-    
         #region Player Movement Methods
 
         /// <summary>
@@ -52,18 +51,17 @@ namespace DIPProject
         {
             var player = GetMyPlayer();
             
-            // Remember where I was            
-            var position = player.transform.position;
-            _fishingPreviousLocation = new Vector2(position.x, position.y);
-            
             // Get my teleport location
-            (var myFishingPosition, var myTeleportLocation) = GetMyTeleportLocation();
-            Debug.Log("Teleporting myself to: " + myTeleportLocation);
+            (var position, var location) = GetMyTeleportLocation();
+            
+            Debug.Log("Teleporting myself to: " + location);
+            
             player.transform.SetPositionAndRotation(
-                new Vector3(myTeleportLocation.x, myTeleportLocation.y, transform.position.z),
+                new Vector3(location.x, location.y, transform.position.z),
                 Quaternion.identity
             );
-            player.GetComponent<Animator>().SetInteger("Fishing", (int) myFishingPosition);
+            
+            player.GetComponent<Animator>().SetInteger("Fishing", (int) position);
             
         }
         

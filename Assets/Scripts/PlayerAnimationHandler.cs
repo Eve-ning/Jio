@@ -8,16 +8,16 @@ namespace DIPProject
     {
         #region Variables
 
-        private static readonly int Up = Animator.StringToHash("Up");
-        private static readonly int Right = Animator.StringToHash("Right");
-        private static readonly int Left = Animator.StringToHash("Left");
-        private static readonly int Down = Animator.StringToHash("Down");
-        private static readonly int Stop = Animator.StringToHash("Stop");
+        private static readonly int Up     = Animator.StringToHash("Up");
+        private static readonly int Right  = Animator.StringToHash("Right");
+        private static readonly int Left   = Animator.StringToHash("Left");
+        private static readonly int Down   = Animator.StringToHash("Down");
+        private static readonly int Stop   = Animator.StringToHash("Stop");
         private static readonly int Active = Animator.StringToHash("Active");
 
         // This is to keep track of the previous movement state so that the calls
         // are not redundant.
-        private static Movement currentMovement = Movement.Stop;
+        private static Movement _currentMovement = Movement.Stop;
         
         [SerializeField] public Animator animator;
         [SerializeField] private PhotonView photonView;
@@ -80,9 +80,9 @@ namespace DIPProject
             //
             // We do this because Update will repeatedly call redundant RPCs, causing
             // many glitches.
-            if (currentMovement == movement) return;
+            if (_currentMovement == movement && !photonView.IsMine) return;
             
-            currentMovement = movement;
+            _currentMovement = movement;
 
             // In addition to setting the animator triggers
             // We also send the RPC if we are in a room

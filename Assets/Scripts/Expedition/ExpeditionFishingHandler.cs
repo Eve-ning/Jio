@@ -62,7 +62,7 @@ namespace DIPProject
         public const string TIMER_FORMAT = @"hh\:mm\:ss";
 
         [Tooltip("This is to adjust how fast time flows. This is mainly used for debugging.")] [SerializeField]
-        public uint DEBUG_TIME_MULTIPLIER = 1;
+        public uint DEBUG_TIME_MULTIPLIER = 15;
 
         [Tooltip("This is used to trigger the start/end expedition.")]
         public Animator animator;
