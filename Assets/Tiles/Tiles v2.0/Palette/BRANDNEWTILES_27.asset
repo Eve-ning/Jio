@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: BRANDNEWTILES_27
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: -6674890344983071226, guid: ec48250e275aa4e438fd64e2df9731f7, type: 3}
+  m_Sprite: {fileID: -4925224259468033958, guid: ec48250e275aa4e438fd64e2df9731f7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
