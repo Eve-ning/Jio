@@ -221,6 +221,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 58160632982809116, guid: b1a259a2aaf12294ebaf588d05201553, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 58160632982809116, guid: b1a259a2aaf12294ebaf588d05201553, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 58160632982809116, guid: b1a259a2aaf12294ebaf588d05201553, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -230,7 +238,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 58160632997006979, guid: b1a259a2aaf12294ebaf588d05201553, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 4999.9688
+      value: 4999.9683
       objectReference: {fileID: 0}
     - target: {fileID: 58160633098446558, guid: b1a259a2aaf12294ebaf588d05201553, type: 3}
       propertyPath: m_AnchorMax.y
@@ -265,6 +273,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 58160633615855852, guid: b1a259a2aaf12294ebaf588d05201553, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 58160633615855852, guid: b1a259a2aaf12294ebaf588d05201553, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 58160633615855852, guid: b1a259a2aaf12294ebaf588d05201553, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -305,12 +321,28 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 58160633823537208, guid: b1a259a2aaf12294ebaf588d05201553, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 58160633823537208, guid: b1a259a2aaf12294ebaf588d05201553, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 58160633823537208, guid: b1a259a2aaf12294ebaf588d05201553, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 58160633823537208, guid: b1a259a2aaf12294ebaf588d05201553, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 58160633888264615, guid: b1a259a2aaf12294ebaf588d05201553, type: 3}
+      propertyPath: spawnPoint.x
+      value: -0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 58160633888264615, guid: b1a259a2aaf12294ebaf588d05201553, type: 3}
+      propertyPath: spawnPoint.y
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 58160633938253107, guid: b1a259a2aaf12294ebaf588d05201553, type: 3}
       propertyPath: m_AnchorMax.y
@@ -377,6 +409,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 58160634608908335, guid: b1a259a2aaf12294ebaf588d05201553, type: 3}
+      propertyPath: fishingTeleportLocations.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 58160634608908335, guid: b1a259a2aaf12294ebaf588d05201553, type: 3}
       propertyPath: fishingTeleportLocations.Array.data[0].x
       value: -4.75
       objectReference: {fileID: 0}
@@ -414,6 +450,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 58160634608908335, guid: b1a259a2aaf12294ebaf588d05201553, type: 3}
       propertyPath: fishingTeleportLocations.Array.data[4].y
+      value: 3.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 58160634608908335, guid: b1a259a2aaf12294ebaf588d05201553, type: 3}
+      propertyPath: fishingTeleportLocations.Array.data[5].x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 58160634608908335, guid: b1a259a2aaf12294ebaf588d05201553, type: 3}
+      propertyPath: fishingTeleportLocations.Array.data[5].y
       value: 3.75
       objectReference: {fileID: 0}
     - target: {fileID: 3948435287020776721, guid: b1a259a2aaf12294ebaf588d05201553, type: 3}

@@ -2,6 +2,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace DIPProject
 {
@@ -15,13 +16,14 @@ namespace DIPProject
         [Tooltip("The Dummy Camera used in the scene to be disabled on Start().")] [SerializeField]
         private GameObject dummyCamera;
 
+        [Tooltip("The spawn point of the player. A 0-1 Random float will be added to avoid stacking.")]
+        [SerializeField]
+        private Vector2 spawnPoint = Vector2.zero;
+        
         [Tooltip("The UI to snap to the player camera on instantiation.")] [SerializeField]
         private Canvas[] roomUi;
 
-        private readonly string ROOM_NAME_PREFIX = "CODE: ";
-
-        [Tooltip("The duration of the room, in seconds")] [SerializeField]
-        private int roomDuration = 10;
+        private const string RoomNamePrefix = "CODE: ";
 
         [SerializeField] private TMP_Text[] playerList;
 
@@ -35,7 +37,6 @@ namespace DIPProject
         }
 
         #endregion
-        
 
         #region Public Methods
 
@@ -54,9 +55,13 @@ namespace DIPProject
         public override void OnJoinedRoom()
         {
             var player = 
-                PhotonNetwork.Instantiate("Player2D", new Vector3(0, 1, 0), Quaternion.identity);
+                PhotonNetwork.Instantiate(
+                    "Player2D",
+                    new Vector3(spawnPoint.x + Random.value * 0.1f, spawnPoint.y + Random.value * 0.1f, 0),
+                    Quaternion.identity);
+            
             Debug.Log("Room Name " + PhotonNetwork.CurrentRoom.Name);
-            roomNameText.text = ROOM_NAME_PREFIX + PhotonNetwork.CurrentRoom.Name;
+            roomNameText.text = RoomNamePrefix + PhotonNetwork.CurrentRoom.Name;
 
             // Gets the camera of the new instantiated player and shifts camera to it
             var playerCamera = player.GetComponentInChildren<Camera>();
@@ -78,7 +83,7 @@ namespace DIPProject
             base.OnPlayerLeftRoom(otherPlayer);
         }
 
-        public void UpdatePlayerList()
+        private void UpdatePlayerList()
         {
             var position = 0;
 
