@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 0.75323707, b: 0, a: 1}
   m_Intensity: 1.5
   m_LightVolumeOpacity: 0
-  m_ApplyToSortingLayers: 45bad149d3d589e100000000478acbb9d5f213276595b77e31e89610a59e24299dd55807
+  m_ApplyToSortingLayers: 45bad149d3d589e100000000478acbb9d5f213276595b77e31e89610a59e24299339fd0a9dd55807
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 1
   m_LightOrder: 0
@@ -100,7 +100,7 @@ Transform:
   m_GameObject: {fileID: 7371409071452019769}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.009889, y: 6.129019, z: -495.8358}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
+  m_LocalScale: {x: 0.35, y: 0.35, z: 1}
   m_Children:
   - {fileID: 7371409071313111738}
   m_Father: {fileID: 0}
@@ -200,5 +200,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4.045764, y: 1.8172746}
+  m_Size: {x: 2, y: 1.8172746}
   m_EdgeRadius: 0.3

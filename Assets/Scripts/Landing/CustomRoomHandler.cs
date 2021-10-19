@@ -9,15 +9,15 @@ namespace DIPProject
 	/// <summary>
 	///     Handles what happens if the user wants to create a custom room name
 	/// </summary>
-	public class CustomRoomHandler : MonoBehaviourPunCallbacks
+	public class CustomRoomHandler : RoomHandler
     {
         #region MonoBehaviour Callbacks
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Return) && uiCanvas.activeSelf) CustomRoom();
-            if (Input.GetKeyDown(KeyCode.Escape) && uiCanvas.activeSelf)
-                landingAnimatorHandler.SetTrigger("Close Custom");
+            if (!uiCanvas.activeSelf) return;
+            if (Input.GetKeyDown(KeyCode.Return)) CustomRoom();
+            if (Input.GetKeyDown(KeyCode.Escape)) landingAnimatorHandler.SetTrigger("Close Custom");
         }
 
         #endregion
@@ -43,8 +43,6 @@ namespace DIPProject
         public GameObject uiCanvas;
         public InputField uiRoomNameInput;
 
-        [SerializeField] private Animator landingAnimatorHandler;
-
         #endregion
 
         #region Public Methods
@@ -53,18 +51,15 @@ namespace DIPProject
         ///     Attempts to Join a Room specified for the uiRoomNameInput
         ///     This will call the trigger if the condition passes
         /// </summary>
-        public void CustomRoom()
-        {
-            CustomRoom(uiRoomNameInput.text);
-        }
 
         /// <summary>
         ///     Attempts to Join a Room specified for the uiRoomNameInput
         ///     This will call the trigger if the condition passes
         /// </summary>
-        public void CustomRoom(string roomName)
+        public void CustomRoom(string roomName = null)
         {
-            if (roomName.Length == CreateRoomHandler.ROOM_NAME_LENGTH) landingAnimatorHandler.SetTrigger("Custom");
+            if (roomName is { Length: RoomNameLength }) 
+                landingAnimatorHandler.SetTrigger("Custom");
         }
 
         /// <summary>
@@ -73,10 +68,7 @@ namespace DIPProject
         /// </summary>
         public void CustomRoomAfterAnimation()
         {
-            Debug.Log(PhotonNetwork.NickName + " is Attempting to Join / Create Room " + uiRoomNameInput.text);
-            PhotonNetwork.JoinOrCreateRoom(uiRoomNameInput.text,
-                new RoomOptions {MaxPlayers = CreateRoomHandler.MAX_PLAYERS}, null);
-            PhotonNetwork.LoadLevel("Expedition");
+            JoinOrCreateRoom(uiRoomNameInput.text);
         }
 
         #endregion

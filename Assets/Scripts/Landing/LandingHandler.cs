@@ -8,6 +8,7 @@ namespace DIPProject
     /// </summary>
     public class LandingHandler : MonoBehaviour
     {
+        
         public GameObject landingIntro;
 
         // Start is called before the first frame update
