@@ -1,5 +1,6 @@
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -22,7 +23,7 @@ namespace DIPProject
         protected Animator landingAnimatorHandler;
 
         [Tooltip("The Expedition Scenes")]
-        public Scene[] expeditionScenes;
+        public SceneAsset[] expeditionScenes;
 
         #endregion
         
