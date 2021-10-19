@@ -22,9 +22,6 @@ namespace DIPProject
         [Tooltip("The Landing Animator")] [SerializeField]
         protected Animator landingAnimatorHandler;
 
-        [Tooltip("The Expedition Scenes")]
-        public SceneAsset[] expeditionScenes;
-
         #endregion
         
         #region MonoBehaviourPunCallbacks Callbacks
@@ -48,7 +45,7 @@ namespace DIPProject
         protected void JoinOrCreateRoom(string roomName)
         {
             PhotonNetwork.JoinOrCreateRoom(roomName, new RoomOptions {MaxPlayers = MaxPlayers}, null);
-            PhotonNetwork.LoadLevel(expeditionScenes[Random.Range(0,expeditionScenes.Length)].name);
+            PhotonNetwork.LoadLevel(Random.Range(3,6));
         }
    
         #endregion
