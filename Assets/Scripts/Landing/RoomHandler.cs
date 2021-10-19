@@ -1,6 +1,7 @@
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace DIPProject
 {
@@ -19,6 +20,9 @@ namespace DIPProject
  
         [Tooltip("The Landing Animator")] [SerializeField]
         protected Animator landingAnimatorHandler;
+
+        [Tooltip("The Expedition Scenes")]
+        public Scene[] expeditionScenes;
 
         #endregion
         
@@ -40,12 +44,11 @@ namespace DIPProject
         /// Joins or creates a new room based on the roomName provided
         /// </summary>
         /// <param name="roomName"></param>
-        public void JoinOrCreateRoom(string roomName)
+        protected void JoinOrCreateRoom(string roomName)
         {
             PhotonNetwork.JoinOrCreateRoom(roomName, new RoomOptions {MaxPlayers = MaxPlayers}, null);
-            PhotonNetwork.LoadLevel("Expedition");
+            PhotonNetwork.LoadLevel(expeditionScenes[Random.Range(0,expeditionScenes.Length)].name);
         }
-
    
         #endregion
     }
