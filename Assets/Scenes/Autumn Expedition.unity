@@ -27378,7 +27378,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 4999.9707}
+  m_AnchoredPosition: {x: 0, y: 4999.97}
   m_SizeDelta: {x: -10, y: 10000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1079185504004193497
@@ -31908,12 +31908,12 @@ MonoBehaviour:
   - DAE
   - EAD
   fishingTeleportLocations:
-  - {x: 4, y: -0.25}
-  - {x: 8.5, y: 2}
-  - {x: 7, y: -0.75}
-  - {x: 7.5, y: -0.5}
-  - {x: 4.5, y: 0}
-  fishingPositions: 0200000001000000030000000300000002000000
+  - {x: -5.85, y: 3.75}
+  - {x: -3.85, y: 3.25}
+  - {x: -2.35, y: -0.5}
+  - {x: 0, y: -1.25}
+  - {x: 4.65, y: 3.5}
+  fishingPositions: 0200000001000000040000000300000003000000
   isTimerRunning: 0
   nonHostSelectableDisable:
   - {fileID: 1079185503930002646}
