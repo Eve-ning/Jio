@@ -584,7 +584,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 58160633510574683, guid: b1a259a2aaf12294ebaf588d05201553, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 600.00024
+      value: 600.0002
       objectReference: {fileID: 0}
     - target: {fileID: 58160633615855852, guid: b1a259a2aaf12294ebaf588d05201553, type: 3}
       propertyPath: m_AnchorMax.y
@@ -21465,7 +21465,7 @@ MonoBehaviour:
   m_Color: {r: 0.8228177, g: 0.7783019, b: 1, a: 1}
   m_Intensity: 0.78
   m_LightVolumeOpacity: 0
-  m_ApplyToSortingLayers: 45bad149d3d589e100000000478acbb9d5f213276595b77e31e89610a59e24299dd55807
+  m_ApplyToSortingLayers: 45bad149d3d589e100000000478acbb9d5f213276595b77e31e89610a59e24299339fd0a9dd55807
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
   m_LightOrder: 0
