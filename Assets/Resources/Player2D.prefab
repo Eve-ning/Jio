@@ -1,37 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &65320274316287493
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5187319768315858207}
-  m_Layer: 0
-  m_Name: Chat Box
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5187319768315858207
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 65320274316287493}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 2661021817303853787}
-  - {fileID: 481210272699422238}
-  m_Father: {fileID: 1708767843482307434}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1005019617619140657
 GameObject:
   m_ObjectHideFlags: 0
@@ -57,7 +25,7 @@ RectTransform:
   m_GameObject: {fileID: 1005019617619140657}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.45, y: 0.45, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_Children:
   - {fileID: 4766602672286081563}
   m_Father: {fileID: 7222851619992910955}
@@ -94,16 +62,16 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3417568405310136482}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 5187319768315858207}
+  m_Father: {fileID: 1708767843482307434}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.33}
-  m_SizeDelta: {x: 6, y: 2}
+  m_AnchoredPosition: {x: 0, y: 0.15}
+  m_SizeDelta: {x: 2.02, y: 0.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &4429525541492830207
 MeshRenderer:
@@ -124,7 +92,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1377084458660819708, guid: 38dde030ccb83154497c26e56c800c29, type: 2}
+  - {fileID: -717676571959069765, guid: dbca60af80cc278429683c678b18b890, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -143,7 +111,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 123262365
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 2
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &2476205663474072140
@@ -168,15 +136,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: Ola Amigo
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 38dde030ccb83154497c26e56c800c29, type: 2}
-  m_sharedMaterial: {fileID: 1377084458660819708, guid: 38dde030ccb83154497c26e56c800c29, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: dbca60af80cc278429683c678b18b890, type: 2}
+  m_sharedMaterial: {fileID: -717676571959069765, guid: dbca60af80cc278429683c678b18b890, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4280361303
-  m_fontColor: {r: 0.33962262, g: 0.12976147, b: 0.12976147, a: 1}
+    rgba: 4282782751
+  m_fontColor: {r: 0.123307884, g: 0.078720175, b: 0.2735849, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -193,19 +161,19 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 5
+  m_fontSize: 4.5
   m_fontSizeBase: 3.12
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 3
-  m_fontSizeMax: 5
+  m_fontSizeMin: 2.5
+  m_fontSizeMax: 4.5
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: -48
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -262,11 +230,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5588855778448660989}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.92, y: 1.3, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_Children: []
-  m_Father: {fileID: 5187319768315858207}
+  m_Father: {fileID: 1708767843482307434}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3994558920358079629
@@ -307,7 +275,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 123262365
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: d9b34aabc552ac14db5998d857ba84b4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -392,7 +360,7 @@ SpriteRenderer:
   m_SortingLayerID: 278325297
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a004fb8a5bb7d5349a21aa909d117861, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 209267567870cb74d8bd43d62f2f763b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -422,13 +390,13 @@ MonoBehaviour:
   m_SelfShadows: 0
   m_ApplyToSortingLayers: 45bad149d3d589e100000000478acbb9d5f213276595b77e31e89610a59e24299dd55807
   m_ShapePath:
-  - {x: -0.8317668, y: -0.9968504, z: 0}
-  - {x: 0.3862237, y: -1.5876707, z: 0}
-  - {x: 1.3975085, y: -1.1049504, z: 0}
-  - {x: 0.46231422, y: -0.7993677, z: 0}
-  m_ShapePathHash: 172546135
+  - {x: -1.1066124, y: -0.67619705, z: 0}
+  - {x: 0.111377984, y: -1.1754019, z: 0}
+  - {x: 1.7181618, y: -0.5094514, z: 0}
+  - {x: 0.48521802, y: 0.0022656322, z: 0}
+  m_ShapePathHash: 885509238
   m_Mesh: {fileID: 0}
-  m_InstanceId: 99418
+  m_InstanceId: 95922
 --- !u!1 &5748995862670152976
 GameObject:
   m_ObjectHideFlags: 0
@@ -453,10 +421,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5748995862670152976}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.32, z: 0}
+  m_LocalPosition: {x: 0, y: 1.47, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 5187319768315858207}
+  - {fileID: 2661021817303853787}
+  - {fileID: 481210272699422238}
   m_Father: {fileID: 7222851619992910955}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -494,8 +463,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -0.63}
-  m_SizeDelta: {x: 8.54, y: 5}
+  m_AnchoredPosition: {x: 0, y: -1.7}
+  m_SizeDelta: {x: 8, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &4373940803589256467
 MeshRenderer:
@@ -516,7 +485,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1377084458660819708, guid: 38dde030ccb83154497c26e56c800c29, type: 2}
+  - {fileID: -717676571959069765, guid: dbca60af80cc278429683c678b18b890, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -535,7 +504,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 123262365
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &1876083515578640227
@@ -560,8 +529,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Player Name
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 38dde030ccb83154497c26e56c800c29, type: 2}
-  m_sharedMaterial: {fileID: 1377084458660819708, guid: 38dde030ccb83154497c26e56c800c29, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: dbca60af80cc278429683c678b18b890, type: 2}
+  m_sharedMaterial: {fileID: -717676571959069765, guid: dbca60af80cc278429683c678b18b890, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -585,12 +554,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 6
+  m_fontSize: 3
   m_fontSizeBase: 6
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 3
+  m_fontSizeMax: 3
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
@@ -657,7 +626,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9147820163983063848}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: -10.77}
+  m_LocalPosition: {x: 0, y: 1.2, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7222851619992910955}
@@ -840,7 +809,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 7, y: 7}
+  m_Size: {x: 7, y: 6.99}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -861,8 +830,8 @@ MonoBehaviour:
   photonView: {fileID: 9147820164636223803}
   playerNameText: {fileID: 1876083515578640227}
   playerCamera: {fileID: 9147820163983063848}
-  speed: 5
-  chatBox: {fileID: 65320274316287493}
+  speed: 2.5
+  chatBox: {fileID: 5748995862670152976}
   chatText: {fileID: 2476205663474072140}
   chatOpenTime: 2
 --- !u!114 &9147820164636223803
@@ -923,8 +892,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.17, y: -0.49}
-  m_Size: {x: 0.6800001, y: 0.43}
+  m_Offset: {x: -0.1, y: -0.28}
+  m_Size: {x: 0.38, y: 0.25}
   m_Direction: 1
 --- !u!114 &4502497802014872581
 MonoBehaviour:
@@ -974,7 +943,7 @@ Animator:
   m_GameObject: {fileID: 9147820164636223802}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4feae2a2594fc764d82791111da1a50c, type: 2}
+  m_Controller: {fileID: 22100000, guid: 4ab72b00757008046b6719600780fa2d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1025,6 +994,9 @@ MonoBehaviour:
   - Type: 9
     SynchronizeType: 0
     Name: End Fishing
+  - Type: 3
+    SynchronizeType: 0
+    Name: Fishing
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0

@@ -7,8 +7,14 @@ namespace DIPProject
 	/// <summary>
 	///     Handles what happens if the player wants to create a random room
 	/// </summary>
-	public class CreateRoomHandler : MonoBehaviourPunCallbacks
+	public class CreateRoomHandler : RoomHandler
     {
+        #region Variables
+        // Room name letters will be chosen from these letters
+        private const string Letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+        #endregion
+
         #region MonoBehaviourPunCallbacks Callbacks
 
         public override void OnCreateRoomFailed(short returnCode, string message)
@@ -17,22 +23,6 @@ namespace DIPProject
             PhotonNetwork.LoadLevel("Landing");
             base.OnCreateRoomFailed(returnCode, message);
         }
-
-        #endregion
-
-        #region Variables'
-
-        [Tooltip("Maximum number of players allowed in the room.")]
-        public const byte MAX_PLAYERS = 5;
-
-        [Tooltip("The length of the room name")]
-        public const int ROOM_NAME_LENGTH = 5;
-
-        // Room name letters will be chosen from these letters
-        private const string LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-        [Tooltip("The Landing Animator")] [SerializeField]
-        private Animator landingAnimatorHandler;
 
         #endregion
 
@@ -52,10 +42,7 @@ namespace DIPProject
         /// </summary>
         public void CreateRoomAfterAnimation()
         {
-            var roomName = CreateRoomName();
-            Debug.Log(PhotonNetwork.NickName + " is Creating Room " + roomName);
-            PhotonNetwork.JoinOrCreateRoom(roomName, new RoomOptions {MaxPlayers = MAX_PLAYERS}, null);
-            PhotonNetwork.LoadLevel("Expedition");
+            JoinOrCreateRoom(CreateRoomName());
         }
 
         /// <summary>
@@ -64,8 +51,9 @@ namespace DIPProject
         /// <returns>A string of random letters selected from LETTERS.</returns>
         private string CreateRoomName()
         {
-            var letters = new char[ROOM_NAME_LENGTH];
-            for (var i = 0; i < ROOM_NAME_LENGTH; i++) letters[i] = LETTERS[Random.Range(0, LETTERS.Length)];
+            var letters = new char[RoomNameLength];
+            for (var i = 0; i < RoomNameLength; i++) 
+                letters[i] = Letters[Random.Range(0, Letters.Length)];
 
             return new string(letters);
         }

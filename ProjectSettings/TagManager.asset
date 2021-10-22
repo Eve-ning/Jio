@@ -63,6 +63,9 @@ TagManager:
   - name: Level 2
     uniqueID: 690265765
     locked: 0
+  - name: Level 3
+    uniqueID: 184367507
+    locked: 0
   - name: UI
     uniqueID: 123262365
     locked: 0
