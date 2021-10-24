@@ -778,6 +778,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Expedition Template Bare
       objectReference: {fileID: 0}
+    - target: {fileID: 5426597807460828776, guid: b1a259a2aaf12294ebaf588d05201553, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5534510863985966871, guid: b1a259a2aaf12294ebaf588d05201553, type: 3}
       propertyPath: m_RootOrder
       value: 2
