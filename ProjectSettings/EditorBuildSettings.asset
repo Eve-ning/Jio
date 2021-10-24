@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Winter Expedition.unity
     guid: 86a5a3fd9fb464e4bb2c6892466a61f3
+  - enabled: 1
+    path: Assets/Scenes/New Expedition.unity
+    guid: de466fdc599a1a6479ae309db64342c2
   m_configObjects: {}
