@@ -23,10 +23,10 @@ namespace DIPProject
         private Image background;
 
         private const float backgroundStartX = 0f;
-        private const float backgroundEndX = -1900f;
+        private const float backgroundEndX = -4000f;
 
         private const float globalLightStart = 1f;
-        private const float globalLightEnd = 0.1f;
+        private const float globalLightEnd = 0.25f;
 
         private int _dayNightCycleFrames = 50;
         private float _dayNightCycleDelay = 0.01f;
