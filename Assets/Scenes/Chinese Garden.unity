@@ -10482,13 +10482,13 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 278325297
   m_SortingLayer: 4
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 3
-  m_Mode: 0
+  m_Mode: 1
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
 --- !u!1839735485 &468912898
@@ -18213,7 +18213,7 @@ TilemapRenderer:
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 3
-  m_Mode: 0
+  m_Mode: 1
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
 --- !u!1839735485 &1844904929
@@ -25336,31 +25336,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7371409071452019764, guid: 31265a74f673cb0419cae0ec3a48f176, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.99
+      value: -1.73
       objectReference: {fileID: 0}
     - target: {fileID: 7371409071452019764, guid: 31265a74f673cb0419cae0ec3a48f176, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.48
+      value: -1.83
       objectReference: {fileID: 0}
     - target: {fileID: 7371409071452019764, guid: 31265a74f673cb0419cae0ec3a48f176, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7371409071452019764, guid: 31265a74f673cb0419cae0ec3a48f176, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7371409071452019764, guid: 31265a74f673cb0419cae0ec3a48f176, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7371409071452019764, guid: 31265a74f673cb0419cae0ec3a48f176, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7371409071452019764, guid: 31265a74f673cb0419cae0ec3a48f176, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7371409071452019764, guid: 31265a74f673cb0419cae0ec3a48f176, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -25377,6 +25361,14 @@ PrefabInstance:
     - target: {fileID: 7371409071452019769, guid: 31265a74f673cb0419cae0ec3a48f176, type: 3}
       propertyPath: m_Name
       value: Campfire (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7371409071452019771, guid: 31265a74f673cb0419cae0ec3a48f176, type: 3}
+      propertyPath: m_SortingLayer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7371409071452019771, guid: 31265a74f673cb0419cae0ec3a48f176, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 690265765
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31265a74f673cb0419cae0ec3a48f176, type: 3}
