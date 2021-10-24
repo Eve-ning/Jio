@@ -396,7 +396,7 @@ MonoBehaviour:
   - {x: 0.48521802, y: 0.0022656322, z: 0}
   m_ShapePathHash: 885509238
   m_Mesh: {fileID: 0}
-  m_InstanceId: 95922
+  m_InstanceId: 101700
 --- !u!1 &5748995862670152976
 GameObject:
   m_ObjectHideFlags: 0
@@ -658,8 +658,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 2.5
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2

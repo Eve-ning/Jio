@@ -66,6 +66,7 @@ namespace DIPProject
 
         [Tooltip("This is used to trigger the start/end expedition.")]
         public Animator animator;
+
         #region Event Codes
 
         private const byte SyncTimerTimeEventCode = 1;
@@ -170,6 +171,7 @@ namespace DIPProject
             // Just in case it's not synced.
             FreezePlayers();
             TeleportMyPlayer();
+            StartCoroutine(MoveCameraToFishing());
             animator.SetTrigger("Start Expedition");
         }
 
@@ -224,6 +226,7 @@ namespace DIPProject
             
             // Reset Timer
             TimerTime = TotalTime;
+            StartCoroutine(MoveCameraFromFishing());
             
             animator.SetTrigger("End Expedition");
             

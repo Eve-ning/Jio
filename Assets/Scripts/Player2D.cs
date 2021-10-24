@@ -104,24 +104,5 @@ namespace DIPProject
         }
 
         #endregion
-
-        #region Scripted Animations
-
-
-        /// <summary>
-        ///     The asynchronous coroutine called when flipping
-        /// </summary>
-        /// <param name="reverse"></param>
-        /// <returns></returns>
-        public IEnumerator FlipChar(bool reverse)
-        {
-            for (var i = -AnimationFrames; i <= AnimationFrames; i++)
-            {
-                // spriteImage.transform.localScale = new Vector3((reverse ? -1 : 1) * (float) i / AnimationFrames, 1, 1);
-                yield return new WaitForSeconds(AnimationFrameDelay);
-            }
-        }
-
-        #endregion
     }
 }
