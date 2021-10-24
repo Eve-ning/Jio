@@ -204,6 +204,7 @@ namespace DIPProject
         private void LoopExpeditionChild(TimeSpan timerTime)
         {
             TimerTime = timerTime;
+            UpdateDayNightCycle();
         }
 
         /// <summary>
@@ -226,6 +227,7 @@ namespace DIPProject
             
             // Reset Timer
             TimerTime = TotalTime;
+            StartCoroutine(ResetDayNightCycle());
             StartCoroutine(MoveCameraFromFishing());
             
             animator.SetTrigger("End Expedition");

@@ -20,8 +20,8 @@ namespace DIPProject
         [SerializeField]
         private Vector2 spawnPoint = Vector2.zero;
         
-        [Tooltip("The UI to snap to the player camera on instantiation.")] [SerializeField]
-        private Canvas[] roomUi;
+        [Tooltip("The Canvases to snap to the player camera on instantiation.")] [SerializeField]
+        private Canvas[] canvasSwap;
 
         private const string RoomNamePrefix = "CODE: ";
 
@@ -65,7 +65,7 @@ namespace DIPProject
 
             // Gets the camera of the new instantiated player and shifts camera to it
             var playerCamera = player.GetComponentInChildren<Camera>();
-            foreach (var ui in roomUi) ui.worldCamera = playerCamera;
+            foreach (var ui in canvasSwap) ui.worldCamera = playerCamera;
 
             UpdatePlayerList();
         }
