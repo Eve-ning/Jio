@@ -24,7 +24,10 @@ namespace DIPProject
 
         private const float backgroundStartX = 0f;
         private const float backgroundEndX = -1900f;
-        
+
+        private const float globalLightStart = 1f;
+        private const float globalLightEnd = 0.1f;
+
         private int _dayNightCycleFrames = 50;
         private float _dayNightCycleDelay = 0.01f;
 
@@ -37,16 +40,18 @@ namespace DIPProject
             var position = background.rectTransform.anchoredPosition;
             position = new Vector2(progress * (backgroundEndX - backgroundStartX) + backgroundStartX, position.y);
             background.rectTransform.anchoredPosition = position;
+            globalLight2D.intensity = globalLightStart - (globalLightStart - globalLightEnd) * progress;
         }
 
         private IEnumerator ResetDayNightCycle()
         {
             for (var i = 0; i < _dayNightCycleFrames; i++)
             {
-                var progress = Math.Sqrt((float) i / _dayNightCycleFrames);
+                float progress = (float) Math.Sqrt((float) i / _dayNightCycleFrames);
                 var position = background.rectTransform.anchoredPosition;
-                position = new Vector2((float)(1 - progress) * (backgroundEndX - backgroundStartX) , position.y);
+                position = new Vector2((1 - progress) * (backgroundEndX - backgroundStartX) , position.y);
                 background.rectTransform.anchoredPosition = position;
+                globalLight2D.intensity = globalLightEnd + (globalLightStart - globalLightEnd) * progress;
                 yield return new WaitForSeconds(_dayNightCycleDelay);
             }
         }
