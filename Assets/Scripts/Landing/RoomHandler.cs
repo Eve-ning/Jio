@@ -45,7 +45,7 @@ namespace DIPProject
         protected void JoinOrCreateRoom(string roomName)
         {
             PhotonNetwork.JoinOrCreateRoom(roomName, new RoomOptions {MaxPlayers = MaxPlayers}, null);
-            PhotonNetwork.LoadLevel(Random.Range(3,6));
+            PhotonNetwork.LoadLevel(Random.Range(3,7));
         }
    
         #endregion
