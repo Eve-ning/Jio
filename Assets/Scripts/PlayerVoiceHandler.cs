@@ -1,9 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using Photon.Voice.Unity;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace DIPProject
 {
@@ -28,12 +25,12 @@ namespace DIPProject
         [SerializeField] [Tooltip("Speaker Max Color Value when active")]
         private float speakerMaxActiveValue = 1f;
 
-        [Tooltip("Amp Level of the Speaker")]
-        private float _volumeLevelAmp = 6f;
+        [Tooltip("Visual Amp Level of the Speaker. This does not amplify the volume in any way. " +
+                 "Only the value of the speaker color.")]
+        private float _visualLevelAmp = 15f;
         
         [SerializeField] [Tooltip("Current Level of the Speaker")]
         private float volumeLevel;
-        
         
         #endregion
 
@@ -71,7 +68,7 @@ namespace DIPProject
             }
 
             // This just scales the Amp from [0,1] to [min, max]
-            volumeLevel = recorder.LevelMeter.CurrentAvgAmp * _volumeLevelAmp * 
+            volumeLevel = recorder.LevelMeter.CurrentAvgAmp * _visualLevelAmp * 
                           (speakerMaxActiveValue - speakerEnabledValue) + speakerEnabledValue;
             speakerIcon.color = Color.HSVToRGB(0,0, Math.Min(volumeLevel, speakerMaxActiveValue));
         }
