@@ -45,7 +45,16 @@ namespace DIPProject
         protected void JoinOrCreateRoom(string roomName)
         {
             PhotonNetwork.JoinOrCreateRoom(roomName, new RoomOptions {MaxPlayers = MaxPlayers}, null);
-            PhotonNetwork.LoadLevel(Random.Range(3,7));
+            
+            var sum = 0;
+            foreach (var c in roomName) sum += System.Convert.ToInt32(c);
+
+            const int FIRST_EXP = 3;
+            const int LAST_EXP = 7;
+            sum %= LAST_EXP - FIRST_EXP;
+            print("Joining expedition " + sum + " with room name " + roomName);
+
+            PhotonNetwork.LoadLevel(sum + FIRST_EXP);
         }
    
         #endregion

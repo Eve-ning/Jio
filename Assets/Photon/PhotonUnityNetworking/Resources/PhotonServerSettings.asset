@@ -16,7 +16,7 @@ MonoBehaviour:
     AppIdRealtime: ffd2bd5f-2474-40c3-9710-087cb84c6b03
     AppIdFusion: 
     AppIdChat: d27e0eb9-1c81-45b6-b430-67f09bf39a8e
-    AppIdVoice: 
+    AppIdVoice: 0fd41032-5850-485c-9f46-8c5a85847850
     AppVersion: 
     UseNameServer: 1
     FixedRegion: 
@@ -29,7 +29,7 @@ MonoBehaviour:
     EnableLobbyStatistics: 0
     NetworkLogging: 1
   DevRegion: in
-  PunLogging: 2
+  PunLogging: 1
   EnableSupportLogger: 0
   RunInBackground: 1
   StartInOfflineMode: 0
@@ -40,6 +40,9 @@ MonoBehaviour:
   - Fire
   - RespawnSpaceship
   - RPCTrigger
+  - CantHearYou
+  - ChangeColour
+  - HeresWhy
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
