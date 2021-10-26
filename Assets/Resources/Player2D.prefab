@@ -560,7 +560,7 @@ MonoBehaviour:
   - {x: 0.48521802, y: 0.0022656322, z: 0}
   m_ShapePathHash: 885509238
   m_Mesh: {fileID: 0}
-  m_InstanceId: 163748
+  m_InstanceId: 165652
 --- !u!1 &5748995862670152976
 GameObject:
   m_ObjectHideFlags: 0
@@ -1400,7 +1400,7 @@ MonoBehaviour:
   speakerIcon: {fileID: 4404242686226350274}
   debugIcon: {fileID: 324125725989996331}
   speakerEnabledValue: 0.4
-  speakerMaxActiveValue: 0.5
+  speakerMaxActiveValue: 1
   volumeLevel: 0
 --- !u!114 &8478425728246023396
 MonoBehaviour:

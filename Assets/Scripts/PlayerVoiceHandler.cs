@@ -26,10 +26,10 @@ namespace DIPProject
         private float speakerEnabledValue = 0.4f;
 
         [SerializeField] [Tooltip("Speaker Max Color Value when active")]
-        private float speakerMaxActiveValue = 0.5f;
+        private float speakerMaxActiveValue = 1f;
 
         [Tooltip("Amp Level of the Speaker")]
-        private float _volumeLevelAmp = 2.5f;
+        private float _volumeLevelAmp = 6f;
         
         [SerializeField] [Tooltip("Current Level of the Speaker")]
         private float volumeLevel;
@@ -52,7 +52,7 @@ namespace DIPProject
         // Update is called once per frame
         void Update()
         {
-            if (Input.GetKey(KeyCode.M) && 
+            if (Input.GetKeyDown(KeyCode.M) && 
                 (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
             {
                 // Flip the state
@@ -61,7 +61,7 @@ namespace DIPProject
                 speakerIcon.color = Color.HSVToRGB(0,0, speakerEnabledValue);
             }
             
-            if (Input.GetKey(KeyCode.D) && 
+            if (Input.GetKeyDown(KeyCode.D) && 
                 (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
             {
                 // Flip the state
