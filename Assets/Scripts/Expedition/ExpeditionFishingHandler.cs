@@ -154,12 +154,10 @@ namespace DIPProject
         /// </summary>
         public void StartExpeditionHost()
         {
-            if (!isTimerRunning)
-            {
-                isTimerRunning = true;
-                SyncStartEvent();
-                StartCoroutine(LoopExpeditionHost());
-            }
+            if (isTimerRunning) return;
+            isTimerRunning = true;
+            SyncStartEvent();
+            StartCoroutine(LoopExpeditionHost());
         }
 
         private void StartExpeditionChild()
@@ -233,7 +231,9 @@ namespace DIPProject
             animator.SetTrigger("End Expedition");
             
             // Resets the Animation to idling and walking
-            GetMyPlayer().GetComponent<Animator>().SetInteger("Fishing", (int)FishingPosition.Reset);
+            // We need to reset for all players fishing animations!
+            foreach (var player in GetPlayers())
+                player.GetComponent<Animator>().SetInteger("Fishing", (int)FishingPosition.Reset);
         }
 
         #endregion
