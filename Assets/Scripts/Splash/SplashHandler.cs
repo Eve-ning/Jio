@@ -45,6 +45,7 @@ namespace DIPProject
         {
             uiEnterButton.SetActive(false);
             PhotonNetwork.ConnectUsingSettings();
+            
             PhotonNetwork.GameVersion = "0.0";
         }
 
