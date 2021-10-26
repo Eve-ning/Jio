@@ -70,8 +70,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.15}
-  m_SizeDelta: {x: 2.02, y: 0.9}
+  m_AnchoredPosition: {x: 0, y: 0.1}
+  m_SizeDelta: {x: 1.81, y: 0.69}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &4429525541492830207
 MeshRenderer:
@@ -92,7 +92,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -717676571959069765, guid: dbca60af80cc278429683c678b18b890, type: 2}
+  - {fileID: 5601720479114955843, guid: 8df3cbf1cfc4c294aafd23718bda60bc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -134,10 +134,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ola Amigo
+  m_text: aada
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: dbca60af80cc278429683c678b18b890, type: 2}
-  m_sharedMaterial: {fileID: -717676571959069765, guid: dbca60af80cc278429683c678b18b890, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8df3cbf1cfc4c294aafd23718bda60bc, type: 2}
+  m_sharedMaterial: {fileID: 5601720479114955843, guid: 8df3cbf1cfc4c294aafd23718bda60bc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -161,19 +161,19 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 4.5
+  m_fontSize: 2.5
   m_fontSizeBase: 3.12
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 2.5
-  m_fontSizeMax: 4.5
+  m_fontSizeMin: 2
+  m_fontSizeMax: 2.5
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: -0.81
   m_wordSpacing: 0
-  m_lineSpacing: -48
+  m_lineSpacing: -39.67
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -232,7 +232,7 @@ Transform:
   m_GameObject: {fileID: 5588855778448660989}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 1}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 1708767843482307434}
   m_RootOrder: 1
@@ -396,7 +396,7 @@ MonoBehaviour:
   - {x: 0.48521802, y: 0.0022656322, z: 0}
   m_ShapePathHash: 885509238
   m_Mesh: {fileID: 0}
-  m_InstanceId: 101700
+  m_InstanceId: 63242
 --- !u!1 &5748995862670152976
 GameObject:
   m_ObjectHideFlags: 0
@@ -626,7 +626,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9147820163983063848}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.2, z: -6}
+  m_LocalPosition: {x: 0, y: 1, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7222851619992910955}
@@ -849,7 +849,7 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 3
+  Synchronization: 1
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
