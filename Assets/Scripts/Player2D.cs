@@ -60,17 +60,6 @@ namespace DIPProject
 
         #endregion
 
-        #region Animation Variables
-
-        [Tooltip("0.01f Frames of the flipping animation")]
-        private const int AnimationFrames = 10;
-
-        [Tooltip("0.01f Frames of the flipping animation")]
-        private const float AnimationFrameDelay = 0.01f;
-
-        #endregion
-
-
         #region MonoBehavior Callbacks
 
         private void Awake()

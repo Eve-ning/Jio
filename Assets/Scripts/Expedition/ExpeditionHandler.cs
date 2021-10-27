@@ -54,7 +54,7 @@ namespace DIPProject
         /// </summary>
         public override void OnJoinedRoom()
         {
-            var player = 
+            var myPlayer = 
                 PhotonNetwork.Instantiate(
                     "Player2D",
                     new Vector3(spawnPoint.x + Random.value * 0.1f, spawnPoint.y + Random.value * 0.1f, 0),
@@ -64,15 +64,20 @@ namespace DIPProject
             roomNameText.text = RoomNamePrefix + PhotonNetwork.CurrentRoom.Name;
 
             // Gets the camera of the new instantiated player and shifts camera to it
-            var playerCamera = player.GetComponentInChildren<Camera>();
+            var playerCamera = myPlayer.GetComponentInChildren<Camera>();
             foreach (var ui in canvasSwap) ui.worldCamera = playerCamera;
-
+            
+            // This force updates all players to give the current voice state.
+            foreach (var player in GameObject.FindGameObjectsWithTag("Player"))
+                player.GetComponent<PlayerVoiceHandler>().SendRPCVoiceState();
+            
             UpdatePlayerList();
         }
 
         public override void OnPlayerEnteredRoom(Player newPlayer)
         {
             UpdatePlayerList();
+
             base.OnPlayerEnteredRoom(newPlayer);
         }
 
