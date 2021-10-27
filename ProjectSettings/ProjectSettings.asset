@@ -147,6 +147,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
     Standalone: com.DefaultCompany.DIPProject
+    iPhone: com.DefaultCompany.DIPProject
   buildNumber:
     Standalone: 0
     iPhone: 0
@@ -313,9 +314,9 @@ PlayerSettings:
   enableInternalProfiler: 0
   logObjCUncaughtExceptions: 1
   enableCrashReportAPI: 0
-  cameraUsageDescription: 
+  cameraUsageDescription: Allow DIPProject to use Camera?
   locationUsageDescription: 
-  microphoneUsageDescription: 
+  microphoneUsageDescription: Allow DIPProject to use Microphone?
   switchNMETAOverride: 
   switchNetLibKey: 
   switchSocketMemoryPoolSize: 6144
