@@ -26,10 +26,10 @@ namespace DIPProject
 
         #region Public Methods
 
-        private void JoinRoom(string name)
+        private void JoinRoom(string roomName)
         {
-            customRoomHandler.CustomRoom(JOHN_ROOMNAME);
-            uiRoomNameInput.text = JOHN_ROOMNAME;
+            customRoomHandler.CustomRoom(roomName);
+            uiRoomNameInput.text = roomName;
         }
         
         public void JoinJohn() { JoinRoom(JOHN_ROOMNAME); }
