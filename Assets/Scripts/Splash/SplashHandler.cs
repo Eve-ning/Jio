@@ -60,7 +60,7 @@ namespace DIPProject
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Return) && ReadyToProceed()) authenticateUser();
+            if (Input.GetKeyDown(KeyCode.Return) && ReadyToProceed()) AuthenticateUser();
         }
 
         #endregion
@@ -107,10 +107,9 @@ namespace DIPProject
             uiSignupButton.SetActive(ReadyToProceed());
         }
 
-        public void checkUserName()
+        public void CheckUserName()
         {
-            try
-            {
+            try {
             
                 using var conn = new MySqlConnection(getConn);
                 conn.Open();
@@ -122,7 +121,7 @@ namespace DIPProject
 
                 conn.Close();
             
-                insertCredentials();
+                InsertCredentials();
 
             } catch {
 
@@ -131,7 +130,7 @@ namespace DIPProject
             }
         }
 
-        private void insertCredentials()
+        private void InsertCredentials()
         {
             try
             {
@@ -156,7 +155,7 @@ namespace DIPProject
         }
         
 
-        public void authenticateUser()
+        public void AuthenticateUser()
         {
             try
             {
@@ -174,7 +173,7 @@ namespace DIPProject
                 //error message if no catch because pair doesn't exist
                 Debug.Log("Wrong Credentials!");
 
-                deletePair();
+                DeletePair();
 
             } catch {
 
@@ -187,7 +186,7 @@ namespace DIPProject
             }
         }
         
-        private void deletePair()
+        private void DeletePair()
         {
             try
             {
