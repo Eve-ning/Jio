@@ -1106,7 +1106,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 793826485701459981}
-  photonView: {fileID: 9147820164636223803}
 --- !u!95 &793826485701459981
 Animator:
   serializedVersion: 3
