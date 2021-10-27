@@ -135,9 +135,12 @@ namespace DIPProject
         /// <summary>
         /// Sends the RPC to others
         /// </summary>
-        void SendRPCVoiceState()
+        public void SendRPCVoiceState()
         {
-            _photonView.RPC("RPCVoiceState", RpcTarget.Others, IsSpeaking, IsDebugging);
+            if (_photonView != null)
+                _photonView.RPC("RPCVoiceState", RpcTarget.Others, IsSpeaking, IsDebugging);
+            else
+                PhotonView.Get(this).RPC("RPCVoiceState", RpcTarget.Others, IsSpeaking, IsDebugging);
         }
 
         #endregion
