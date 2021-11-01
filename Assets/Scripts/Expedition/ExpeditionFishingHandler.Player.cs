@@ -49,20 +49,21 @@ namespace DIPProject
         /// </summary>
         private void TeleportMyPlayer()
         {
-            var player = GetMyPlayer();
+            var myPlayer = GetMyPlayer();
             
             // Get my teleport location
-            (var position, var location) = GetMyTeleportLocation();
+            var (position, location) = GetMyTeleportLocation();
             
             Debug.Log("Teleporting myself to: " + location);
             
-            player.transform.SetPositionAndRotation(
+            myPlayer.transform.SetPositionAndRotation(
                 new Vector3(location.x, location.y, transform.position.z),
                 Quaternion.identity
             );
-            
-            player.GetComponent<Animator>().SetInteger("Fishing", (int) position);
-            
+
+            // We need to set for all players so that they all appear to be fishing!
+            foreach (var player in GetPlayers())
+                player.GetComponent<Animator>().SetInteger("Fishing", (int) position);
         }
         
         /// <summary>

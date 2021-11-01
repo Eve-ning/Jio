@@ -20,8 +20,8 @@ namespace DIPProject
         [SerializeField]
         private Vector2 spawnPoint = Vector2.zero;
         
-        [Tooltip("The UI to snap to the player camera on instantiation.")] [SerializeField]
-        private Canvas[] roomUi;
+        [Tooltip("The Canvases to snap to the player camera on instantiation.")] [SerializeField]
+        private Canvas[] canvasSwap;
 
         private const string RoomNamePrefix = "CODE: ";
 
@@ -54,7 +54,7 @@ namespace DIPProject
         /// </summary>
         public override void OnJoinedRoom()
         {
-            var player = 
+            var myPlayer = 
                 PhotonNetwork.Instantiate(
                     "Player2D",
                     new Vector3(spawnPoint.x + Random.value * 0.1f, spawnPoint.y + Random.value * 0.1f, 0),
@@ -64,15 +64,20 @@ namespace DIPProject
             roomNameText.text = RoomNamePrefix + PhotonNetwork.CurrentRoom.Name;
 
             // Gets the camera of the new instantiated player and shifts camera to it
-            var playerCamera = player.GetComponentInChildren<Camera>();
-            foreach (var ui in roomUi) ui.worldCamera = playerCamera;
-
+            var playerCamera = myPlayer.GetComponentInChildren<Camera>();
+            foreach (var ui in canvasSwap) ui.worldCamera = playerCamera;
+            
+            // This force updates all players to give the current voice state.
+            foreach (var player in GameObject.FindGameObjectsWithTag("Player"))
+                player.GetComponent<PlayerVoiceHandler>().SendRPCVoiceState();
+            
             UpdatePlayerList();
         }
 
         public override void OnPlayerEnteredRoom(Player newPlayer)
         {
             UpdatePlayerList();
+
             base.OnPlayerEnteredRoom(newPlayer);
         }
 

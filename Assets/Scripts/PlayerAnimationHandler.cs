@@ -1,3 +1,4 @@
+using System;
 using JetBrains.Annotations;
 using Photon.Pun;
 using UnityEngine;
@@ -20,7 +21,7 @@ namespace DIPProject
         private static Movement _currentMovement = Movement.Stop;
         
         [SerializeField] public Animator animator;
-        [SerializeField] private PhotonView photonView;
+        private PhotonView _photonView;
 
         public enum Movement
         {
@@ -36,14 +37,14 @@ namespace DIPProject
 
         private void Start()
         {
-            photonView = PhotonView.Get(this);
+            _photonView = PhotonView.Get(this);
         }
 
         // Update is called once per frame
         private void Update()
         {
             // On execute the input animation handler if the photon view is ours
-            if (photonView.IsMine) InputToTrigger();
+            if (_photonView.IsMine) InputToTrigger();
         }
 
         /// <summary>
@@ -80,7 +81,7 @@ namespace DIPProject
             //
             // We do this because Update will repeatedly call redundant RPCs, causing
             // many glitches.
-            if (_currentMovement == movement && !photonView.IsMine) return;
+            if (_currentMovement == movement && !_photonView.IsMine) return;
             
             _currentMovement = movement;
 
@@ -90,8 +91,8 @@ namespace DIPProject
             //
             // Note that we need the isMine check again because RPCs can call this, 
             // We don't want to send another RPC, it'll cause an infinite loop.
-            if (PhotonNetwork.InRoom && photonView.IsMine) 
-                photonView.RPC("RPCTrigger", RpcTarget.Others, (int) movement);
+            if (PhotonNetwork.InRoom && _photonView.IsMine) 
+                _photonView.RPC("RPCTrigger", RpcTarget.Others, (int) movement);
             
             // A Switch statement for the movement
             // Note that we explicitly reset some triggers just in case they get stuck
@@ -125,6 +126,8 @@ namespace DIPProject
                     animator.SetTrigger(Active);
                     animator.ResetTrigger(Stop);
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(movement), movement, null);
             }
         }
         #endregion
@@ -135,7 +138,7 @@ namespace DIPProject
         /// The receiver of the RPC.
         /// This will only be called by the non-callee as RPC is set to Others.
         /// We will thus then loop through all the clients and find the
-        /// photonView owner of the local instance and trigger their animation.
+        /// _photonView owner of the local instance and trigger their animation.
         /// </summary>
         /// <param name="movementId"></param>
         /// <param name="info"></param>
@@ -144,7 +147,7 @@ namespace DIPProject
         void RPCTrigger(int movementId, PhotonMessageInfo info)
         {
             // If the photon view received is the same view as the one in the scene, then we proceed.
-            if (photonView == info.photonView) AnimationTrigger((Movement) movementId);
+            if (_photonView == info.photonView) AnimationTrigger((Movement) movementId);
         }
 
         #endregion
