@@ -60,7 +60,7 @@ namespace DIPProject
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Return) && ReadyToProceed()) AuthenticateUser();
+            if (Input.GetKeyDown(KeyCode.Return)) JoinLobby();
         }
 
         #endregion
@@ -72,7 +72,7 @@ namespace DIPProject
         /// </summary>
         public void JoinLobby()
         {
-            if (ReadyToProceed() && existingUser == true)
+            if (ReadyToProceed() && AuthenticateUser())
             {
                 foregroundAnimator.SetTrigger("Join");
                 backgroundAnimator.SetTrigger("Join");
@@ -95,7 +95,9 @@ namespace DIPProject
         /// <returns></returns>
         public bool ReadyToProceed()
         {
-            return (uiUsername.text.Length >= minimumUsernameLength && uiPassword.text.Length >= minimumUsernameLength) && PhotonNetwork.IsConnected;
+            return uiUsername.text.Length >= minimumUsernameLength &&
+                   uiPassword.text.Length >= minimumUsernameLength &&
+                   PhotonNetwork.IsConnected;
         }
 
         /// <summary>
@@ -134,7 +136,6 @@ namespace DIPProject
         {
             try
             {
-
                 using var conn = new MySqlConnection(getConn);
                 conn.Open();
 
@@ -155,25 +156,26 @@ namespace DIPProject
         }
         
 
-        public void AuthenticateUser()
+        public bool AuthenticateUser()
         {
             try
             {
-            
+                print("t");
                 using var conn = new MySqlConnection(getConn);
                 conn.Open();
-
+                print("t");
                 string query = "INSERT INTO users.credentials(appID, appKey) VALUES ('" + uiUsername.text + "', '" + uiPassword.text + "')";
                 using var cmd = new MySqlCommand(query, conn);
-
+                print("t");
                 using MySqlDataReader rdr = cmd.ExecuteReader();
 
                 conn.Close();
-
+                print("t");
                 //error message if no catch because pair doesn't exist
                 Debug.Log("Wrong Credentials!");
 
                 DeletePair();
+                return false;
 
             } catch {
 
@@ -181,8 +183,7 @@ namespace DIPProject
                 Debug.Log("Logging In...");
 
                 existingUser = true;
-                JoinLobby();
-
+                return true;
             }
         }
         
