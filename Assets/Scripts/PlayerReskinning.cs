@@ -71,6 +71,21 @@ namespace DIPProject {
             }
         }
 
+        private void Update()
+        {
+            UpdateCatWithInput();            
+        }
+
+        private void UpdateCatWithInput()
+        {
+            if (!Input.GetKey(KeyCode.C)) return;
+            if (Input.GetKeyDown(KeyCode.Alpha1)) CurrentCat = Cat.Pusheen;
+            else if (Input.GetKeyDown(KeyCode.Alpha2)) CurrentCat = Cat.Garfield;
+            else if (Input.GetKeyDown(KeyCode.Alpha3)) CurrentCat = Cat.Jiggly;
+            else if (Input.GetKeyDown(KeyCode.Alpha4)) CurrentCat = Cat.Black;
+        }
+        
+
         /// <summary>
         /// We use a Late Update here because the Animations actually occur after Update
         /// hence overriding the reskin. Thus we need to reskin only after animation. 
