@@ -24,7 +24,6 @@ public class PlayerReskinning : MonoBehaviour {
 
     private void Start()
     {
-        SpriteRenderer = GetComponent<SpriteRenderer>();
         catSpritesMap = new Dictionary<Cat, Dictionary<string, Sprite>>();
         for (int i = 0; i < catNames.Length; i++)
         {

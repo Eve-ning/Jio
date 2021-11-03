@@ -560,7 +560,7 @@ MonoBehaviour:
   - {x: 0.48521802, y: 0.0022656322, z: 0}
   m_ShapePathHash: 885509238
   m_Mesh: {fileID: 0}
-  m_InstanceId: 165652
+  m_InstanceId: 40204
 --- !u!1 &5748995862670152976
 GameObject:
   m_ObjectHideFlags: 0
@@ -908,6 +908,7 @@ GameObject:
   - component: {fileID: 3005114159882725277}
   - component: {fileID: 8478425728246023396}
   - component: {fileID: 1744969667505255685}
+  - component: {fileID: 4138581805185045532}
   m_Layer: 0
   m_Name: Player2D
   m_TagString: Player
@@ -1442,3 +1443,17 @@ AudioLowPassFilter:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4138581805185045532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9147820164636223802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed3cdcc8a5e7eb5469f7a7e7d613a57f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpriteRenderer: {fileID: 8580450556019708032}
+  CurrentCat: 0
