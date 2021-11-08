@@ -102,6 +102,14 @@ namespace DIPProject
                     // Which in turn will trigger appropriate updates of time
                     totalTimeSlider.value = (float) photonEvent.CustomData;
                     break;
+                
+                case SyncFishingPositionCode:
+                    foreach (var player in GetPlayers())
+                    {
+                        if (photonEvent.Sender == player.GetPhotonView().OwnerActorNr)
+                            player.GetComponent<Animator>().SetInteger("Fishing", (int) photonEvent.CustomData);
+                    }
+                    break;
             }
         }
 

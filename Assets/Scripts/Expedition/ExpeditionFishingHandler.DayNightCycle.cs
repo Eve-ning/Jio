@@ -36,7 +36,6 @@ namespace DIPProject
         private void UpdateDayNightCycle()
         {
             float progress = 1 - (float) (TimerTime.TotalSeconds / TotalTime.TotalSeconds);
-            Debug.LogWarning(progress);
             var position = background.rectTransform.anchoredPosition;
             position = new Vector2(progress * (backgroundEndX - backgroundStartX) + backgroundStartX, position.y);
             background.rectTransform.anchoredPosition = position;
