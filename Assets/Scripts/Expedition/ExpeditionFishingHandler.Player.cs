@@ -1,5 +1,7 @@
 using System.Linq;
+using ExitGames.Client.Photon;
 using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Vector2 = UnityEngine.Vector2;
@@ -25,6 +27,8 @@ namespace DIPProject
         
         [Tooltip("These are the fishing positions corresponding to the locations fished.")] 
         public FishingPosition[] fishingPositions;
+        
+        private const byte SyncFishingPositionCode = 5;
         
         #endregion
 
@@ -62,8 +66,14 @@ namespace DIPProject
             );
 
             // We need to set for all players so that they all appear to be fishing!
-            foreach (var player in GetPlayers())
-                player.GetComponent<Animator>().SetInteger("Fishing", (int) position);
+            myPlayer.GetComponent<Animator>().SetInteger("Fishing", (int) position);
+            var raiseEventOptions = new RaiseEventOptions {Receivers = ReceiverGroup.Others};
+            PhotonNetwork.RaiseEvent(
+                SyncFishingPositionCode,
+                (int) position, // Content
+                raiseEventOptions,
+                SendOptions.SendReliable
+            );
         }
         
         /// <summary>

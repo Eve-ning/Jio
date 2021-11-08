@@ -1,6 +1,8 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
+using Photon.Pun;
 
 namespace DIPProject { 
     public class PlayerReskinning : MonoBehaviour {
@@ -73,19 +75,44 @@ namespace DIPProject {
 
         private void Update()
         {
-            UpdateCatWithInput();            
+            if (PhotonView.Get(this).IsMine) UpdateCatWithInput();            
         }
 
         private void UpdateCatWithInput()
         {
             if (!Input.GetKey(KeyCode.C)) return;
-            if (Input.GetKeyDown(KeyCode.Alpha1)) CurrentCat = Cat.Pusheen;
-            else if (Input.GetKeyDown(KeyCode.Alpha2)) CurrentCat = Cat.Garfield;
-            else if (Input.GetKeyDown(KeyCode.Alpha3)) CurrentCat = Cat.Jiggly;
-            else if (Input.GetKeyDown(KeyCode.Alpha4)) CurrentCat = Cat.Black;
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                var reskinId = Cat.Pusheen;
+                Reskin(reskinId);
+                PhotonView.Get(this).RPC("RPCReskin", RpcTarget.Others, (int) reskinId);
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                var reskinId = Cat.Garfield;
+                Reskin(reskinId);
+                PhotonView.Get(this).RPC("RPCReskin", RpcTarget.Others, (int) reskinId);
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                var reskinId = Cat.Jiggly;
+                Reskin(reskinId);
+                PhotonView.Get(this).RPC("RPCReskin", RpcTarget.Others, (int) reskinId);
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                var reskinId = Cat.Black;
+                Reskin(reskinId);
+                PhotonView.Get(this).RPC("RPCReskin", RpcTarget.Others, (int) reskinId);
+            }
+        }
+
+        private void Reskin(Cat reskinId)
+        {
+            CurrentCat = reskinId;
         }
         
-
+        
         /// <summary>
         /// We use a Late Update here because the Animations actually occur after Update
         /// hence overriding the reskin. Thus we need to reskin only after animation. 
@@ -102,6 +129,27 @@ namespace DIPProject {
                 
             // We replace the sprite here.
             SpriteRenderer.sprite = value;
+        }
+
+        #endregion
+        
+                
+        #region RPC Callbacks
+
+        /// <summary>
+        /// The receiver of the RPC.
+        /// This will only be called by the non-callee as RPC is set to Others.
+        /// We will thus then loop through all the clients and find the
+        /// _photonView owner of the local instance and trigger their animation.
+        /// </summary>
+        /// <param name="reskinId"></param>
+        /// <param name="info"></param>
+        [PunRPC]
+        [UsedImplicitly]
+        void RPCReskin(int reskinId, PhotonMessageInfo info)
+        {
+            // If the photon view received is the same view as the one in the scene, then we proceed.
+            if (PhotonView.Get(this) == info.photonView) Reskin((Cat) reskinId);
         }
 
         #endregion
