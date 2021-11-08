@@ -221,7 +221,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 413276434}
         m_TargetAssemblyTypeName: DIPProject.SplashHandler, Assembly-CSharp
-        m_MethodName: checkUserName
+        m_MethodName: CheckUserName
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
