@@ -146,11 +146,33 @@ namespace DIPProject
 
                 conn.Close();
 
+                CreateInventory();
                 Debug.Log("Registered!");
                 
             } catch {
 
                 Debug.Log("insertCredentials Error...");
+
+            }
+        }
+
+        private void CreateInventory()
+        {
+            try
+            {
+                using var conn = new MySqlConnection(getConn);
+                conn.Open();
+
+                string query = "INSERT INTO users.inventory(appID, Fish0, Fish1, Fish2, Fish3, Fish4) VALUES ('" + uiUsername.text + "', " + 0 + ", " + 0 + ", " + 0 + ", " + 0 + ", " + 0 + ")";
+                using var cmd = new MySqlCommand(query, conn);
+
+                using MySqlDataReader rdr = cmd.ExecuteReader();
+
+                conn.Close();
+                
+            } catch {
+
+                Debug.Log("CreateInventory Error...");
 
             }
         }
