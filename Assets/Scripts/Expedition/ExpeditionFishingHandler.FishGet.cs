@@ -5,11 +5,19 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
+using Photon.Pun;
+
+using MySql.Data;
+using MySql.Data.MySqlClient;
+
 namespace DIPProject
 {
     public partial class ExpeditionFishingHandler 
     {
         #region Variables
+
+        private int n;
+        private string getConn = @"server=dipdatabase.cvxt4s3abkq1.us-east-2.rds.amazonaws.com;port=3306;username=admin;password=admin2073";
 
         public enum Fish
         {
@@ -55,7 +63,36 @@ namespace DIPProject
         }
         public void setGetFishRandom()
         {
-            setGetFish((Fish) Random.Range(0, 5));
+            RanNum();
+            AddFish(n);
+            setGetFish((Fish) n);
+        }
+
+        private void RanNum()
+        {
+            n = Random.Range(0, 5);
+        }
+
+        private void AddFish(int x)
+        {
+            try
+            {
+
+                using var conn = new MySqlConnection(getConn);
+                conn.Open();
+
+                string query = "UPDATE users.inventory SET Fish" + x + " = Fish" + x + " + 1 WHERE appID = '" + PhotonNetwork.NickName + "'";
+                using var cmd = new MySqlCommand(query, conn);
+
+                using MySqlDataReader rdr = cmd.ExecuteReader();
+
+                conn.Close();
+                
+            } catch {
+
+                Debug.Log("AddFish Error...");
+
+            }
         }
 
         #endregion
