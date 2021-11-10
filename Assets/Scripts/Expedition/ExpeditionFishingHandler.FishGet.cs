@@ -21,10 +21,10 @@ namespace DIPProject
 
         public enum Fish
         {
-            Neemo   = 0,
-            Angler  = 1,
-            Generic = 2,
-            Shroom  = 3,
+            Generic = 0,
+            Shroom  = 1,
+            Angler  = 2,
+            Neemo   = 3,
             Tortle  = 4 
         }
         
@@ -39,10 +39,10 @@ namespace DIPProject
         [Tooltip("Fish sprite names respectively.")]
         public List<string> fishSpriteNames = new List<string>
         {
-            "Neemo",
-            "Angler",
             "Generic",
             "Shroom",
+            "Angler",
+            "Neemo",
             "Tortle"
         };
 
