@@ -60,6 +60,8 @@ namespace DIPProject
         {
             // If roomName is null, we assign the text to it 
             roomName ??= uiRoomNameInput.text;
+
+            if (roomName.Length == 0) roomName = uiRoomNameInput.text;
             
             if (roomName is { Length: RoomNameLength }) 
                 landingAnimatorHandler.SetTrigger("Custom");
