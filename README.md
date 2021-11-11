@@ -1,3 +1,5 @@
+![Logo](https://github.com/Eve-ning/DIPProject/blob/main/Assets/Graphics/UI/Logo/Logo%20v3.png)
+
 # JIO
 
 `Jio: To invite someone out`
