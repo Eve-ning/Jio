@@ -106,12 +106,10 @@ namespace DIPProject
                 case SyncFishingPositionCode:
                     foreach (var player in GetPlayers())
                     {
-                        if (photonEvent.Sender == player.GetPhotonView().OwnerActorNr)
-                        {
-                            player.GetComponent<Animator>().SetTrigger("Start Fishing");
-                            player.GetComponent<Animator>().SetInteger("Fishing", (int)photonEvent.CustomData);
-                            player.GetComponent<Animator>().ResetTrigger("Start Fishing");
-                        }
+                        if (photonEvent.Sender != player.GetPhotonView().OwnerActorNr) continue;
+                        player.GetComponent<Animator>().SetTrigger("Start Fishing");
+                        player.GetComponent<Animator>().SetInteger("Fishing", (int)photonEvent.CustomData);
+                        player.GetComponent<Animator>().ResetTrigger("Start Fishing");
                     }
                     break;
             }
