@@ -910,9 +910,9 @@ AnimatorStateMachine:
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions:
-  - first: {fileID: -4046504719676918727}
-    second: []
   - first: {fileID: 5744200133062592795}
+    second: []
+  - first: {fileID: -4046504719676918727}
     second: []
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 200, y: 270, z: 0}
@@ -1000,7 +1000,7 @@ AnimatorController:
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 1
+    m_DefaultBool: 0
     m_Controller: {fileID: 0}
   - m_Name: End Fishing
     m_Type: 9
