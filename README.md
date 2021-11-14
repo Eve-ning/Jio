@@ -1,4 +1,6 @@
-![Logo](https://github.com/Eve-ning/DIPProject/blob/main/Assets/Graphics/UI/Logo/Logo%20v3.png)
+[![Logo](https://github.com/Eve-ning/DIPProject/blob/readme-update/Readme%20Graphics/banner.png)](https://www.youtube.com/watch?v=1XwxXzItly0)
+
+# [Trailer](https://www.youtube.com/watch?v=1XwxXzItly0)
 
 # JIO
 
@@ -12,6 +14,20 @@ Inspired by the Forest & Gather Application:
 - Focus session with their friends.
 - Integrated Chat and Voice Chat.
 - Currency system in Jio. 
+
+# Features
+
+## 4 Different Cats !
+![Cats!](https://github.com/Eve-ning/DIPProject/blob/readme-update/Readme%20Graphics/cats.png)
+
+## 5 Different Fishes !
+![Fishey](https://github.com/Eve-ning/DIPProject/blob/readme-update/Readme%20Graphics/fishes.png)
+
+## Day Night Cycle !
+![Background!](https://github.com/Eve-ning/DIPProject/blob/readme-update/Readme%20Graphics/background.png)
+
+## Voice + Chat System & Personal Profiles !
+![Logos!](https://github.com/Eve-ning/DIPProject/blob/readme-update/Readme%20Graphics/misc.png)
 
 # Settings
 
