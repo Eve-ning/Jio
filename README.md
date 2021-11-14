@@ -4,7 +4,6 @@
 
 ![Poster](https://github.com/Eve-ning/DIPProject/blob/readme-update/Reports/Poster/Poster.png)
 
-
 # JIO
 
 `Jio: To invite someone out`
@@ -34,7 +33,6 @@ Inspired by the Forest & Gather Application:
 ![Logos!](https://github.com/Eve-ning/DIPProject/blob/readme-update/Readme%20Graphics/misc.png)
 
 # Configurations
-
 - Unity Build Version: 2020.3.16f1
 - Packages
   - Photon PUN 2: Version 2.37 
