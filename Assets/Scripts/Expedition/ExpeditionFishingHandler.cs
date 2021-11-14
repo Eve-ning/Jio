@@ -243,9 +243,7 @@ namespace DIPProject
             // Resets the Animation to idling and walking
             // We need to reset for all players fishing animations!
             foreach (var player in GetPlayers()) {
-                player.GetComponent<Animator>().SetTrigger("Start Fishing");
                 player.GetComponent<Animator>().SetInteger("Fishing", (int)FishingPosition.Reset);
-                player.GetComponent<Animator>().ResetTrigger("Start Fishing");
             }
         }
 
