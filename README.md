@@ -2,11 +2,15 @@
 
 # [Trailer](https://www.youtube.com/watch?v=1XwxXzItly0)
 
+![Poster](https://github.com/Eve-ning/DIPProject/blob/readme-update/Reports/Poster/Poster.png)
+
+
 # JIO
 
 `Jio: To invite someone out`
 
 **JIO** is an app for both for social and productivity purposes. 
+
 **JIO** will allow users to meet up virtually with their friends, in a game-like setting. This can help users feel connected through this virtual space. 
 
 Inspired by the Forest & Gather Application:
@@ -29,7 +33,7 @@ Inspired by the Forest & Gather Application:
 ## Voice + Chat System & Personal Profiles !
 ![Logos!](https://github.com/Eve-ning/DIPProject/blob/readme-update/Readme%20Graphics/misc.png)
 
-# Settings
+# Configurations
 
 - Unity Build Version: 2020.3.16f1
 - Packages
