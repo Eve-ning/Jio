@@ -1,16 +1,20 @@
+# JIO
+
+`Jio: To invite someone out`
+
 [![Logo](https://github.com/Eve-ning/DIPProject/blob/main/Readme%20Graphics/banner.png)](https://www.youtube.com/watch?v=1XwxXzItly0)
 
 # [Trailer](https://www.youtube.com/watch?v=1XwxXzItly0)
 
 ![Poster](https://github.com/Eve-ning/DIPProject/blob/main/Reports/Poster/Poster.png)
 
-# JIO
-
-`Jio: To invite someone out`
+# JIO?
 
 **JIO** is an app for both for social and productivity purposes. 
 
-**JIO** will allow users to meet up virtually with their friends, in a game-like setting. This can help users feel connected through this virtual space. 
+**JIO** will allow users to meet up virtually with their friends, in a game-like setting.
+
+This can help users feel connected through this virtual space. 
 
 Inspired by the Forest & Gather Application:
 - Pomodoro timer system.
