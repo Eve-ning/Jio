@@ -66,6 +66,8 @@ namespace DIPProject
             );
 
             // We need to set for all players so that they all appear to be fishing!
+            
+            myPlayer.GetComponent<Animator>().SetTrigger("Start Fishing");
             myPlayer.GetComponent<Animator>().SetInteger("Fishing", (int) position);
             var raiseEventOptions = new RaiseEventOptions {Receivers = ReceiverGroup.Others};
             PhotonNetwork.RaiseEvent(

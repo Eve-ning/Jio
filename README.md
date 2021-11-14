@@ -1,4 +1,6 @@
-![Logo](https://github.com/Eve-ning/DIPProject/blob/main/Assets/Graphics/UI/Logo/Logo%20v3.png)
+# [![Logo](https://github.com/Eve-ning/DIPProject/blob/main/Assets/Graphics/UI/Logo/Logo%20v3.png)](https://www.youtube.com/watch?v=1XwxXzItly0)
+
+# [Watch the Trailer!](https://www.youtube.com/watch?v=1XwxXzItly0)
 
 # JIO
 
@@ -12,6 +14,10 @@ Inspired by the Forest & Gather Application:
 - Focus session with their friends.
 - Integrated Chat and Voice Chat.
 - Currency system in Jio. 
+
+# Features
+
+- **4 Different Cats**!
 
 # Settings
 
